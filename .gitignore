@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pychache__/
+*.DS_Store
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+lib/
+lib64/
+*.egg-info/
+*.egg
