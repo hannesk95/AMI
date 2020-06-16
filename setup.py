@@ -10,8 +10,8 @@ if os.path.exists(README_PATH):
         LONG_DESC = readme.read()
 
 INSTALL_REQUIRES = ['numpy']
-PACKAGE_NAME = 'covid19_climate_predictor'
-PACKAGE_DIR = 'covid19_climate_predictor'
+PACKAGE_NAME = ''
+PACKAGE_DIR = ''
 
 setup(
     name=PACKAGE_NAME,
