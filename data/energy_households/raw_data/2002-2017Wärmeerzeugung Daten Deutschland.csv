@@ -1,0 +1,634 @@
+GENESIS-Tabelle: 43411-0001
+Nettowärmeerzeugung, Brennstoffeinsatz, -bezug, -bestand:;;;;;
+Deutschland, Jahre, Energieträger;;;;;
+Erhebung über Erzeugung und Verwendung von Wärme;;;;;
+Deutschland;;;;;
+;;Nettowärmeerzeugung;Brennstoffeinsatz;Brennstoffbezug;Brennstoffbestand
+;;MWh;GJ;GJ;GJ
+2002;Steinkohlen;2385392;9910862;45226039;5591479
+2002;Steinkohlenkoks;.;.;.;.
+2002;Steinkohlenbriketts;0;0;0;0
+2002;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2002;Sonstige Steinkohlen;104849;433640;435180;10813
+2002;Rohbraunkohlen;.;.;.;.
+2002;Hartbraunkohlen;0;0;0;0
+2002;Braunkohlenbriketts;.;.;0;0
+2002;Braunkohlenkoks;0;0;0;0
+2002;Wirbelschichtkohle;.;.;0;0
+2002;Staub- und Trockenkohle;191398;757940;758002;3597
+2002;Sonstige Braunkohlen;.;.;.;.
+2002;Dieselkraftstoff;0;0;.;.
+2002;Heizöl, leicht;2009893;9067858;10229947;6135292
+2002;Heizöl, schwer;106559;460638;951347;494192
+2002;Flüssiggas;6666;25822;0;0
+2002;Raffineriegas;0;0;0;0
+2002;Petrolkoks;0;0;0;0
+2002;Sonstige Mineralölprodukte;0;0;.;.
+2002;Erdgas, Erdölgas;21983984;107996696;0;0
+2002;Grubengas;236430;2685380;0;0
+2002;Kokereigas;.;.;0;0
+2002;Hochofengas;0;0;0;0
+2002;Sonstige hergestellte Gase;.;.;0;0
+2002;Geothermie;.;x;x;x
+2002;Solarthermie;0;x;x;x
+2002;Feste biogene Stoffe;429412;2507035;0;0
+2002;Flüssige biogene Stoffe;867;3768;0;0
+2002;Biogas;22804;89824;0;0
+2002;Klärgas;.;.;0;0
+2002;Deponiegas;5558;26762;0;0
+2002;Sonstige erneuerbare Energien;0;0;0;0
+2002;Klärschlamm;0;0;0;0
+2002;Abfall (Hausmüll, Industrie);662881;3881795;0;0
+2002;Abfall (Industrie);0;0;0;0
+2002;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2002;Kernenergie;x;x;x;x
+2002;Wärme;0;0;0;0
+2002;Sonstige Energieträger;587022;2527236;0;0
+2003;Steinkohlen;1633616;6686262;2452960;339188
+2003;Steinkohlenkoks;.;.;.;.
+2003;Steinkohlenbriketts;0;0;0;0
+2003;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2003;Sonstige Steinkohlen;94808;394240;394515;10882
+2003;Rohbraunkohlen;.;.;.;.
+2003;Hartbraunkohlen;0;0;0;0
+2003;Braunkohlenbriketts;.;.;0;0
+2003;Braunkohlenkoks;0;0;0;0
+2003;Wirbelschichtkohle;.;.;0;0
+2003;Staub- und Trockenkohle;194351;802212;802447;5980
+2003;Sonstige Braunkohlen;0;0;.;.
+2003;Dieselkraftstoff;0;0;.;.
+2003;Heizöl, leicht;1797158;7814408;8730880;3793208
+2003;Heizöl, schwer;57373;276131;203272;84666
+2003;Flüssiggas;4867;20774;0;0
+2003;Raffineriegas;0;0;0;0
+2003;Petrolkoks;0;0;0;0
+2003;Sonstige Mineralölprodukte;.;.;.;.
+2003;Erdgas, Erdölgas;18686981;111726172;0;0
+2003;Grubengas;233573;1116684;0;0
+2003;Kokereigas;.;.;0;0
+2003;Hochofengas;0;0;0;0
+2003;Sonstige hergestellte Gase;.;.;0;0
+2003;Geothermie;.;x;x;x
+2003;Solarthermie;0;x;x;x
+2003;Feste biogene Stoffe;424871;2377670;0;0
+2003;Flüssige biogene Stoffe;.;.;0;0
+2003;Biogas;.;.;0;0
+2003;Klärgas;4217;38389;0;0
+2003;Deponiegas;7707;34823;0;0
+2003;Sonstige erneuerbare Energien;0;0;0;0
+2003;Klärschlamm;.;.;0;0
+2003;Abfall (Hausmüll, Industrie);.;.;0;0
+2003;Abfall (Industrie);0;0;0;0
+2003;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2003;Kernenergie;x;x;x;x
+2003;Wärme;0;0;0;0
+2003;Sonstige Energieträger;597354;2814561;0;0
+2004;Steinkohlen;981003;4951315;4683185;823692
+2004;Steinkohlenkoks;.;.;.;.
+2004;Steinkohlenbriketts;0;0;0;0
+2004;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2004;Sonstige Steinkohlen;406443;1720023;166126;3488
+2004;Rohbraunkohlen;.;.;.;.
+2004;Hartbraunkohlen;0;0;0;0
+2004;Braunkohlenbriketts;0;0;0;0
+2004;Braunkohlenkoks;0;0;0;0
+2004;Wirbelschichtkohle;.;.;0;0
+2004;Staub- und Trockenkohle;193042;796838;812234;6620
+2004;Sonstige Braunkohlen;0;0;.;.
+2004;Dieselkraftstoff;0;0;.;.
+2004;Heizöl, leicht;1572346;6707928;6087773;3447330
+2004;Heizöl, schwer;50580;230504;189697;55551
+2004;Flüssiggas;4496;18330;0;0
+2004;Raffineriegas;0;0;0;0
+2004;Petrolkoks;0;0;0;0
+2004;Sonstige Mineralölprodukte;0;0;18387;11448
+2004;Erdgas, Erdölgas;19036777;87298948;0;0
+2004;Grubengas;230027;1110967;0;0
+2004;Kokereigas;.;.;0;0
+2004;Hochofengas;0;0;0;0
+2004;Sonstige hergestellte Gase;.;.;0;0
+2004;Geothermie;.;x;x;x
+2004;Solarthermie;0;x;x;x
+2004;Feste biogene Stoffe;764035;5290061;0;0
+2004;Flüssige biogene Stoffe;.;.;0;0
+2004;Biogas;.;.;0;0
+2004;Klärgas;.;.;0;0
+2004;Deponiegas;9697;235639;0;0
+2004;Sonstige erneuerbare Energien;0;0;0;0
+2004;Klärschlamm;.;.;0;0
+2004;Abfall (Hausmüll, Industrie);408491;2329537;0;0
+2004;Abfall (Industrie);0;0;0;0
+2004;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2004;Kernenergie;x;x;x;x
+2004;Wärme;0;0;0;0
+2004;Sonstige Energieträger;992811;4215110;0;0
+2005;Steinkohlen;706776;3923690;3895836;142747
+2005;Steinkohlenkoks;.;.;0;.
+2005;Steinkohlenbriketts;0;0;0;0
+2005;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2005;Sonstige Steinkohlen;.;.;.;.
+2005;Rohbraunkohlen;.;.;.;.
+2005;Hartbraunkohlen;0;0;0;0
+2005;Braunkohlenbriketts;0;0;0;0
+2005;Braunkohlenkoks;0;0;0;0
+2005;Wirbelschichtkohle;0;0;0;0
+2005;Staub- und Trockenkohle;174996;731210;730728;5010
+2005;Sonstige Braunkohlen;0;0;0;0
+2005;Dieselkraftstoff;.;.;.;.
+2005;Heizöl, leicht;1503759;6682924;5777627;2569776
+2005;Heizöl, schwer;.;.;.;.
+2005;Flüssiggas;4414;18293;0;0
+2005;Raffineriegas;0;0;0;0
+2005;Petrolkoks;0;0;0;0
+2005;Sonstige Mineralölprodukte;0;0;18192;11413
+2005;Erdgas, Erdölgas;20596999;98846083;0;0
+2005;Grubengas;.;.;0;0
+2005;Kokereigas;0;0;0;0
+2005;Hochofengas;0;0;0;0
+2005;Sonstige hergestellte Gase;.;.;0;0
+2005;Geothermie;.;x;x;x
+2005;Solarthermie;0;x;x;x
+2005;Feste biogene Stoffe;942507;6753015;0;0
+2005;Flüssige biogene Stoffe;.;.;0;0
+2005;Biogas;.;.;0;0
+2005;Klärgas;4930;37316;0;0
+2005;Deponiegas;59491;231457;0;0
+2005;Sonstige erneuerbare Energien;.;0;0;0
+2005;Klärschlamm;.;.;0;0
+2005;Abfall (Hausmüll, Industrie);415363;2359646;0;0
+2005;Abfall (Industrie);0;0;0;0
+2005;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2005;Kernenergie;x;x;x;x
+2005;Wärme;0;0;0;0
+2005;Sonstige Energieträger;251864;1976029;0;0
+2006;Steinkohlen;726315;4437900;4365862;40663
+2006;Steinkohlenkoks;.;.;0;.
+2006;Steinkohlenbriketts;0;0;0;0
+2006;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2006;Sonstige Steinkohlen;.;.;.;.
+2006;Rohbraunkohlen;.;.;.;0
+2006;Hartbraunkohlen;0;0;0;0
+2006;Braunkohlenbriketts;0;0;0;0
+2006;Braunkohlenkoks;0;0;0;0
+2006;Wirbelschichtkohle;0;0;0;0
+2006;Staub- und Trockenkohle;172115;725884;727399;5082
+2006;Sonstige Braunkohlen;0;0;0;0
+2006;Dieselkraftstoff;.;.;.;.
+2006;Heizöl, leicht;1452059;6656489;6123749;2508362
+2006;Heizöl, schwer;.;.;.;0
+2006;Flüssiggas;6482;31381;0;0
+2006;Raffineriegas;0;0;0;0
+2006;Petrolkoks;0;0;0;0
+2006;Sonstige Mineralölprodukte;0;0;29909;11691
+2006;Erdgas, Erdölgas;18177888;86111115;0;0
+2006;Grubengas;42281;202546;0;0
+2006;Kokereigas;0;0;0;0
+2006;Hochofengas;0;0;0;0
+2006;Sonstige hergestellte Gase;.;.;0;0
+2006;Geothermie;.;x;x;x
+2006;Solarthermie;0;x;x;x
+2006;Feste biogene Stoffe;952457;6919769;0;0
+2006;Flüssige biogene Stoffe;3159;14352;0;0
+2006;Biogas;28122;270166;0;0
+2006;Klärgas;10315;54139;0;0
+2006;Deponiegas;13443;87709;0;0
+2006;Sonstige erneuerbare Energien;49461;176597;0;0
+2006;Klärschlamm;.;.;0;0
+2006;Abfall (Hausmüll, Industrie);1385540;7314185;0;0
+2006;Abfall (Industrie);0;0;0;0
+2006;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2006;Kernenergie;x;x;x;x
+2006;Wärme;0;0;0;0
+2006;Sonstige Energieträger;229348;978394;0;0
+2007;Steinkohlen;1264529;7074349;6993911;68160
+2007;Steinkohlenkoks;.;.;.;.
+2007;Steinkohlenbriketts;0;0;0;0
+2007;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2007;Sonstige Steinkohlen;.;.;.;.
+2007;Rohbraunkohlen;.;.;.;.
+2007;Hartbraunkohlen;0;0;0;0
+2007;Braunkohlenbriketts;0;0;0;0
+2007;Braunkohlenkoks;0;0;0;0
+2007;Wirbelschichtkohle;0;0;0;0
+2007;Staub- und Trockenkohle;148112;597492;478401;4811
+2007;Sonstige Braunkohlen;0;0;0;0
+2007;Dieselkraftstoff;0;0;0;0
+2007;Heizöl, leicht;1212961;5214817;5716377;2598101
+2007;Heizöl, schwer;71785;294222;317332;36522
+2007;Flüssiggas;24226;106123;0;0
+2007;Raffineriegas;0;0;0;0
+2007;Petrolkoks;0;0;0;0
+2007;Sonstige Mineralölprodukte;0;0;108591;11291
+2007;Erdgas, Erdölgas;16238303;76718779;0;0
+2007;Grubengas;.;.;0;0
+2007;Kokereigas;.;.;0;0
+2007;Hochofengas;0;0;0;0
+2007;Sonstige hergestellte Gase;0;0;0;0
+2007;Geothermie;.;x;x;x
+2007;Solarthermie;0;x;x;x
+2007;Feste biogene Stoffe;928434;6392837;0;0
+2007;Flüssige biogene Stoffe;20359;199541;0;0
+2007;Biogas;22144;226504;0;0
+2007;Klärgas;7790;40522;0;0
+2007;Deponiegas;41698;213546;0;0
+2007;Sonstige erneuerbare Energien;.;.;0;0
+2007;Klärschlamm;.;.;0;0
+2007;Abfall (Hausmüll, Industrie);1398232;7288138;0;0
+2007;Abfall (Industrie);0;0;0;0
+2007;Abfall (Hausmüll, Siedlungsabfälle);0;0;0;0
+2007;Kernenergie;x;x;x;x
+2007;Wärme;0;0;0;0
+2007;Sonstige Energieträger;477590;1916076;0;0
+2008;Steinkohlen;786978;3256551;2400815;245677
+2008;Steinkohlenkoks;.;.;.;.
+2008;Steinkohlenbriketts;0;0;0;0
+2008;Kohlenwertstoffe aus Steinkohle;0;0;0;0
+2008;Sonstige Steinkohlen;.;.;.;.
+2008;Rohbraunkohlen;0;0;0;0
+2008;Hartbraunkohlen;0;0;0;0
+2008;Braunkohlenbriketts;0;0;0;0
+2008;Braunkohlenkoks;0;0;0;0
+2008;Wirbelschichtkohle;0;0;0;0
+2008;Staub- und Trockenkohle;276950;1123859;926909;11803
+2008;Sonstige Braunkohlen;0;0;0;0
+2008;Dieselkraftstoff;0;0;0;0
+2008;Heizöl, leicht;1058604;5312164;4969867;10791549
+2008;Heizöl, schwer;.;.;.;0
+2008;Flüssiggas;932;4022;0;0
+2008;Raffineriegas;0;0;0;0
+2008;Petrolkoks;0;0;0;0
+2008;Sonstige Mineralölprodukte;0;0;3926;11284
+2008;Erdgas, Erdölgas;16608855;75379277;0;0
+2008;Grubengas;57884;400042;0;0
+2008;Kokereigas;.;.;0;0
+2008;Hochofengas;.;.;0;0
+2008;Sonstige hergestellte Gase;.;.;0;0
+2008;Geothermie;.;x;x;x
+2008;Solarthermie;0;x;x;x
+2008;Feste biogene Stoffe;1006087;6640679;0;0
+2008;Flüssige biogene Stoffe;27871;186376;0;0
+2008;Biogas;14333;97846;0;0
+2008;Klärgas;6432;35921;0;0
+2008;Deponiegas;17833;90619;0;0
+2008;Sonstige erneuerbare Energien;.;.;0;0
+2008;Klärschlamm;.;.;0;0
+2008;Abfall (Hausmüll, Industrie);1989490;16310843;0;0
+2008;Abfall (Industrie);907667;10056875;0;0
+2008;Abfall (Hausmüll, Siedlungsabfälle);1081823;6253968;0;0
+2008;Kernenergie;x;x;x;x
+2008;Wärme;0;0;0;0
+2008;Sonstige Energieträger;52576;364512;0;0
+2009;Steinkohlen;1356504;6484779;6610804;181037
+2009;Steinkohlenkoks;.;.;.;.
+2009;Steinkohlenbriketts;-;-;-;-
+2009;Kohlenwertstoffe aus Steinkohle;-;-;-;-
+2009;Sonstige Steinkohlen;.;.;.;.
+2009;Rohbraunkohlen;-;-;-;-
+2009;Hartbraunkohlen;-;-;-;-
+2009;Braunkohlenbriketts;-;-;-;-
+2009;Braunkohlenkoks;-;-;-;-
+2009;Wirbelschichtkohle;-;-;-;-
+2009;Staub- und Trockenkohle;278540;1216441;896845;8154
+2009;Sonstige Braunkohlen;-;-;-;-
+2009;Dieselkraftstoff;-;-;-;-
+2009;Heizöl, leicht;1323283;5622861;5291205;2687084
+2009;Heizöl, schwer;.;.;.;.
+2009;Flüssiggas;2403;11866;-;-
+2009;Raffineriegas;-;-;-;-
+2009;Petrolkoks;-;-;-;-
+2009;Sonstige Mineralölprodukte;-;-;6586;5946
+2009;Erdgas, Erdölgas;14506269;64703392;-;-
+2009;Grubengas;113237;805160;-;-
+2009;Kokereigas;.;.;-;-
+2009;Hochofengas;.;.;-;-
+2009;Sonstige hergestellte Gase;.;.;-;-
+2009;Geothermie;.;x;x;x
+2009;Solarthermie;-;x;x;x
+2009;Feste biogene Stoffe;1237022;8573723;-;-
+2009;Flüssige biogene Stoffe;56497;401643;-;-
+2009;Biogas;68854;489193;-;-
+2009;Klärgas;.;.;-;-
+2009;Deponiegas;45692;264685;-;-
+2009;Sonstige erneuerbare Energien;.;.;-;-
+2009;Klärschlamm;.;.;-;-
+2009;Abfall (Hausmüll, Industrie);1986526;11373073;-;-
+2009;Abfall (Industrie);293526;1670496;-;-
+2009;Abfall (Hausmüll, Siedlungsabfälle);1693000;9702577;-;-
+2009;Kernenergie;x;x;x;x
+2009;Wärme;-;-;-;-
+2009;Sonstige Energieträger;353197;1196535;-;-
+2010;Steinkohlen;1444178;6729444;6665331;98445
+2010;Steinkohlenkoks;.;.;.;.
+2010;Steinkohlenbriketts;-;-;-;-
+2010;Kohlenwertstoffe aus Steinkohle;-;-;-;-
+2010;Sonstige Steinkohlen;.;.;.;.
+2010;Rohbraunkohlen;-;-;-;-
+2010;Hartbraunkohlen;-;-;-;-
+2010;Braunkohlenbriketts;-;-;-;-
+2010;Braunkohlenkoks;-;-;-;-
+2010;Wirbelschichtkohle;-;-;-;-
+2010;Staub- und Trockenkohle;311438;1304518;44338586;653872
+2010;Sonstige Braunkohlen;-;-;-;-
+2010;Dieselkraftstoff;-;-;-;-
+2010;Heizöl, leicht;1343685;5841696;32726034;7924662
+2010;Heizöl, schwer;.;.;.;.
+2010;Flüssiggas;1895;8597;-;-
+2010;Raffineriegas;-;-;-;-
+2010;Petrolkoks;-;-;-;-
+2010;Sonstige Mineralölprodukte;-;-;6102;3512
+2010;Erdgas, Erdölgas;17320047;76592597;-;-
+2010;Grubengas;56968;295906;-;-
+2010;Kokereigas;.;.;-;-
+2010;Hochofengas;.;.;-;-
+2010;Sonstige hergestellte Gase;.;.;-;-
+2010;Geothermie;16527;x;x;x
+2010;Solarthermie;-;x;x;x
+2010;Feste biogene Stoffe;1272593;8272185;-;-
+2010;Flüssige biogene Stoffe;36004;271385;-;-
+2010;Biogas;80648;514095;-;-
+2010;Klärgas;.;.;-;-
+2010;Deponiegas;33097;200156;-;-
+2010;Sonstige erneuerbare Energien;.;.;-;-
+2010;Klärschlamm;.;.;-;-
+2010;Abfall (Hausmüll, Industrie);2333293;14598839;-;-
+2010;Abfall (Industrie);314749;1649590;-;-
+2010;Abfall (Hausmüll, Siedlungsabfälle);2018544;12949249;-;-
+2010;Kernenergie;x;x;x;x
+2010;Wärme;-;-;-;-
+2010;Sonstige Energieträger;486992;1980336;-;-
+2011;Steinkohlen;1275354;6015822;6128335;203465
+2011;Steinkohlenkoks;26790;114066;.;.
+2011;Steinkohlenbriketts;-;-;-;-
+2011;Kohlenwertstoffe aus Steinkohle;-;-;-;-
+2011;Sonstige Steinkohlen;.;.;.;.
+2011;Rohbraunkohlen;-;-;-;-
+2011;Hartbraunkohlen;-;-;-;-
+2011;Braunkohlenbriketts;-;-;-;-
+2011;Braunkohlenkoks;-;-;-;-
+2011;Wirbelschichtkohle;-;-;-;-
+2011;Staub- und Trockenkohle;367858;1564272;1684339;10023
+2011;Sonstige Braunkohlen;-;-;-;-
+2011;Dieselkraftstoff;-;-;-;-
+2011;Heizöl, leicht;865482;3786700;4657533;2566265
+2011;Heizöl, schwer;.;.;.;.
+2011;Flüssiggas;18775;75794;-;-
+2011;Raffineriegas;-;-;-;-
+2011;Petrolkoks;-;-;-;-
+2011;Sonstige Mineralölprodukte;-;-;81175;8830
+2011;Erdgas, Erdölgas;14004085;62251985;-;-
+2011;Grubengas;524791;2274152;-;-
+2011;Kokereigas;-;-;-;-
+2011;Hochofengas;-;-;-;-
+2011;Sonstige hergestellte Gase;.;.;-;-
+2011;Geothermie;.;x;x;x
+2011;Solarthermie;-;x;x;x
+2011;Feste biogene Stoffe;1223722;6949873;-;-
+2011;Flüssige biogene Stoffe;13961;72646;-;-
+2011;Biogas;242894;1607380;-;-
+2011;Klärgas;.;.;-;-
+2011;Deponiegas;33894;221345;-;-
+2011;Sonstige erneuerbare Energien;1769;.;-;-
+2011;Klärschlamm;.;.;-;-
+2011;Abfall (Hausmüll, Industrie);3317583;16233781;-;-
+2011;Abfall (Industrie);.;.;-;-
+2011;Abfall (Hausmüll, Siedlungsabfälle);.;.;-;-
+2011;Kernenergie;x;x;x;x
+2011;Wärme;14003;53447;-;-
+2011;Sonstige Energieträger;410857;1847904;-;-
+2012;Steinkohlen;497263;2299421;2200700;.
+2012;Steinkohlenkoks;.;.;.;-
+2012;Steinkohlenbriketts;-;-;-;-
+2012;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2012;Sonstige Steinkohlen;-;-;-;-
+2012;Rohbraunkohlen;-;-;-;-
+2012;Hartbraunkohlen;-;-;-;-
+2012;Braunkohlenbriketts;-;-;-;-
+2012;Braunkohlenkoks;-;-;-;-
+2012;Wirbelschichtkohle;-;-;-;-
+2012;Staub- und Trockenkohle;186315;770740;776385;14638
+2012;Sonstige Braunkohlen;-;-;-;-
+2012;Dieselkraftstoff;-;-;-;-
+2012;Heizöl, leicht;982839;4294208;5524790;3463610
+2012;Heizöl, schwer;.;.;.;.
+2012;Flüssiggas;.;.;.;.
+2012;Raffineriegas;-;-;-;-
+2012;Petrolkoks;-;-;-;-
+2012;Sonstige Mineralölprodukte;.;.;.;-
+2012;Erdgas, Erdölgas;13380902;58344571;58356596;.
+2012;Grubengas;.;.;-;-
+2012;Kokereigas;.;.;-;-
+2012;Hochofengas;-;-;-;-
+2012;Sonstige hergestellte Gase;.;.;.;-
+2012;Geothermie;.;x;x;x
+2012;Solarthermie;.;x;x;x
+2012;Feste biogene Stoffe;2205213;12838505;12914025;-
+2012;Flüssige biogene Stoffe;-;-;-;-
+2012;Biogas;303706;1700654;1700654;-
+2012;Klärgas;.;.;.;-
+2012;Deponiegas;.;.;-;-
+2012;Sonstige erneuerbare Energien;.;.;.;-
+2012;Klärschlamm;-;-;-;-
+2012;Abfall (Hausmüll, Industrie);-;-;-;-
+2012;Abfall (Industrie);.;.;.;.
+2012;Abfall (Hausmüll, Siedlungsabfälle);2669411;11072992;11852270;.
+2012;Kernenergie;x;x;x;x
+2012;Wärme;.;.;-;-
+2012;Sonstige Energieträger;.;.;.;.
+2013;Steinkohlen;276707;1203057;1199593;.
+2013;Steinkohlenkoks;.;.;.;.
+2013;Steinkohlenbriketts;-;-;-;-
+2013;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2013;Sonstige Steinkohlen;-;-;-;-
+2013;Rohbraunkohlen;-;-;-;-
+2013;Hartbraunkohlen;-;-;-;-
+2013;Braunkohlenbriketts;-;-;-;-
+2013;Braunkohlenkoks;-;-;-;-
+2013;Wirbelschichtkohle;-;-;-;-
+2013;Staub- und Trockenkohle;229917;941310;940264;12422
+2013;Sonstige Braunkohlen;-;-;-;-
+2013;Dieselkraftstoff;-;-;-;-
+2013;Heizöl, leicht;756564;3252598;3416916;3431252
+2013;Heizöl, schwer;.;.;.;.
+2013;Flüssiggas;4808;.;21766;.
+2013;Raffineriegas;-;-;-;-
+2013;Petrolkoks;-;-;-;-
+2013;Sonstige Mineralölprodukte;.;.;.;-
+2013;Erdgas, Erdölgas;13435443;58293996;58257588;-
+2013;Grubengas;.;.;.;-
+2013;Kokereigas;.;.;.;-
+2013;Hochofengas;.;.;.;-
+2013;Sonstige hergestellte Gase;.;.;.;-
+2013;Geothermie;.;x;x;x
+2013;Solarthermie;.;x;x;x
+2013;Feste biogene Stoffe;1696002;8491466;8595770;318843
+2013;Flüssige biogene Stoffe;.;.;.;-
+2013;Biogas;447665;2919957;2928641;.
+2013;Klärgas;.;.;.;-
+2013;Deponiegas;21130;.;.;-
+2013;Sonstige erneuerbare Energien;.;-;-;-
+2013;Klärschlamm;.;.;.;-
+2013;Abfall (Hausmüll, Industrie);-;-;-;-
+2013;Abfall (Industrie);.;.;.;.
+2013;Abfall (Hausmüll, Siedlungsabfälle);2999210;12739218;12640105;.
+2013;Kernenergie;x;x;x;x
+2013;Wärme;.;.;.;-
+2013;Sonstige Energieträger;.;.;.;-
+2014;Steinkohlen;173411;742610;716464;.
+2014;Steinkohlenkoks;.;.;.;.
+2014;Steinkohlenbriketts;-;-;-;-
+2014;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2014;Sonstige Steinkohlen;-;-;-;-
+2014;Rohbraunkohlen;-;-;-;-
+2014;Hartbraunkohlen;-;-;-;-
+2014;Braunkohlenbriketts;-;-;-;-
+2014;Braunkohlenkoks;-;-;-;-
+2014;Wirbelschichtkohle;-;-;-;-
+2014;Staub- und Trockenkohle;282044;1186521;1195751;18728
+2014;Sonstige Braunkohlen;-;-;-;-
+2014;Dieselkraftstoff;-;-;-;-
+2014;Heizöl, leicht;449567;2085351;2380430;3122670
+2014;Heizöl, schwer;.;.;-;.
+2014;Flüssiggas;.;.;.;.
+2014;Raffineriegas;-;-;-;-
+2014;Petrolkoks;-;-;-;-
+2014;Sonstige Mineralölprodukte;.;.;.;-
+2014;Erdgas, Erdölgas;12007774;52122842;52112742;-
+2014;Grubengas;.;.;.;-
+2014;Kokereigas;.;.;.;-
+2014;Hochofengas;.;.;.;-
+2014;Sonstige hergestellte Gase;.;.;.;-
+2014;Geothermie;.;x;x;x
+2014;Solarthermie;.;x;x;x
+2014;Feste biogene Stoffe;1671943;10433713;10642014;510919
+2014;Flüssige biogene Stoffe;.;.;.;-
+2014;Biogas;551403;3746435;3746435;-
+2014;Klärgas;.;.;.;-
+2014;Deponiegas;22990;.;.;-
+2014;Sonstige erneuerbare Energien;.;.;.;-
+2014;Klärschlamm;-;-;-;-
+2014;Abfall (Hausmüll, Industrie);-;-;-;-
+2014;Abfall (Industrie);.;.;.;.
+2014;Abfall (Hausmüll, Siedlungsabfälle);.;10201147;10203045;.
+2014;Kernenergie;x;x;x;x
+2014;Wärme;.;.;.;-
+2014;Sonstige Energieträger;.;.;.;-
+2015;Steinkohlen;149316;641756;632495;.
+2015;Steinkohlenkoks;.;.;.;-
+2015;Steinkohlenbriketts;-;-;-;-
+2015;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2015;Sonstige Steinkohlen;-;-;-;-
+2015;Rohbraunkohlen;-;-;-;-
+2015;Hartbraunkohlen;-;-;-;-
+2015;Braunkohlenbriketts;-;-;-;-
+2015;Braunkohlenkoks;-;-;-;-
+2015;Wirbelschichtkohle;-;-;-;-
+2015;Staub- und Trockenkohle;345369;1421546;1418980;19392
+2015;Sonstige Braunkohlen;-;-;-;-
+2015;Dieselkraftstoff;-;-;-;-
+2015;Heizöl, leicht;696100;696100;3172295;3037746
+2015;Heizöl, schwer;.;.;.;.
+2015;Flüssiggas;.;.;.;.
+2015;Raffineriegas;-;-;-;-
+2015;Petrolkoks;-;-;-;-
+2015;Sonstige Mineralölprodukte;.;.;.;-
+2015;Erdgas, Erdölgas;12321615;53693935;53709227;.
+2015;Grubengas;.;.;.;-
+2015;Kokereigas;.;.;.;-
+2015;Hochofengas;-;-;-;-
+2015;Sonstige hergestellte Gase;.;.;.;-
+2015;Geothermie;.;x;x;x
+2015;Solarthermie;.;x;x;x
+2015;Feste biogene Stoffe;1596965;9026063;8979874;442602
+2015;Flüssige biogene Stoffe;.;.;.;-
+2015;Biogas;736509;4642753;4642753;-
+2015;Klärgas;.;.;.;-
+2015;Deponiegas;.;.;.;-
+2015;Sonstige erneuerbare Energien;.;-;-;-
+2015;Klärschlamm;-;-;-;-
+2015;Abfall (Hausmüll, Industrie);-;-;-;-
+2015;Abfall (Industrie);.;.;.;.
+2015;Abfall (Hausmüll, Siedlungsabfälle);.;.;.;.
+2015;Kernenergie;x;x;x;x
+2015;Wärme;.;.;.;-
+2015;Sonstige Energieträger;.;.;.;-
+2016;Steinkohlen;148794;644483;613736;.
+2016;Steinkohlenkoks;.;.;.;-
+2016;Steinkohlenbriketts;-;-;-;-
+2016;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2016;Sonstige Steinkohlen;-;-;-;-
+2016;Rohbraunkohlen;-;-;-;-
+2016;Hartbraunkohlen;-;-;-;-
+2016;Braunkohlenbriketts;-;-;-;-
+2016;Braunkohlenkoks;-;-;-;-
+2016;Wirbelschichtkohle;-;-;-;-
+2016;Staub- und Trockenkohle;334717;1377701;1373314;15026
+2016;Sonstige Braunkohlen;-;-;-;-
+2016;Dieselkraftstoff;-;-;-;-
+2016;Heizöl, leicht;701129;2984674;4025724;4075425
+2016;Heizöl, schwer;.;.;.;.
+2016;Flüssiggas;4520;18541;.;.
+2016;Raffineriegas;-;-;-;-
+2016;Petrolkoks;-;-;-;-
+2016;Sonstige Mineralölprodukte;.;.;.;-
+2016;Erdgas, Erdölgas;13190256;57429093;57502055;.
+2016;Grubengas;.;.;.;-
+2016;Kokereigas;.;.;.;-
+2016;Hochofengas;-;-;-;-
+2016;Sonstige hergestellte Gase;.;.;.;-
+2016;Geothermie;.;x;x;x
+2016;Solarthermie;.;x;x;x
+2016;Feste biogene Stoffe;1579465;7898340;8063673;606647
+2016;Flüssige biogene Stoffe;-;-;-;-
+2016;Biogas;697667;4262543;4262543;-
+2016;Klärgas;.;.;.;-
+2016;Deponiegas;.;.;.;-
+2016;Sonstige erneuerbare Energien;.;.;.;-
+2016;Klärschlamm;-;-;-;-
+2016;Abfall (Hausmüll, Industrie);-;-;-;-
+2016;Abfall (Industrie);.;.;.;.
+2016;Abfall (Hausmüll, Siedlungsabfälle);.;.;.;.
+2016;Kernenergie;x;x;x;x
+2016;Wärme;.;.;.;-
+2016;Sonstige Energieträger;.;.;.;-
+2017;Steinkohlen;.;.;.;.
+2017;Steinkohlenkoks;.;.;.;-
+2017;Steinkohlenbriketts;-;-;-;-
+2017;Kohlenwertstoffe aus Steinkohle;.;.;.;.
+2017;Sonstige Steinkohlen;-;-;-;-
+2017;Rohbraunkohlen;-;-;-;-
+2017;Hartbraunkohlen;-;-;-;-
+2017;Braunkohlenbriketts;-;-;-;-
+2017;Braunkohlenkoks;-;-;-;-
+2017;Wirbelschichtkohle;-;-;-;-
+2017;Staub- und Trockenkohle;319501;1313200;1310780;12613
+2017;Sonstige Braunkohlen;-;-;-;-
+2017;Dieselkraftstoff;-;-;-;-
+2017;Heizöl, leicht;576081;2426714;2504734;4192138
+2017;Heizöl, schwer;.;.;.;.
+2017;Flüssiggas;.;.;.;.
+2017;Raffineriegas;-;-;-;-
+2017;Petrolkoks;-;-;-;-
+2017;Sonstige Mineralölprodukte;.;.;.;-
+2017;Erdgas, Erdölgas;13479938;58667617;58667664;.
+2017;Grubengas;.;315867;315867;-
+2017;Kokereigas;.;.;.;-
+2017;Hochofengas;-;-;-;-
+2017;Sonstige hergestellte Gase;.;.;.;-
+2017;Geothermie;.;x;x;x
+2017;Solarthermie;.;x;x;x
+2017;Feste biogene Stoffe;1623632;8048726;8079036;631316
+2017;Flüssige biogene Stoffe;.;.;.;-
+2017;Biogas;612500;3473978;3473978;-
+2017;Klärgas;.;.;.;-
+2017;Deponiegas;.;.;.;-
+2017;Sonstige erneuerbare Energien;.;.;.;-
+2017;Klärschlamm;-;-;-;-
+2017;Abfall (Hausmüll, Industrie);-;-;-;-
+2017;Abfall (Industrie);.;.;.;.
+2017;Abfall (Hausmüll, Siedlungsabfälle);.;.;.;.
+2017;Kernenergie;x;x;x;x
+2017;Wärme;.;.;.;-
+2017;Sonstige Energieträger;.;.;.;-
+__________
+© Statistisches Bundesamt (Destatis), 2020
+Stand: 22.06.2020 / 18:23:44
