@@ -1,0 +1,15 @@
+﻿Technology;;Min;Median;Max
+Currently commercially available technologies;;;;
+Coal-PC;;740,00;820,00;910,00
+Gas -combined cycle;;410,00;490,00;650,00
+Biomass -Dedicated;;130,00;230,00;420,00
+Solar PV -Utility scale;;18,00;48,00;180,00
+Solar PV - rooftop;;26,00;41,00;60,00
+Geothermal;;6,00;38,00;79,00
+Concentrated solar power;;8,80;27,00;63,00
+Hydropower;;1,00;24,00;2200,00
+Wind Offshore;;8,00;12,00;35,00
+Nuclear;;3,70;12,00;110,00
+Wind Onshore;;7,00;11,00;56,00
+Pre-commercial technologies;;;;
+Ocean (Tidal and wave);;5,60;17,00;28,00
