@@ -1,0 +1,14 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+1832;Groﬂer Arber;13.14;49.11;1446;9.2;19821101;20040825;Hellmann;Niederschlagsmenge, konv.;eor;
+1832;Groﬂer Arber;13.14;49.11;1446;2;20040825;20041027;PLUVIO;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.14;49.11;1446;2;20040825;20041027;Hellmann;Niederschlagsmenge, konv.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20041028;20101102;PLUVIO;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20041028;20090801;Hellmann;Niederschlagsmenge, konv.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20101103;20101218;PLUVIO;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20110509;20130102;PLUVIO;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20130428;20171025;PLUVIO;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2;20171026;20180704;rain[e]H3, W‰getechnologie;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2.75;20180705;20190203;rain[e]H3, W‰getechnologie;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;2.75;20190501;20190821;rain[e]H3, W‰getechnologie;Niederschlagsmenge, elektr.;eor;
+1832;Groﬂer Arber;13.13;49.11;1436;3.25;20190822;20200622;rain[e]H3, W‰getechnologie;Niederschlagsmenge, elektr.;eor;
+generiert: 23.06.2020 --  Deutscher Wetterdienst  --

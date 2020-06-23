@@ -1,0 +1,8 @@
+Stations_id;Stationshoehe;Geogr.Breite;Geogr.Laenge;von_datum;bis_datum;Stationsname
+  2932;  131.00; 51.4200; 12.2200;18970601;19720430;Leipzig/Halle
+  2932;  131.00; 51.4201; 12.2213;19720501;19871130;Leipzig/Halle
+  2932;  131.00; 51.4201; 12.2213;19871201;19891014;Leipzig/Halle
+  2932;  133.00; 51.4195; 12.2232;19891015;19940118;Leipzig/Halle
+  2932;  144.00; 51.4112; 12.2332;19940119;20000229;Leipzig/Halle
+  2932;  131.00; 51.4345; 12.2393;20000301;20081231;Leipzig/Halle
+  2932;  131.00; 51.4348; 12.2396;20090101;        ;Leipzig/Halle

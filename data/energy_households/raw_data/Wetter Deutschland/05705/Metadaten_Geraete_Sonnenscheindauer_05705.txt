@@ -1,0 +1,8 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+5705;Würzburg;;;;;19470101;19580903;Gerätetyp unbekannt;Sonnenscheinregistrierung, konv.;eor;
+5705;Würzburg;9.91;49.8;259;4;19580904;19810405;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+5705;Würzburg;9.96;49.77;268;7.4;19810406;19950405;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+5705;Würzburg;9.96;49.77;268;7.4;19940301;20060606;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+5705;Würzburg;9.96;49.77;268;9999;19950403;20021201;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+5705;Würzburg;9.96;49.77;268;7.4;20060607;20200622;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+generiert: 23.06.2020 --  Deutscher Wetterdienst  --

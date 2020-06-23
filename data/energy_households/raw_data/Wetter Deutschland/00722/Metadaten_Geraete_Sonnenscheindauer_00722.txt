@@ -1,0 +1,16 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+722;Brocken;10.62;51.8;1140;23;19380101;19391231;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1142;23;19400101;19470427;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1142;10;19470912;19481020;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1142;23;19481021;19500531;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1142;23;19500825;19970308;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1142;23;19970309;19970829;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;19970830;20070731;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20070725;20080416;SCAPP;Sonnenscheind/Strahlungsmessung, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20080129;20170225;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20170411;20190116;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20190117;20190205;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20190206;20190309;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20190309;20190313;Sonnenscheinschreiber nach Campbell-Stokes;Sonnenscheinregistrierung, konv.;eor;
+722;Brocken;10.62;51.8;1133.9;23;20190314;20200622;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
+generiert: 23.06.2020 --  Deutscher Wetterdienst  --

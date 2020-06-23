@@ -1,0 +1,7 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+1346;Feldberg/Schwarzwald;;;;;19210101;19250430;Gerätetyp unbekannt;Temperatur/Feuchtemessung, konv.;eor;
+1346;Feldberg/Schwarzwald;8;47.87;1490;14.35;19250501;19380725;Psychrometerthermometer (trocken);Temperatur/Feuchtemessung, konv.;eor;
+1346;Feldberg/Schwarzwald;8;47.87;1489.6;14.35;19380726;20081202;Psychrometerthermometer (trocken);Temperatur/Feuchtemessung, konv.;eor;
+1346;Feldberg/Schwarzwald;8;47.87;1489.6;14.35;19951026;20180604;PT 100 (Luft);Temperaturmessung, elektr.;eor;
+1346;Feldberg/Schwarzwald;8;47.87;1489.6;14.4;20180605;20200622;PT 100 (Luft);Temperaturmessung, elektr.;eor;
+generiert: 23.06.2020 --  Deutscher Wetterdienst  --

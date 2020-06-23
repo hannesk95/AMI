@@ -1,0 +1,3 @@
+Stations_ID;Stationsname;Von_Datum;Bis_Datum
+   722;Brocken                                 ;18360101;19450419
+   722;Brocken                                 ;19470428;
