@@ -1,5 +1,0 @@
-Stations_id;Stationshoehe;Geogr.Breite;Geogr.Laenge;von_datum;bis_datum;Stationsname
-  1832; 1446.00; 49.1126; 13.1353;19821101;20041027;Groﬂer Arber
-  1832; 1436.00; 49.1130; 13.1342;20041028;20101102;Groﬂer Arber
-  1832; 1436.00; 49.1129; 13.1338;20101103;20170411;Groﬂer Arber
-  1832; 1436.00; 49.1129; 13.1338;20170412;        ;Groﬂer Arber

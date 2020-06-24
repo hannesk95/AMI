@@ -1,6 +1,0 @@
-Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
-1832;Groﬂer Arber;13.14;49.11;1446;9.6;19971101;20041025;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
-1832;Groﬂer Arber;13.13;49.11;1436;10;20041028;20101102;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
-1832;Groﬂer Arber;13.13;49.11;1436;10;20101103;20190825;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
-1832;Groﬂer Arber;13.13;49.11;1436;6;20190829;20200622;SONIe Sonnenenergie-Sensor;Sonnenscheindauer, elektr.;eor;
-generiert: 23.06.2020 --  Deutscher Wetterdienst  --

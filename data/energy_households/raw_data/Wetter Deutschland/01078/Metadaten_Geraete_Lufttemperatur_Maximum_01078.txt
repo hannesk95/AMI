@@ -1,6 +1,0 @@
-Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
-1078;Düsseldorf;6.78;51.29;37;2.1;19690701;19921005;Maximumthermometer;Temperaturmessung, konv.;eor;
-1078;Düsseldorf;6.77;51.3;37;2;19921006;20060202;PT 100 (Luft);Temperaturmessung, elektr.;eor;
-1078;Düsseldorf;6.77;51.3;37;2.1;19921006;20050330;Maximumthermometer;Temperaturmessung, konv.;eor;
-1078;Düsseldorf;6.77;51.3;36.6;2;20060203;20200622;PT 100 (Luft);Temperaturmessung, elektr.;eor;
-generiert: 23.06.2020 --  Deutscher Wetterdienst  --
