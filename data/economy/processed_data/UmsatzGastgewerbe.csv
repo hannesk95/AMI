@@ -1,0 +1,973 @@
+;;;Originalwerte
+Beherbergung;1994;Januar;92,3
+Beherbergung;1994;Februar;97
+Beherbergung;1994;März;111,3
+Beherbergung;1994;April;117,2
+Beherbergung;1994;Mai;138
+Beherbergung;1994;Juni;134,7
+Beherbergung;1994;Juli;130,8
+Beherbergung;1994;August;135,6
+Beherbergung;1994;September;155,6
+Beherbergung;1994;Oktober;146
+Beherbergung;1994;November;106,5
+Beherbergung;1994;Dezember;110,8
+Beherbergung;1995;Januar;92,2
+Beherbergung;1995;Februar;96,6
+Beherbergung;1995;März;112,4
+Beherbergung;1995;April;114,4
+Beherbergung;1995;Mai;140,9
+Beherbergung;1995;Juni;130,3
+Beherbergung;1995;Juli;122,8
+Beherbergung;1995;August;125,5
+Beherbergung;1995;September;143,2
+Beherbergung;1995;Oktober;139
+Beherbergung;1995;November;105,1
+Beherbergung;1995;Dezember;108,2
+Beherbergung;1996;Januar;88,6
+Beherbergung;1996;Februar;94,6
+Beherbergung;1996;März;109,5
+Beherbergung;1996;April;112,3
+Beherbergung;1996;Mai;132,8
+Beherbergung;1996;Juni;127,3
+Beherbergung;1996;Juli;118,8
+Beherbergung;1996;August;125
+Beherbergung;1996;September;140,7
+Beherbergung;1996;Oktober;133,5
+Beherbergung;1996;November;103
+Beherbergung;1996;Dezember;104,9
+Beherbergung;1997;Januar;88,3
+Beherbergung;1997;Februar;89,8
+Beherbergung;1997;März;104,5
+Beherbergung;1997;April;109,6
+Beherbergung;1997;Mai;126,4
+Beherbergung;1997;Juni;126,8
+Beherbergung;1997;Juli;114,7
+Beherbergung;1997;August;123,6
+Beherbergung;1997;September;141,8
+Beherbergung;1997;Oktober;133,4
+Beherbergung;1997;November;101,2
+Beherbergung;1997;Dezember;105,5
+Beherbergung;1998;Januar;86,6
+Beherbergung;1998;Februar;92,3
+Beherbergung;1998;März;103,8
+Beherbergung;1998;April;105,1
+Beherbergung;1998;Mai;129,6
+Beherbergung;1998;Juni;123,9
+Beherbergung;1998;Juli;114,7
+Beherbergung;1998;August;122,4
+Beherbergung;1998;September;137,9
+Beherbergung;1998;Oktober;130,6
+Beherbergung;1998;November;100,4
+Beherbergung;1998;Dezember;105,8
+Beherbergung;1999;Januar;91,1
+Beherbergung;1999;Februar;93,1
+Beherbergung;1999;März;105,2
+Beherbergung;1999;April;106,3
+Beherbergung;1999;Mai;128
+Beherbergung;1999;Juni;122,8
+Beherbergung;1999;Juli;116,8
+Beherbergung;1999;August;122,3
+Beherbergung;1999;September;140,4
+Beherbergung;1999;Oktober;132,8
+Beherbergung;1999;November;107,7
+Beherbergung;1999;Dezember;109,9
+Beherbergung;2000;Januar;92,6
+Beherbergung;2000;Februar;99,7
+Beherbergung;2000;März;108,7
+Beherbergung;2000;April;112,1
+Beherbergung;2000;Mai;140,3
+Beherbergung;2000;Juni;135,6
+Beherbergung;2000;Juli;130,1
+Beherbergung;2000;August;134,7
+Beherbergung;2000;September;154,2
+Beherbergung;2000;Oktober;140,4
+Beherbergung;2000;November;110
+Beherbergung;2000;Dezember;110
+Beherbergung;2001;Januar;96,4
+Beherbergung;2001;Februar;95,1
+Beherbergung;2001;März;111,7
+Beherbergung;2001;April;113,2
+Beherbergung;2001;Mai;137,2
+Beherbergung;2001;Juni;132
+Beherbergung;2001;Juli;130,3
+Beherbergung;2001;August;132,5
+Beherbergung;2001;September;143,4
+Beherbergung;2001;Oktober;135,2
+Beherbergung;2001;November;108,1
+Beherbergung;2001;Dezember;105,3
+Beherbergung;2002;Januar;91,7
+Beherbergung;2002;Februar;92,5
+Beherbergung;2002;März;104,7
+Beherbergung;2002;April;111,5
+Beherbergung;2002;Mai;123,8
+Beherbergung;2002;Juni;124,6
+Beherbergung;2002;Juli;121,1
+Beherbergung;2002;August;124,2
+Beherbergung;2002;September;136,2
+Beherbergung;2002;Oktober;123,8
+Beherbergung;2002;November;98,3
+Beherbergung;2002;Dezember;94,7
+Beherbergung;2003;Januar;82,7
+Beherbergung;2003;Februar;84,8
+Beherbergung;2003;März;97,1
+Beherbergung;2003;April;97,9
+Beherbergung;2003;Mai;118,3
+Beherbergung;2003;Juni;114,7
+Beherbergung;2003;Juli;109
+Beherbergung;2003;August;112,4
+Beherbergung;2003;September;124,6
+Beherbergung;2003;Oktober;118,5
+Beherbergung;2003;November;94,5
+Beherbergung;2003;Dezember;94,6
+Beherbergung;2004;Januar;79,1
+Beherbergung;2004;Februar;85,8
+Beherbergung;2004;März;98,2
+Beherbergung;2004;April;100,7
+Beherbergung;2004;Mai;121,2
+Beherbergung;2004;Juni;113
+Beherbergung;2004;Juli;110,7
+Beherbergung;2004;August;112,3
+Beherbergung;2004;September;127,1
+Beherbergung;2004;Oktober;118,7
+Beherbergung;2004;November;94,1
+Beherbergung;2004;Dezember;91,8
+Beherbergung;2005;Januar;79,3
+Beherbergung;2005;Februar;80,5
+Beherbergung;2005;März;90,5
+Beherbergung;2005;April;99,4
+Beherbergung;2005;Mai;112,7
+Beherbergung;2005;Juni;110,3
+Beherbergung;2005;Juli;108,5
+Beherbergung;2005;August;112,2
+Beherbergung;2005;September;125,6
+Beherbergung;2005;Oktober;116
+Beherbergung;2005;November;90,3
+Beherbergung;2005;Dezember;94,1
+Beherbergung;2006;Januar;79,5
+Beherbergung;2006;Februar;82,1
+Beherbergung;2006;März;93,1
+Beherbergung;2006;April;97,6
+Beherbergung;2006;Mai;118,4
+Beherbergung;2006;Juni;115,1
+Beherbergung;2006;Juli;115,2
+Beherbergung;2006;August;111,3
+Beherbergung;2006;September;129,6
+Beherbergung;2006;Oktober;118,4
+Beherbergung;2006;November;89,4
+Beherbergung;2006;Dezember;98,3
+Beherbergung;2007;Januar;80,9
+Beherbergung;2007;Februar;82,3
+Beherbergung;2007;März;97,9
+Beherbergung;2007;April;101,8
+Beherbergung;2007;Mai;115,7
+Beherbergung;2007;Juni;113,1
+Beherbergung;2007;Juli;112,2
+Beherbergung;2007;August;114,6
+Beherbergung;2007;September;124,6
+Beherbergung;2007;Oktober;120,8
+Beherbergung;2007;November;94,7
+Beherbergung;2007;Dezember;98,1
+Beherbergung;2008;Januar;81,4
+Beherbergung;2008;Februar;86,7
+Beherbergung;2008;März;91
+Beherbergung;2008;April;102,3
+Beherbergung;2008;Mai;118,6
+Beherbergung;2008;Juni;113,3
+Beherbergung;2008;Juli;111,2
+Beherbergung;2008;August;113,2
+Beherbergung;2008;September;123,5
+Beherbergung;2008;Oktober;115,1
+Beherbergung;2008;November;91,3
+Beherbergung;2008;Dezember;91,3
+Beherbergung;2009;Januar;71,5
+Beherbergung;2009;Februar;74,3
+Beherbergung;2009;März;84,5
+Beherbergung;2009;April;87,9
+Beherbergung;2009;Mai;105,7
+Beherbergung;2009;Juni;102,4
+Beherbergung;2009;Juli;105,4
+Beherbergung;2009;August;108
+Beherbergung;2009;September;113,2
+Beherbergung;2009;Oktober;105,5
+Beherbergung;2009;November;85
+Beherbergung;2009;Dezember;87,6
+Beherbergung;2010;Januar;69,3
+Beherbergung;2010;Februar;73,1
+Beherbergung;2010;März;83
+Beherbergung;2010;April;91,1
+Beherbergung;2010;Mai;101,7
+Beherbergung;2010;Juni;103,7
+Beherbergung;2010;Juli;108
+Beherbergung;2010;August;106,8
+Beherbergung;2010;September;116,8
+Beherbergung;2010;Oktober;110,3
+Beherbergung;2010;November;88,8
+Beherbergung;2010;Dezember;87,5
+Beherbergung;2011;Januar;73,4
+Beherbergung;2011;Februar;75,5
+Beherbergung;2011;März;87
+Beherbergung;2011;April;92,2
+Beherbergung;2011;Mai;110
+Beherbergung;2011;Juni;106,8
+Beherbergung;2011;Juli;109,4
+Beherbergung;2011;August;106,3
+Beherbergung;2011;September;116,9
+Beherbergung;2011;Oktober;110,4
+Beherbergung;2011;November;90
+Beherbergung;2011;Dezember;90,4
+Beherbergung;2012;Januar;74,2
+Beherbergung;2012;Februar;78,9
+Beherbergung;2012;März;90,7
+Beherbergung;2012;April;93,5
+Beherbergung;2012;Mai;111,6
+Beherbergung;2012;Juni;108,3
+Beherbergung;2012;Juli;108,9
+Beherbergung;2012;August;111,6
+Beherbergung;2012;September;119,8
+Beherbergung;2012;Oktober;109,4
+Beherbergung;2012;November;90,7
+Beherbergung;2012;Dezember;91
+Beherbergung;2013;Januar;74,6
+Beherbergung;2013;Februar;76,2
+Beherbergung;2013;März;87,3
+Beherbergung;2013;April;94,5
+Beherbergung;2013;Mai;102,8
+Beherbergung;2013;Juni;105,5
+Beherbergung;2013;Juli;109
+Beherbergung;2013;August;111,7
+Beherbergung;2013;September;116,7
+Beherbergung;2013;Oktober;112
+Beherbergung;2013;November;89,6
+Beherbergung;2013;Dezember;88,7
+Beherbergung;2014;Januar;74,4
+Beherbergung;2014;Februar;75,2
+Beherbergung;2014;März;86,5
+Beherbergung;2014;April;90,6
+Beherbergung;2014;Mai;111,1
+Beherbergung;2014;Juni;106,8
+Beherbergung;2014;Juli;109,5
+Beherbergung;2014;August;113,8
+Beherbergung;2014;September;121,2
+Beherbergung;2014;Oktober;112,2
+Beherbergung;2014;November;92,4
+Beherbergung;2014;Dezember;90,4
+Beherbergung;2015;Januar;75,1
+Beherbergung;2015;Februar;78
+Beherbergung;2015;März;88,8
+Beherbergung;2015;April;91,9
+Beherbergung;2015;Mai;108,9
+Beherbergung;2015;Juni;112,5
+Beherbergung;2015;Juli;112,6
+Beherbergung;2015;August;115,3
+Beherbergung;2015;September;119,3
+Beherbergung;2015;Oktober;113,3
+Beherbergung;2015;November;92,9
+Beherbergung;2015;Dezember;91,7
+Beherbergung;2016;Januar;76,6
+Beherbergung;2016;Februar;80,7
+Beherbergung;2016;März;91,7
+Beherbergung;2016;April;99,4
+Beherbergung;2016;Mai;108,6
+Beherbergung;2016;Juni;111,1
+Beherbergung;2016;Juli;115,2
+Beherbergung;2016;August;114,6
+Beherbergung;2016;September;125,6
+Beherbergung;2016;Oktober;114,7
+Beherbergung;2016;November;93,2
+Beherbergung;2016;Dezember;92,6
+Beherbergung;2017;Januar;78,4
+Beherbergung;2017;Februar;79,1
+Beherbergung;2017;März;96,2
+Beherbergung;2017;April;97,1
+Beherbergung;2017;Mai;116,1
+Beherbergung;2017;Juni;111,4
+Beherbergung;2017;Juli;115,7
+Beherbergung;2017;August;112,2
+Beherbergung;2017;September;124,4
+Beherbergung;2017;Oktober;114,6
+Beherbergung;2017;November;94,1
+Beherbergung;2017;Dezember;96,1
+Beherbergung;2018;Januar;80,8
+Beherbergung;2018;Februar;81,6
+Beherbergung;2018;März;94,3
+Beherbergung;2018;April;102,4
+Beherbergung;2018;Mai;109,2
+Beherbergung;2018;Juni;115,5
+Beherbergung;2018;Juli;116,5
+Beherbergung;2018;August;116
+Beherbergung;2018;September;127,1
+Beherbergung;2018;Oktober;115,9
+Beherbergung;2018;November;97,3
+Beherbergung;2018;Dezember;96
+Beherbergung;2019;Januar;82,1
+Beherbergung;2019;Februar;83,9
+Beherbergung;2019;März;97,7
+Beherbergung;2019;April;101,3
+Beherbergung;2019;Mai;112,1
+Beherbergung;2019;Juni;115,7
+Beherbergung;2019;Juli;115,5
+Beherbergung;2019;August;115,1
+Beherbergung;2019;September;123,2
+Beherbergung;2019;Oktober;117
+Beherbergung;2019;November;100,1
+Beherbergung;2019;Dezember;96,1
+Beherbergung;2020;Januar;80,8
+Beherbergung;2020;Februar;84,5
+Beherbergung;2020;März;48,2
+Beherbergung;2020;April;11,5
+Beherbergung;2020;Mai;...
+Beherbergung;2020;Juni;...
+Beherbergung;2020;Juli;...
+Beherbergung;2020;August;...
+Beherbergung;2020;September;...
+Beherbergung;2020;Oktober;...
+Beherbergung;2020;November;...
+Beherbergung;2020;Dezember;...
+Hotels, Gasthöfe und Pensionen;1994;Januar;91,9
+Hotels, Gasthöfe und Pensionen;1994;Februar;97,2
+Hotels, Gasthöfe und Pensionen;1994;März;110,6
+Hotels, Gasthöfe und Pensionen;1994;April;115,9
+Hotels, Gasthöfe und Pensionen;1994;Mai;136,8
+Hotels, Gasthöfe und Pensionen;1994;Juni;132,8
+Hotels, Gasthöfe und Pensionen;1994;Juli;126,4
+Hotels, Gasthöfe und Pensionen;1994;August;132,2
+Hotels, Gasthöfe und Pensionen;1994;September;155,6
+Hotels, Gasthöfe und Pensionen;1994;Oktober;146,6
+Hotels, Gasthöfe und Pensionen;1994;November;108
+Hotels, Gasthöfe und Pensionen;1994;Dezember;112,1
+Hotels, Gasthöfe und Pensionen;1995;Januar;91,6
+Hotels, Gasthöfe und Pensionen;1995;Februar;96,8
+Hotels, Gasthöfe und Pensionen;1995;März;112,5
+Hotels, Gasthöfe und Pensionen;1995;April;112,7
+Hotels, Gasthöfe und Pensionen;1995;Mai;140,4
+Hotels, Gasthöfe und Pensionen;1995;Juni;128
+Hotels, Gasthöfe und Pensionen;1995;Juli;118,2
+Hotels, Gasthöfe und Pensionen;1995;August;121,9
+Hotels, Gasthöfe und Pensionen;1995;September;142,6
+Hotels, Gasthöfe und Pensionen;1995;Oktober;139,3
+Hotels, Gasthöfe und Pensionen;1995;November;106,7
+Hotels, Gasthöfe und Pensionen;1995;Dezember;109,9
+Hotels, Gasthöfe und Pensionen;1996;Januar;88,6
+Hotels, Gasthöfe und Pensionen;1996;Februar;94,8
+Hotels, Gasthöfe und Pensionen;1996;März;109,3
+Hotels, Gasthöfe und Pensionen;1996;April;110,7
+Hotels, Gasthöfe und Pensionen;1996;Mai;131,8
+Hotels, Gasthöfe und Pensionen;1996;Juni;124,4
+Hotels, Gasthöfe und Pensionen;1996;Juli;113,7
+Hotels, Gasthöfe und Pensionen;1996;August;121,2
+Hotels, Gasthöfe und Pensionen;1996;September;139,5
+Hotels, Gasthöfe und Pensionen;1996;Oktober;133,4
+Hotels, Gasthöfe und Pensionen;1996;November;105,1
+Hotels, Gasthöfe und Pensionen;1996;Dezember;106,3
+Hotels, Gasthöfe und Pensionen;1997;Januar;88,3
+Hotels, Gasthöfe und Pensionen;1997;Februar;89,9
+Hotels, Gasthöfe und Pensionen;1997;März;104,6
+Hotels, Gasthöfe und Pensionen;1997;April;108,8
+Hotels, Gasthöfe und Pensionen;1997;Mai;125
+Hotels, Gasthöfe und Pensionen;1997;Juni;125,5
+Hotels, Gasthöfe und Pensionen;1997;Juli;111
+Hotels, Gasthöfe und Pensionen;1997;August;119,9
+Hotels, Gasthöfe und Pensionen;1997;September;141,7
+Hotels, Gasthöfe und Pensionen;1997;Oktober;133,8
+Hotels, Gasthöfe und Pensionen;1997;November;103,6
+Hotels, Gasthöfe und Pensionen;1997;Dezember;107,4
+Hotels, Gasthöfe und Pensionen;1998;Januar;87,1
+Hotels, Gasthöfe und Pensionen;1998;Februar;93
+Hotels, Gasthöfe und Pensionen;1998;März;104,8
+Hotels, Gasthöfe und Pensionen;1998;April;103,5
+Hotels, Gasthöfe und Pensionen;1998;Mai;128,8
+Hotels, Gasthöfe und Pensionen;1998;Juni;122,4
+Hotels, Gasthöfe und Pensionen;1998;Juli;110,5
+Hotels, Gasthöfe und Pensionen;1998;August;117,5
+Hotels, Gasthöfe und Pensionen;1998;September;136,8
+Hotels, Gasthöfe und Pensionen;1998;Oktober;130,4
+Hotels, Gasthöfe und Pensionen;1998;November;102,5
+Hotels, Gasthöfe und Pensionen;1998;Dezember;107,3
+Hotels, Gasthöfe und Pensionen;1999;Januar;91,6
+Hotels, Gasthöfe und Pensionen;1999;Februar;93,4
+Hotels, Gasthöfe und Pensionen;1999;März;106,2
+Hotels, Gasthöfe und Pensionen;1999;April;105,5
+Hotels, Gasthöfe und Pensionen;1999;Mai;127,4
+Hotels, Gasthöfe und Pensionen;1999;Juni;121,6
+Hotels, Gasthöfe und Pensionen;1999;Juli;113,3
+Hotels, Gasthöfe und Pensionen;1999;August;118,3
+Hotels, Gasthöfe und Pensionen;1999;September;139,6
+Hotels, Gasthöfe und Pensionen;1999;Oktober;132,9
+Hotels, Gasthöfe und Pensionen;1999;November;109,7
+Hotels, Gasthöfe und Pensionen;1999;Dezember;111,8
+Hotels, Gasthöfe und Pensionen;2000;Januar;92,9
+Hotels, Gasthöfe und Pensionen;2000;Februar;100,4
+Hotels, Gasthöfe und Pensionen;2000;März;110
+Hotels, Gasthöfe und Pensionen;2000;April;111
+Hotels, Gasthöfe und Pensionen;2000;Mai;140,4
+Hotels, Gasthöfe und Pensionen;2000;Juni;134,3
+Hotels, Gasthöfe und Pensionen;2000;Juli;127,6
+Hotels, Gasthöfe und Pensionen;2000;August;131,9
+Hotels, Gasthöfe und Pensionen;2000;September;153,7
+Hotels, Gasthöfe und Pensionen;2000;Oktober;141,1
+Hotels, Gasthöfe und Pensionen;2000;November;112,7
+Hotels, Gasthöfe und Pensionen;2000;Dezember;112,7
+Hotels, Gasthöfe und Pensionen;2001;Januar;97,5
+Hotels, Gasthöfe und Pensionen;2001;Februar;96,2
+Hotels, Gasthöfe und Pensionen;2001;März;113,6
+Hotels, Gasthöfe und Pensionen;2001;April;112,1
+Hotels, Gasthöfe und Pensionen;2001;Mai;137,2
+Hotels, Gasthöfe und Pensionen;2001;Juni;130,7
+Hotels, Gasthöfe und Pensionen;2001;Juli;126,7
+Hotels, Gasthöfe und Pensionen;2001;August;129,3
+Hotels, Gasthöfe und Pensionen;2001;September;142,9
+Hotels, Gasthöfe und Pensionen;2001;Oktober;135,8
+Hotels, Gasthöfe und Pensionen;2001;November;110,9
+Hotels, Gasthöfe und Pensionen;2001;Dezember;108
+Hotels, Gasthöfe und Pensionen;2002;Januar;92,6
+Hotels, Gasthöfe und Pensionen;2002;Februar;93,7
+Hotels, Gasthöfe und Pensionen;2002;März;105,1
+Hotels, Gasthöfe und Pensionen;2002;April;111,1
+Hotels, Gasthöfe und Pensionen;2002;Mai;122,6
+Hotels, Gasthöfe und Pensionen;2002;Juni;123,1
+Hotels, Gasthöfe und Pensionen;2002;Juli;117,5
+Hotels, Gasthöfe und Pensionen;2002;August;120,7
+Hotels, Gasthöfe und Pensionen;2002;September;135,4
+Hotels, Gasthöfe und Pensionen;2002;Oktober;123,9
+Hotels, Gasthöfe und Pensionen;2002;November;100,7
+Hotels, Gasthöfe und Pensionen;2002;Dezember;96,8
+Hotels, Gasthöfe und Pensionen;2003;Januar;82,7
+Hotels, Gasthöfe und Pensionen;2003;Februar;84,9
+Hotels, Gasthöfe und Pensionen;2003;März;96,7
+Hotels, Gasthöfe und Pensionen;2003;April;96,5
+Hotels, Gasthöfe und Pensionen;2003;Mai;117,7
+Hotels, Gasthöfe und Pensionen;2003;Juni;113
+Hotels, Gasthöfe und Pensionen;2003;Juli;106,3
+Hotels, Gasthöfe und Pensionen;2003;August;109,2
+Hotels, Gasthöfe und Pensionen;2003;September;124
+Hotels, Gasthöfe und Pensionen;2003;Oktober;118,5
+Hotels, Gasthöfe und Pensionen;2003;November;96
+Hotels, Gasthöfe und Pensionen;2003;Dezember;95
+Hotels, Gasthöfe und Pensionen;2004;Januar;78,7
+Hotels, Gasthöfe und Pensionen;2004;Februar;85,4
+Hotels, Gasthöfe und Pensionen;2004;März;97,4
+Hotels, Gasthöfe und Pensionen;2004;April;99,4
+Hotels, Gasthöfe und Pensionen;2004;Mai;121
+Hotels, Gasthöfe und Pensionen;2004;Juni;111,5
+Hotels, Gasthöfe und Pensionen;2004;Juli;108,3
+Hotels, Gasthöfe und Pensionen;2004;August;109,4
+Hotels, Gasthöfe und Pensionen;2004;September;126,6
+Hotels, Gasthöfe und Pensionen;2004;Oktober;119,1
+Hotels, Gasthöfe und Pensionen;2004;November;95,4
+Hotels, Gasthöfe und Pensionen;2004;Dezember;93,3
+Hotels, Gasthöfe und Pensionen;2005;Januar;77,7
+Hotels, Gasthöfe und Pensionen;2005;Februar;80,4
+Hotels, Gasthöfe und Pensionen;2005;März;89,4
+Hotels, Gasthöfe und Pensionen;2005;April;99
+Hotels, Gasthöfe und Pensionen;2005;Mai;111,5
+Hotels, Gasthöfe und Pensionen;2005;Juni;109,2
+Hotels, Gasthöfe und Pensionen;2005;Juli;105,3
+Hotels, Gasthöfe und Pensionen;2005;August;109,2
+Hotels, Gasthöfe und Pensionen;2005;September;124,8
+Hotels, Gasthöfe und Pensionen;2005;Oktober;116
+Hotels, Gasthöfe und Pensionen;2005;November;91,1
+Hotels, Gasthöfe und Pensionen;2005;Dezember;95,9
+Hotels, Gasthöfe und Pensionen;2006;Januar;79,2
+Hotels, Gasthöfe und Pensionen;2006;Februar;81,4
+Hotels, Gasthöfe und Pensionen;2006;März;92,9
+Hotels, Gasthöfe und Pensionen;2006;April;96,6
+Hotels, Gasthöfe und Pensionen;2006;Mai;118,2
+Hotels, Gasthöfe und Pensionen;2006;Juni;113,6
+Hotels, Gasthöfe und Pensionen;2006;Juli;112,3
+Hotels, Gasthöfe und Pensionen;2006;August;108,4
+Hotels, Gasthöfe und Pensionen;2006;September;128,7
+Hotels, Gasthöfe und Pensionen;2006;Oktober;118,4
+Hotels, Gasthöfe und Pensionen;2006;November;90,7
+Hotels, Gasthöfe und Pensionen;2006;Dezember;99,8
+Hotels, Gasthöfe und Pensionen;2007;Januar;79,4
+Hotels, Gasthöfe und Pensionen;2007;Februar;82,6
+Hotels, Gasthöfe und Pensionen;2007;März;97,4
+Hotels, Gasthöfe und Pensionen;2007;April;101
+Hotels, Gasthöfe und Pensionen;2007;Mai;115,2
+Hotels, Gasthöfe und Pensionen;2007;Juni;111,6
+Hotels, Gasthöfe und Pensionen;2007;Juli;109,5
+Hotels, Gasthöfe und Pensionen;2007;August;111,7
+Hotels, Gasthöfe und Pensionen;2007;September;124,3
+Hotels, Gasthöfe und Pensionen;2007;Oktober;121,2
+Hotels, Gasthöfe und Pensionen;2007;November;96,1
+Hotels, Gasthöfe und Pensionen;2007;Dezember;100,4
+Hotels, Gasthöfe und Pensionen;2008;Januar;81,1
+Hotels, Gasthöfe und Pensionen;2008;Februar;87,1
+Hotels, Gasthöfe und Pensionen;2008;März;90,2
+Hotels, Gasthöfe und Pensionen;2008;April;101,5
+Hotels, Gasthöfe und Pensionen;2008;Mai;117,3
+Hotels, Gasthöfe und Pensionen;2008;Juni;112
+Hotels, Gasthöfe und Pensionen;2008;Juli;108
+Hotels, Gasthöfe und Pensionen;2008;August;109,9
+Hotels, Gasthöfe und Pensionen;2008;September;122,6
+Hotels, Gasthöfe und Pensionen;2008;Oktober;115
+Hotels, Gasthöfe und Pensionen;2008;November;92,8
+Hotels, Gasthöfe und Pensionen;2008;Dezember;93,2
+Hotels, Gasthöfe und Pensionen;2009;Januar;70,6
+Hotels, Gasthöfe und Pensionen;2009;Februar;74,5
+Hotels, Gasthöfe und Pensionen;2009;März;84,5
+Hotels, Gasthöfe und Pensionen;2009;April;86,3
+Hotels, Gasthöfe und Pensionen;2009;Mai;104,7
+Hotels, Gasthöfe und Pensionen;2009;Juni;100
+Hotels, Gasthöfe und Pensionen;2009;Juli;101
+Hotels, Gasthöfe und Pensionen;2009;August;103,8
+Hotels, Gasthöfe und Pensionen;2009;September;112,3
+Hotels, Gasthöfe und Pensionen;2009;Oktober;105
+Hotels, Gasthöfe und Pensionen;2009;November;86,6
+Hotels, Gasthöfe und Pensionen;2009;Dezember;89,9
+Hotels, Gasthöfe und Pensionen;2010;Januar;68,9
+Hotels, Gasthöfe und Pensionen;2010;Februar;73,7
+Hotels, Gasthöfe und Pensionen;2010;März;83,1
+Hotels, Gasthöfe und Pensionen;2010;April;90,5
+Hotels, Gasthöfe und Pensionen;2010;Mai;100,6
+Hotels, Gasthöfe und Pensionen;2010;Juni;102
+Hotels, Gasthöfe und Pensionen;2010;Juli;102,6
+Hotels, Gasthöfe und Pensionen;2010;August;102,3
+Hotels, Gasthöfe und Pensionen;2010;September;116,9
+Hotels, Gasthöfe und Pensionen;2010;Oktober;110,9
+Hotels, Gasthöfe und Pensionen;2010;November;91,3
+Hotels, Gasthöfe und Pensionen;2010;Dezember;89,8
+Hotels, Gasthöfe und Pensionen;2011;Januar;73,4
+Hotels, Gasthöfe und Pensionen;2011;Februar;76,5
+Hotels, Gasthöfe und Pensionen;2011;März;88,1
+Hotels, Gasthöfe und Pensionen;2011;April;90,6
+Hotels, Gasthöfe und Pensionen;2011;Mai;110,3
+Hotels, Gasthöfe und Pensionen;2011;Juni;104,7
+Hotels, Gasthöfe und Pensionen;2011;Juli;105,3
+Hotels, Gasthöfe und Pensionen;2011;August;102,1
+Hotels, Gasthöfe und Pensionen;2011;September;116,8
+Hotels, Gasthöfe und Pensionen;2011;Oktober;110,7
+Hotels, Gasthöfe und Pensionen;2011;November;92,2
+Hotels, Gasthöfe und Pensionen;2011;Dezember;92,9
+Hotels, Gasthöfe und Pensionen;2012;Januar;74,3
+Hotels, Gasthöfe und Pensionen;2012;Februar;79,9
+Hotels, Gasthöfe und Pensionen;2012;März;91,6
+Hotels, Gasthöfe und Pensionen;2012;April;92,8
+Hotels, Gasthöfe und Pensionen;2012;Mai;111,4
+Hotels, Gasthöfe und Pensionen;2012;Juni;107,1
+Hotels, Gasthöfe und Pensionen;2012;Juli;105,6
+Hotels, Gasthöfe und Pensionen;2012;August;108,2
+Hotels, Gasthöfe und Pensionen;2012;September;120,2
+Hotels, Gasthöfe und Pensionen;2012;Oktober;109,7
+Hotels, Gasthöfe und Pensionen;2012;November;92,8
+Hotels, Gasthöfe und Pensionen;2012;Dezember;93
+Hotels, Gasthöfe und Pensionen;2013;Januar;75,2
+Hotels, Gasthöfe und Pensionen;2013;Februar;77,7
+Hotels, Gasthöfe und Pensionen;2013;März;88,2
+Hotels, Gasthöfe und Pensionen;2013;April;95,4
+Hotels, Gasthöfe und Pensionen;2013;Mai;102,4
+Hotels, Gasthöfe und Pensionen;2013;Juni;105,1
+Hotels, Gasthöfe und Pensionen;2013;Juli;104,9
+Hotels, Gasthöfe und Pensionen;2013;August;108,4
+Hotels, Gasthöfe und Pensionen;2013;September;116,8
+Hotels, Gasthöfe und Pensionen;2013;Oktober;112,8
+Hotels, Gasthöfe und Pensionen;2013;November;91,9
+Hotels, Gasthöfe und Pensionen;2013;Dezember;90,9
+Hotels, Gasthöfe und Pensionen;2014;Januar;74,8
+Hotels, Gasthöfe und Pensionen;2014;Februar;76,2
+Hotels, Gasthöfe und Pensionen;2014;März;87,8
+Hotels, Gasthöfe und Pensionen;2014;April;89,9
+Hotels, Gasthöfe und Pensionen;2014;Mai;111,8
+Hotels, Gasthöfe und Pensionen;2014;Juni;105,5
+Hotels, Gasthöfe und Pensionen;2014;Juli;106,7
+Hotels, Gasthöfe und Pensionen;2014;August;110,3
+Hotels, Gasthöfe und Pensionen;2014;September;121,8
+Hotels, Gasthöfe und Pensionen;2014;Oktober;112,8
+Hotels, Gasthöfe und Pensionen;2014;November;94,7
+Hotels, Gasthöfe und Pensionen;2014;Dezember;92,5
+Hotels, Gasthöfe und Pensionen;2015;Januar;75,2
+Hotels, Gasthöfe und Pensionen;2015;Februar;78,6
+Hotels, Gasthöfe und Pensionen;2015;März;89,4
+Hotels, Gasthöfe und Pensionen;2015;April;91,5
+Hotels, Gasthöfe und Pensionen;2015;Mai;108,8
+Hotels, Gasthöfe und Pensionen;2015;Juni;112,4
+Hotels, Gasthöfe und Pensionen;2015;Juli;109,6
+Hotels, Gasthöfe und Pensionen;2015;August;112,3
+Hotels, Gasthöfe und Pensionen;2015;September;119,9
+Hotels, Gasthöfe und Pensionen;2015;Oktober;113,6
+Hotels, Gasthöfe und Pensionen;2015;November;95,1
+Hotels, Gasthöfe und Pensionen;2015;Dezember;93,6
+Hotels, Gasthöfe und Pensionen;2016;Januar;77,1
+Hotels, Gasthöfe und Pensionen;2016;Februar;82,2
+Hotels, Gasthöfe und Pensionen;2016;März;92,7
+Hotels, Gasthöfe und Pensionen;2016;April;100,4
+Hotels, Gasthöfe und Pensionen;2016;Mai;108,1
+Hotels, Gasthöfe und Pensionen;2016;Juni;111,2
+Hotels, Gasthöfe und Pensionen;2016;Juli;111,8
+Hotels, Gasthöfe und Pensionen;2016;August;110,8
+Hotels, Gasthöfe und Pensionen;2016;September;126,4
+Hotels, Gasthöfe und Pensionen;2016;Oktober;115,7
+Hotels, Gasthöfe und Pensionen;2016;November;96,5
+Hotels, Gasthöfe und Pensionen;2016;Dezember;95,9
+Hotels, Gasthöfe und Pensionen;2017;Januar;79,1
+Hotels, Gasthöfe und Pensionen;2017;Februar;80,8
+Hotels, Gasthöfe und Pensionen;2017;März;98,2
+Hotels, Gasthöfe und Pensionen;2017;April;96,5
+Hotels, Gasthöfe und Pensionen;2017;Mai;117,1
+Hotels, Gasthöfe und Pensionen;2017;Juni;110
+Hotels, Gasthöfe und Pensionen;2017;Juli;112,5
+Hotels, Gasthöfe und Pensionen;2017;August;108,6
+Hotels, Gasthöfe und Pensionen;2017;September;125,5
+Hotels, Gasthöfe und Pensionen;2017;Oktober;116,2
+Hotels, Gasthöfe und Pensionen;2017;November;97,4
+Hotels, Gasthöfe und Pensionen;2017;Dezember;99,2
+Hotels, Gasthöfe und Pensionen;2018;Januar;81,1
+Hotels, Gasthöfe und Pensionen;2018;Februar;83,1
+Hotels, Gasthöfe und Pensionen;2018;März;95,4
+Hotels, Gasthöfe und Pensionen;2018;April;103,3
+Hotels, Gasthöfe und Pensionen;2018;Mai;108,8
+Hotels, Gasthöfe und Pensionen;2018;Juni;115,3
+Hotels, Gasthöfe und Pensionen;2018;Juli;113,7
+Hotels, Gasthöfe und Pensionen;2018;August;113,4
+Hotels, Gasthöfe und Pensionen;2018;September;127,7
+Hotels, Gasthöfe und Pensionen;2018;Oktober;117,2
+Hotels, Gasthöfe und Pensionen;2018;November;100,5
+Hotels, Gasthöfe und Pensionen;2018;Dezember;99
+Hotels, Gasthöfe und Pensionen;2019;Januar;82,9
+Hotels, Gasthöfe und Pensionen;2019;Februar;85,6
+Hotels, Gasthöfe und Pensionen;2019;März;99,7
+Hotels, Gasthöfe und Pensionen;2019;April;101,2
+Hotels, Gasthöfe und Pensionen;2019;Mai;112,9
+Hotels, Gasthöfe und Pensionen;2019;Juni;114,6
+Hotels, Gasthöfe und Pensionen;2019;Juli;112,5
+Hotels, Gasthöfe und Pensionen;2019;August;112,1
+Hotels, Gasthöfe und Pensionen;2019;September;123,6
+Hotels, Gasthöfe und Pensionen;2019;Oktober;118,2
+Hotels, Gasthöfe und Pensionen;2019;November;103,3
+Hotels, Gasthöfe und Pensionen;2019;Dezember;99
+Hotels, Gasthöfe und Pensionen;2020;Januar;81,3
+Hotels, Gasthöfe und Pensionen;2020;Februar;86,3
+Hotels, Gasthöfe und Pensionen;2020;März;48
+Hotels, Gasthöfe und Pensionen;2020;April;10
+Hotels, Gasthöfe und Pensionen;2020;Mai;...
+Hotels, Gasthöfe und Pensionen;2020;Juni;...
+Hotels, Gasthöfe und Pensionen;2020;Juli;...
+Hotels, Gasthöfe und Pensionen;2020;August;...
+Hotels, Gasthöfe und Pensionen;2020;September;...
+Hotels, Gasthöfe und Pensionen;2020;Oktober;...
+Hotels, Gasthöfe und Pensionen;2020;November;...
+Hotels, Gasthöfe und Pensionen;2020;Dezember;...
+Gastronomie;1994;Januar;152,3
+Gastronomie;1994;Februar;147,6
+Gastronomie;1994;März;166
+Gastronomie;1994;April;168,1
+Gastronomie;1994;Mai;182,6
+Gastronomie;1994;Juni;175,8
+Gastronomie;1994;Juli;180,5
+Gastronomie;1994;August;178,8
+Gastronomie;1994;September;178,2
+Gastronomie;1994;Oktober;176,7
+Gastronomie;1994;November;164,4
+Gastronomie;1994;Dezember;180,8
+Gastronomie;1995;Januar;146,9
+Gastronomie;1995;Februar;149,1
+Gastronomie;1995;März;161,9
+Gastronomie;1995;April;167,7
+Gastronomie;1995;Mai;181,1
+Gastronomie;1995;Juni;176,7
+Gastronomie;1995;Juli;177,9
+Gastronomie;1995;August;176,1
+Gastronomie;1995;September;174,8
+Gastronomie;1995;Oktober;174
+Gastronomie;1995;November;159,8
+Gastronomie;1995;Dezember;173,9
+Gastronomie;1996;Januar;143,1
+Gastronomie;1996;Februar;144,1
+Gastronomie;1996;März;161,7
+Gastronomie;1996;April;163,6
+Gastronomie;1996;Mai;174,1
+Gastronomie;1996;Juni;167,1
+Gastronomie;1996;Juli;171,1
+Gastronomie;1996;August;172
+Gastronomie;1996;September;165,8
+Gastronomie;1996;Oktober;168,1
+Gastronomie;1996;November;153,6
+Gastronomie;1996;Dezember;166,1
+Gastronomie;1997;Januar;138,6
+Gastronomie;1997;Februar;138,3
+Gastronomie;1997;März;156,9
+Gastronomie;1997;April;155,9
+Gastronomie;1997;Mai;172,9
+Gastronomie;1997;Juni;163,7
+Gastronomie;1997;Juli;168,1
+Gastronomie;1997;August;169,3
+Gastronomie;1997;September;165,8
+Gastronomie;1997;Oktober;163
+Gastronomie;1997;November;151,1
+Gastronomie;1997;Dezember;164,6
+Gastronomie;1998;Januar;140,5
+Gastronomie;1998;Februar;137
+Gastronomie;1998;März;150,2
+Gastronomie;1998;April;151,6
+Gastronomie;1998;Mai;166,1
+Gastronomie;1998;Juni;154,2
+Gastronomie;1998;Juli;160,4
+Gastronomie;1998;August;161
+Gastronomie;1998;September;155,3
+Gastronomie;1998;Oktober;155,1
+Gastronomie;1998;November;144,1
+Gastronomie;1998;Dezember;160,2
+Gastronomie;1999;Januar;135,6
+Gastronomie;1999;Februar;130,2
+Gastronomie;1999;März;144,7
+Gastronomie;1999;April;148,5
+Gastronomie;1999;Mai;161,9
+Gastronomie;1999;Juni;152,7
+Gastronomie;1999;Juli;161,7
+Gastronomie;1999;August;157,2
+Gastronomie;1999;September;157,1
+Gastronomie;1999;Oktober;155
+Gastronomie;1999;November;143
+Gastronomie;1999;Dezember;157,6
+Gastronomie;2000;Januar;131,3
+Gastronomie;2000;Februar;130,9
+Gastronomie;2000;März;142,3
+Gastronomie;2000;April;147,4
+Gastronomie;2000;Mai;156,4
+Gastronomie;2000;Juni;155,7
+Gastronomie;2000;Juli;154,9
+Gastronomie;2000;August;153,2
+Gastronomie;2000;September;153,5
+Gastronomie;2000;Oktober;149,7
+Gastronomie;2000;November;136,9
+Gastronomie;2000;Dezember;153,6
+Gastronomie;2001;Januar;128,2
+Gastronomie;2001;Februar;126,7
+Gastronomie;2001;März;140,7
+Gastronomie;2001;April;142,9
+Gastronomie;2001;Mai;155,7
+Gastronomie;2001;Juni;152,6
+Gastronomie;2001;Juli;155,9
+Gastronomie;2001;August;154,7
+Gastronomie;2001;September;147,5
+Gastronomie;2001;Oktober;150,2
+Gastronomie;2001;November;138,5
+Gastronomie;2001;Dezember;153
+Gastronomie;2002;Januar;121,5
+Gastronomie;2002;Februar;118,1
+Gastronomie;2002;März;134,4
+Gastronomie;2002;April;133,6
+Gastronomie;2002;Mai;142,9
+Gastronomie;2002;Juni;137,4
+Gastronomie;2002;Juli;138,7
+Gastronomie;2002;August;139,5
+Gastronomie;2002;September;135,4
+Gastronomie;2002;Oktober;131,3
+Gastronomie;2002;November;121,4
+Gastronomie;2002;Dezember;132,8
+Gastronomie;2003;Januar;112,1
+Gastronomie;2003;Februar;110,1
+Gastronomie;2003;März;122,9
+Gastronomie;2003;April;122,8
+Gastronomie;2003;Mai;133,4
+Gastronomie;2003;Juni;130,3
+Gastronomie;2003;Juli;132,3
+Gastronomie;2003;August;133,1
+Gastronomie;2003;September;129,3
+Gastronomie;2003;Oktober;126,8
+Gastronomie;2003;November;117,8
+Gastronomie;2003;Dezember;129,3
+Gastronomie;2004;Januar;107,8
+Gastronomie;2004;Februar;108,1
+Gastronomie;2004;März;114,8
+Gastronomie;2004;April;120
+Gastronomie;2004;Mai;128,1
+Gastronomie;2004;Juni;120,8
+Gastronomie;2004;Juli;127,2
+Gastronomie;2004;August;125,2
+Gastronomie;2004;September;123,6
+Gastronomie;2004;Oktober;123,1
+Gastronomie;2004;November;112,6
+Gastronomie;2004;Dezember;125,2
+Gastronomie;2005;Januar;104,5
+Gastronomie;2005;Februar;99,8
+Gastronomie;2005;März;112,1
+Gastronomie;2005;April;116
+Gastronomie;2005;Mai;122,9
+Gastronomie;2005;Juni;120
+Gastronomie;2005;Juli;125,4
+Gastronomie;2005;August;122,3
+Gastronomie;2005;September;123,3
+Gastronomie;2005;Oktober;120,8
+Gastronomie;2005;November;108,8
+Gastronomie;2005;Dezember;123,8
+Gastronomie;2006;Januar;101,3
+Gastronomie;2006;Februar;98,7
+Gastronomie;2006;März;107,6
+Gastronomie;2006;April;114,6
+Gastronomie;2006;Mai;120,7
+Gastronomie;2006;Juni;119,4
+Gastronomie;2006;Juli;124,2
+Gastronomie;2006;August;119,4
+Gastronomie;2006;September;123,6
+Gastronomie;2006;Oktober;118,6
+Gastronomie;2006;November;108,8
+Gastronomie;2006;Dezember;124,6
+Gastronomie;2007;Januar;98,9
+Gastronomie;2007;Februar;98
+Gastronomie;2007;März;110,6
+Gastronomie;2007;April;114,2
+Gastronomie;2007;Mai;118,5
+Gastronomie;2007;Juni;117,3
+Gastronomie;2007;Juli;119,2
+Gastronomie;2007;August;118,2
+Gastronomie;2007;September;116,4
+Gastronomie;2007;Oktober;115,6
+Gastronomie;2007;November;107,6
+Gastronomie;2007;Dezember;120,1
+Gastronomie;2008;Januar;96,4
+Gastronomie;2008;Februar;99,1
+Gastronomie;2008;März;104,9
+Gastronomie;2008;April;107
+Gastronomie;2008;Mai;118,1
+Gastronomie;2008;Juni;112,2
+Gastronomie;2008;Juli;115,6
+Gastronomie;2008;August;116,6
+Gastronomie;2008;September;111,7
+Gastronomie;2008;Oktober;111,7
+Gastronomie;2008;November;103,8
+Gastronomie;2008;Dezember;113,8
+Gastronomie;2009;Januar;88,3
+Gastronomie;2009;Februar;86,2
+Gastronomie;2009;März;95,3
+Gastronomie;2009;April;102
+Gastronomie;2009;Mai;110,7
+Gastronomie;2009;Juni;104,7
+Gastronomie;2009;Juli;110,6
+Gastronomie;2009;August;111,4
+Gastronomie;2009;September;105,2
+Gastronomie;2009;Oktober;103,2
+Gastronomie;2009;November;94,7
+Gastronomie;2009;Dezember;106,5
+Gastronomie;2010;Januar;83,6
+Gastronomie;2010;Februar;83,7
+Gastronomie;2010;März;95,1
+Gastronomie;2010;April;98,2
+Gastronomie;2010;Mai;104
+Gastronomie;2010;Juni;102,7
+Gastronomie;2010;Juli;109,5
+Gastronomie;2010;August;106,8
+Gastronomie;2010;September;105,4
+Gastronomie;2010;Oktober;105,7
+Gastronomie;2010;November;95,6
+Gastronomie;2010;Dezember;103
+Gastronomie;2011;Januar;86,9
+Gastronomie;2011;Februar;84,9
+Gastronomie;2011;März;97,1
+Gastronomie;2011;April;101,5
+Gastronomie;2011;Mai;106,7
+Gastronomie;2011;Juni;105,6
+Gastronomie;2011;Juli;110,4
+Gastronomie;2011;August;106,1
+Gastronomie;2011;September;108,2
+Gastronomie;2011;Oktober;106,3
+Gastronomie;2011;November;97,7
+Gastronomie;2011;Dezember;108,7
+Gastronomie;2012;Januar;86,4
+Gastronomie;2012;Februar;86
+Gastronomie;2012;März;98,2
+Gastronomie;2012;April;98
+Gastronomie;2012;Mai;106,6
+Gastronomie;2012;Juni;103,5
+Gastronomie;2012;Juli;106,9
+Gastronomie;2012;August;107,1
+Gastronomie;2012;September;107,2
+Gastronomie;2012;Oktober;102,9
+Gastronomie;2012;November;96,8
+Gastronomie;2012;Dezember;108,1
+Gastronomie;2013;Januar;84
+Gastronomie;2013;Februar;82,5
+Gastronomie;2013;März;95,6
+Gastronomie;2013;April;96
+Gastronomie;2013;Mai;104
+Gastronomie;2013;Juni;103,9
+Gastronomie;2013;Juli;107
+Gastronomie;2013;August;106,6
+Gastronomie;2013;September;104,9
+Gastronomie;2013;Oktober;102,3
+Gastronomie;2013;November;96,7
+Gastronomie;2013;Dezember;105,9
+Gastronomie;2014;Januar;85,5
+Gastronomie;2014;Februar;84,7
+Gastronomie;2014;März;96,4
+Gastronomie;2014;April;95,2
+Gastronomie;2014;Mai;105,2
+Gastronomie;2014;Juni;101,8
+Gastronomie;2014;Juli;106,3
+Gastronomie;2014;August;107,3
+Gastronomie;2014;September;104,5
+Gastronomie;2014;Oktober;104,4
+Gastronomie;2014;November;97,1
+Gastronomie;2014;Dezember;107,6
+Gastronomie;2015;Januar;85,1
+Gastronomie;2015;Februar;83,6
+Gastronomie;2015;März;92,9
+Gastronomie;2015;April;96,6
+Gastronomie;2015;Mai;106,3
+Gastronomie;2015;Juni;104,2
+Gastronomie;2015;Juli;109,1
+Gastronomie;2015;August;109
+Gastronomie;2015;September;104,6
+Gastronomie;2015;Oktober;104,4
+Gastronomie;2015;November;95,9
+Gastronomie;2015;Dezember;108,4
+Gastronomie;2016;Januar;85,3
+Gastronomie;2016;Februar;85,7
+Gastronomie;2016;März;93,6
+Gastronomie;2016;April;98,5
+Gastronomie;2016;Mai;104,9
+Gastronomie;2016;Juni;102,8
+Gastronomie;2016;Juli;110,2
+Gastronomie;2016;August;106,4
+Gastronomie;2016;September;108,6
+Gastronomie;2016;Oktober;103,8
+Gastronomie;2016;November;94,4
+Gastronomie;2016;Dezember;107,6
+Gastronomie;2017;Januar;85
+Gastronomie;2017;Februar;85,7
+Gastronomie;2017;März;98,2
+Gastronomie;2017;April;100,5
+Gastronomie;2017;Mai;106,6
+Gastronomie;2017;Juni;107,9
+Gastronomie;2017;Juli;111,5
+Gastronomie;2017;August;107,9
+Gastronomie;2017;September;108,9
+Gastronomie;2017;Oktober;105,8
+Gastronomie;2017;November;96,5
+Gastronomie;2017;Dezember;110,2
+Gastronomie;2018;Januar;87,9
+Gastronomie;2018;Februar;85,7
+Gastronomie;2018;März;97,1
+Gastronomie;2018;April;102,4
+Gastronomie;2018;Mai;107,8
+Gastronomie;2018;Juni;108,4
+Gastronomie;2018;Juli;111,2
+Gastronomie;2018;August;110,1
+Gastronomie;2018;September;109,6
+Gastronomie;2018;Oktober;106,6
+Gastronomie;2018;November;101,1
+Gastronomie;2018;Dezember;112,6
+Gastronomie;2019;Januar;88,2
+Gastronomie;2019;Februar;90,5
+Gastronomie;2019;März;100,8
+Gastronomie;2019;April;101,6
+Gastronomie;2019;Mai;108
+Gastronomie;2019;Juni;109,9
+Gastronomie;2019;Juli;110,6
+Gastronomie;2019;August;112
+Gastronomie;2019;September;108,7
+Gastronomie;2019;Oktober;106,4
+Gastronomie;2019;November;102,4
+Gastronomie;2019;Dezember;111,1
+Gastronomie;2020;Januar;91
+Gastronomie;2020;Februar;91,4
+Gastronomie;2020;März;58
+Gastronomie;2020;April;32
+Gastronomie;2020;Mai;...
+Gastronomie;2020;Juni;...
+Gastronomie;2020;Juli;...
+Gastronomie;2020;August;...
+Gastronomie;2020;September;...
+Gastronomie;2020;Oktober;...
+Gastronomie;2020;November;...
+Gastronomie;2020;Dezember;...
