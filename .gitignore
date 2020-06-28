@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pychache__/
+.vscode/
 *.DS_Store
 
 # Distribution / packaging

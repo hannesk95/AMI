@@ -9,8 +9,8 @@ if os.path.exists(README_PATH):
     with open(README_PATH) as readme:
         LONG_DESC = readme.read()
 
-INSTALL_REQUIRES = ['numpy']
-PACKAGE_NAME = ''
+INSTALL_REQUIRES = ['ipykernel', 'jupyter', 'numpy', 'pandas', 'seaborn']
+PACKAGE_NAME = 'group10'
 PACKAGE_DIR = ''
 
 setup(
