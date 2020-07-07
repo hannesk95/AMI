@@ -1,4 +1,4 @@
-date,ottokraftstoff_insg,ottokraftstoff_chemWeiterVera,ottokraftstoff_luftfahrt,ottokraftstoff_schifffahrt,ottokraftstoff_militaer,ottokraftstoff_sonstige
+date,FuelSale_tons_ottokraftstoff_insg,FuelSale_tons_ottokraftstoff_chemWeiterVera,FuelSale_tons_ottokraftstoff_luftfahrt,FuelSale_tons_ottokraftstoff_schifffahrt,FuelSale_tons_ottokraftstoff_militaer,FuelSale_tons_ottokraftstoff_sonstige
 2001-01,1956538,0,0,0,15582,1940956
 2001-02,2037325,0,0,0,13592,2023733
 2001-03,2364375,0,0,0,15658,2348717

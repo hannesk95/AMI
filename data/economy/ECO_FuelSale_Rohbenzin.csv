@@ -1,4 +1,4 @@
-date,rohbenzin_insg,rohbenzin_chemWeiterVera,rohbenzin_luftfahrt,rohbenzin_schifffahrt,rohbenzin_militaer,rohbenzin_sonstige
+date,FuelSale_rohbenzin_tons_insg,FuelSale_rohbenzin_tons_chemWeiterVera,FuelSale_rohbenzin_tons_luftfahrt,FuelSale_rohbenzin_tons_schifffahrt,FuelSale_rohbenzin_tons_militaer,FuelSale_rohbenzin_tons_sonstige
 2001-01,1577563,1561677,0,0,0,15886
 2001-02,1381803,1372801,0,0,0,9002
 2001-03,1260032,1248105,0,0,0,11927
