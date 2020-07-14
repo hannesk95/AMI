@@ -1,0 +1,15 @@
+GNFR_Category;GNFR_Category_Name            
+A            ;Public Power                  
+B            ;Industry                      
+C            ;Other Stationary Combustion   
+D            ;Fugitives                     
+E            ;Solvents                      
+F1           ;RoadTransport exhaust gasoline
+F2           ;RoadTransport exhaust diesel  
+F3           ;RoadTransport exhaust LPG gas 
+G            ;Shipping                      
+H            ;Aviation                      
+I            ;OffRoad                       
+J            ;Waste                         
+K            ;Agricultural Livestock        
+L            ;Agricultural Other            
