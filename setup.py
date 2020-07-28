@@ -9,8 +9,7 @@ if os.path.exists(README_PATH):
     with open(README_PATH) as readme:
         LONG_DESC = readme.read()
 
-INSTALL_REQUIRES = ['ipykernel', 'json', 'jupyter', 'keras', 'numpy', 'pandas',
- 'seaborn', 'sklearn']
+INSTALL_REQUIRES = ['ipykernel', 'jupyter', 'numpy', 'pandas', 'seaborn', 'sklearn', 'tensorflow']
 PACKAGE_NAME = 'group10'
 PACKAGE_DIR = ''
 
