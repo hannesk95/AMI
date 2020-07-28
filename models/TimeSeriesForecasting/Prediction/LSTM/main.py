@@ -11,7 +11,7 @@ import numpy as np
 #%% Specify prediction properties
 
 num_input_time_steps = 12
-num_output_time_steps = 24
+num_output_time_steps = 6
 
 #%% Load data and standardize
 
@@ -60,11 +60,13 @@ X_train, X_test, y_train, y_test = split_data(data, num_input_time_steps, num_ou
 
 #%% Build models
 
+mlp = models.mlp(num_input_time_steps, X_train.shape[1], num_output_time_steps)
 gru = models.gru(num_input_time_steps, X_train.shape[1], num_output_time_steps)
 lstm = models.lstm(num_input_time_steps, X_train.shape[1], num_output_time_steps)
 
 #%% Train models
 
+history_mlp = mlp.fit(X_train, y_train, batch_size=8, validation_split=0.2, epochs=200, verbose=1)
 history_gru = gru.fit(X_train, y_train, batch_size=8, validation_split=0.2, epochs=200, verbose=1)
 history_lstm = lstm.fit(X_train, y_train, batch_size=8, validation_split=0.2, epochs=200, verbose=1)
 

@@ -12,11 +12,11 @@ def gru(n_steps,n_feats,n_fore=1):
     model = Sequential(name='GRU')    
 
     model.add(InputLayer(input_shape=(n_steps, n_feats)))
-    model.add(GRU(128, return_sequences=True, name="GRU_1"))
-    model.add(GRU(64, return_sequences=False, name="GRU_2"))
-    model.add(Dense(30, activation='relu', name="GRU_Dense1"))
-    model.add(Dense(16, activation='relu', name="GRU_Dense2"))
-    model.add(Dense(8, activation='relu', name="GRU_Dense3"))    
+    model.add(GRU(8, return_sequences=False, name="GRU_1"))
+    #model.add(GRU(8, return_sequences=False, name="GRU_2"))
+    model.add(Dense(8, activation='relu', name="GRU_Dense1"))
+    #model.add(Dense(16, activation='relu', name="GRU_Dense2"))
+    #model.add(Dense(8, activation='relu', name="GRU_Dense3"))    
     model.add(Dense(n_fore,activation="linear",name="GRU_output"))
     
     model.compile(loss='mse', optimizer='adam',metrics=[r2_keras])
@@ -47,8 +47,8 @@ def mlp(n_steps,n_feats,n_fore=1):
     model = Sequential(name='MLP')    
 
     model.add(InputLayer(input_shape=(n_steps, n_feats)))
-    model.add(Dense(n_fore*50, activation='elu', name="MLP_1"))
-    model.add(Dense(n_fore*30, activation='elu', name="MLP_2"))    
+    model.add(Dense(4, activation='elu', name="MLP_1"))
+    #model.add(Dense(30, activation='elu', name="MLP_2"))    
     model.add(Flatten())    
     model.add(Dense(n_fore,activation="linear",name="MLP_output"))
     
