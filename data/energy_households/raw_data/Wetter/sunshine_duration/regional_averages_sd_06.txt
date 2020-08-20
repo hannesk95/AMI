@@ -1,4 +1,4 @@
-Zeitreihen fuer Gebietsmittel fuer Bundeslaender und Kombinationen von Bundeslaender, erstellt am: 20200602
+Zeitreihen fuer Gebietsmittel fuer Bundeslaender und Kombinationen von Bundeslaender, erstellt am: 20200802
 Jahr;Monat;Brandenburg/Berlin;Brandenburg;Baden-Wuerttemberg;Bayern;Hessen;Mecklenburg-Vorpommern;Niedersachsen;Niedersachsen/Hamburg/Bremen;Nordrhein-Westfalen;Rheinland-Pfalz;Schleswig-Holstein;Saarland;Sachsen;Sachsen-Anhalt;Thueringen/Sachsen-Anhalt;Thueringen;Deutschland;
 1951;06;   245.1;   245.3;   194.2;   198.7;   190.0;   255.5;   212.8;   213.4;   191.4;   190.1;   251.0;   190.8;   223.8;   210.6;   203.7;   195.0;   210.2;
 1952;06;   233.1;   233.0;   254.6;   227.7;   226.9;   223.7;   202.2;   202.2;   204.6;   236.4;   198.5;   265.3;   230.9;   233.8;   229.2;   223.3;   224.7;
@@ -69,3 +69,4 @@ Jahr;Monat;Brandenburg/Berlin;Brandenburg;Baden-Wuerttemberg;Bayern;Hessen;Meckl
 2017;06;   237.3;   237.5;   277.1;   273.8;   226.3;   231.4;   204.9;   205.1;   204.8;   252.0;   215.5;   271.6;   261.3;   232.9;   234.3;   236.3;   241.2;
 2018;06;   227.6;   227.7;   247.3;   225.7;   212.2;   246.4;   196.0;   196.2;   194.6;   222.0;   221.5;   235.6;   201.7;   213.9;   207.5;   199.3;   218.2;
 2019;06;   348.6;   348.5;   295.0;   310.5;   306.2;   326.7;   285.3;   285.0;   297.8;   304.1;   267.3;   303.7;   335.5;   324.0;   317.8;   309.7;   308.1;
+2020;06;   234.8;   234.7;   194.2;   194.4;   206.0;   257.8;   230.5;   231.1;   206.3;   203.7;   267.5;   211.6;   199.6;   225.1;   212.8;   196.7;   214.7;
