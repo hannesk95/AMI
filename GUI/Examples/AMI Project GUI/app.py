@@ -223,6 +223,7 @@ def description_card():
             html.Div(
                 id="intro",
                 children="Some description about our Project.",
+                
             ),
         ],
     )
@@ -236,7 +237,10 @@ def generate_control_card():
     return html.Div(
         id="control-card",
         children=[
-            html.P("Select Data Sector"),
+            html.P(),
+            html.Label("Select Data Sector"),
+            html.Hr(),
+            html.Br(),
             dcc.Dropdown(
                 id="clinic-select",
                 options=[{"label": i, "value": i} for i in clinic_list],
@@ -252,15 +256,15 @@ def generate_control_card():
             #     max_date_allowed=dt(2014, 12, 31),
             #     initial_visible_month=dt(2014, 1, 1),
             # ),
-            html.Br(),
-            html.Br(),
-            html.P("Select Admit Source"),
-            dcc.Dropdown(
-                id="admit-select",
-                options=[{"label": i, "value": i} for i in admit_list],
-                #value=admit_list[:],
-                multi=True,
-            ),
+            #html.Br(),
+            # html.Br(),
+            # html.P("Select Admit Source"),
+            # dcc.Dropdown(
+            #     id="admit-select",
+            #     options=[{"label": i, "value": i} for i in admit_list],
+            #     #value=admit_list[:],
+            #     multi=True,
+            # ),
 
 
             html.Br(),
@@ -485,8 +489,8 @@ def generate_graphs(n):
     
     # Line 1
     y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    y1_upper = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-    y1_lower = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    y1_upper = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+    y1_lower = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
     y1_lower = y1_lower[::-1]
     
     # Line 2
@@ -500,7 +504,6 @@ def generate_graphs(n):
     y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
     y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
     y3_lower = y3_lower[::-1]
-    
     
     
     # Line 4
