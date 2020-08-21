@@ -1,4 +1,4 @@
-Zeitreihen fuer Gebietsmittel fuer Bundeslaender und Kombinationen von Bundeslaender, erstellt am: 20200602
+Zeitreihen fuer Gebietsmittel fuer Bundeslaender und Kombinationen von Bundeslaender, erstellt am: 20200802
 Jahr;Monat;Brandenburg/Berlin;Brandenburg;Baden-Wuerttemberg;Bayern;Hessen;Mecklenburg-Vorpommern;Niedersachsen;Niedersachsen/Hamburg/Bremen;Nordrhein-Westfalen;Rheinland-Pfalz;Schleswig-Holstein;Saarland;Sachsen;Sachsen-Anhalt;Thueringen/Sachsen-Anhalt;Thueringen;Deutschland;
 1881;06;    15.73;    15.71;    15.30;    14.65;    15.30;    15.08;    14.90;    14.90;    15.37;    15.56;    14.80;    15.83;    14.52;    15.46;    15.07;    14.59;    15.08;
 1882;06;    15.05;    15.04;    14.06;    13.59;    14.12;    14.92;    14.74;    14.75;    14.53;    14.33;    15.05;    14.51;    13.77;    14.94;    14.44;    13.80;    14.34;
@@ -139,3 +139,4 @@ Jahr;Monat;Brandenburg/Berlin;Brandenburg;Baden-Wuerttemberg;Bayern;Hessen;Meckl
 2017;06;    17.87;    17.86;    18.62;    18.18;    17.80;    16.52;    17.10;    17.09;    18.05;    18.57;    16.07;    18.81;    17.78;    17.81;    17.57;    17.25;    17.76;
 2018;06;    18.80;    18.79;    17.70;    17.44;    17.84;    17.63;    17.54;    17.54;    17.51;    17.92;    16.94;    18.16;    17.76;    18.57;    18.06;    17.39;    17.73;
 2019;06;    21.91;    21.89;    19.04;    19.60;    19.43;    19.84;    19.32;    19.32;    19.49;    19.47;    17.95;    19.66;    20.94;    21.08;    20.47;    19.66;    19.78;
+2020;06;    18.48;    18.45;    15.98;    15.79;    16.64;    17.13;    17.47;    17.48;    17.33;    16.77;    16.87;    16.81;    17.18;    18.10;    17.32;    16.31;    16.89;
