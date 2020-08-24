@@ -22,60 +22,61 @@ from dash.dependencies import Input, Output
 import json
 import io
 
-data_range = '''
- Grade Women Men
-0 "Sector1" 1990 2020
-1 "Sector2" 1999 2014
-2 "Sector3" 1994 2002
-3 "Sector4" 2001 2020
-4 "Sector5" 2003 2007
-5 "Sector6" 1990 2020
-6 "Sector7" 2001 2010
-7 "Sector8" 1994 2019
-8 "Sector9" 2003 2019
-9 "Sector10" 1997 2020
-'''
-max_sector_number=10
+
 
 
 fig = go.Figure()
 fig_range_plot = go.Figure()
 
-
+# Data Availability Plot
+data_range = '''
+ Grade Start End
+0 "Sector 1" 1990 2020
+1 "Sector 2" 1999 2014
+2 "Sector 3" 1994 2002
+3 "Sector 4" 2001 2020
+4 "Sector 5" 2003 2007
+5 "Sector 6" 1990 2020
+6 "Sector 7" 2001 2010
+7 "Sector 8" 1994 2019
+8 "Sector 9" 2003 2019
+9 "Sector 10" 1997 2020
+'''
+max_sector_number=10
 
 df = pd.read_csv(io.StringIO(data_range), sep='\s+')
-df.sort_values('Men', ascending=False, inplace=True, ignore_index=True)
+df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
     
     
-w_lbl = [str(s) for s in df['Women'].tolist()]
-m_lbl = [str(s) for s in df['Men'].tolist()]
+w_lbl = [str(s) for s in df['Start'].tolist()]
+m_lbl = [str(s) for s in df['End'].tolist()]
 
     
 for i in range(0,max_sector_number):
     fig_range_plot.add_trace(go.Scatter(
-        x=[df['Women'][i],df['Men'][i]],
+        x=[df['Start'][i],df['End'][i]],
         y=[df['Grade'][i],df['Grade'][i]],
         orientation='h',
         line=dict(color='rgb(244,165,130)', width=8),
              ))
 
 fig_range_plot.add_trace(go.Scatter(
-    x=df['Women'],
+    x=df['Start'],
     y=df['Grade'],
     marker=dict(color='#CC5700', size=14),
     mode='markers+text',
     text=w_lbl,
     textposition='middle left',
-    name='Woman'))
+    name='Start'))
 
 fig_range_plot.add_trace(go.Scatter(
-    x=df['Men'],
+    x=df['End'],
     y=df['Grade'],
     marker=dict(color='#227266', size=14),
     mode='markers+text',
     text=m_lbl,
     textposition='middle right',
-    name='Men'))
+    name='End'))
 
 fig_range_plot.update_layout(title="Data Availability", showlegend=False)
     
@@ -158,7 +159,7 @@ for i in database:
 
 for i in database:
   feature = database.get(i)
-  if feature['sector'] not in category_list:
+  if feature['sector'] not in sector_list:
     sector_list.append(feature['sector'])
 
 
@@ -166,7 +167,7 @@ for i in database:
 # Read data
 df = pd.read_csv(DATA_PATH.joinpath("clinical_analytics.csv"))
 
-clinic_list = df["Clinic Name"].unique()
+# clinic_list = df["Clinic Name"].unique()
 df["Admit Source"] = df["Admit Source"].fillna("Not Identified")
 admit_list = df["Admit Source"].unique().tolist()
 
@@ -238,13 +239,20 @@ def generate_control_card():
         id="control-card",
         children=[
             html.P(),
-            html.Label("Select Data Sector"),
+            html.Label("Select Sector"),
             html.Hr(),
             html.Br(),
             dcc.Dropdown(
                 id="clinic-select",
                 options=[{"label": i, "value": i} for i in clinic_list],
                 value=clinic_list[0],
+            ),
+            html.Br(),
+            
+            dcc.Dropdown(
+                id="-select_co2_source",
+                options=[{"label": i, "value": i} for i in sector_list],
+                value=sector_list[0],
             ),
             html.Br(),
             # html.P("Select Check-In Time"),
@@ -328,9 +336,10 @@ def generate_control_card():
                         dcc.Slider(
                             min=0,
                             max=9,
-                            marks={i: 'Max number of infection'.format(i) if i == 1 else str(i) for i in range(1, 6)},
+                            marks={i: 'Infectionnumber'.format(i) if i == 1 else str(i) for i in range(1, 6)},
                             value=5,
                         ),
+                        html.Br(),
                         dcc.Slider(
                             min=0,
                             max=9,
