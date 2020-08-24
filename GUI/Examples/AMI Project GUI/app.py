@@ -23,10 +23,71 @@ import json
 import io
 
 
+# Path
+BASE_PATH = pathlib.Path(__file__).parent.resolve()
+DATA_PATH = BASE_PATH.joinpath("data").resolve()
 
 
-fig = go.Figure()
+
+
+
+
+#Import Data from json FIle
+category_list=[];
+sector_list=[];
+
+#open Data_Path
+
+with open(DATA_PATH.joinpath("feature_database.json")) as json_file:
+    database = json.load(json_file)
+
+
+
+for i in database:
+  feature = database.get(i)
+  if feature['category'] not in category_list:
+    category_list.append(feature['category'])
+
+
+for i in database:
+  feature = database.get(i)
+  if feature['sector'] not in sector_list:
+    sector_list.append(feature['sector'])
+
+
+
+
+
+
+def plot_data_of_sector(Sector):
+     # Concat data from sector economy
+    X_eco_raw = None 
+    for i in database:
+        feature = database.get(i)
+        if feature['sector'] == Sector:
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="inner")
+    
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    fig_data_of_sector = go.Figure()
+    for col in X_eco_raw.columns:
+        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+        #print(col)
+    #fig_data_of_sector.show()
+    return fig_data_of_sector
+
+fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
 fig_range_plot = go.Figure()
+
+
 
 # Data Availability Plot
 data_range = '''
@@ -131,37 +192,6 @@ app = dash.Dash(
 server = app.server
 app.config.suppress_callback_exceptions = True
 
-# Path
-BASE_PATH = pathlib.Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("data").resolve()
-
-
-
-
-
-
-
-
-#Import Data from json FIle
-category_list=[];
-sector_list=[];
-
-with open(DATA_PATH.joinpath("feature_database.json")) as json_file:
-    database = json.load(json_file)
-
-
-
-for i in database:
-  feature = database.get(i)
-  if feature['category'] not in category_list:
-    category_list.append(feature['category'])
-
-
-for i in database:
-  feature = database.get(i)
-  if feature['sector'] not in sector_list:
-    sector_list.append(feature['sector'])
-
 
 
 # Read data
@@ -209,6 +239,7 @@ wait_time_inputs = [
     Input((i + "_wait_time_graph"), "selectedData") for i in all_departments
 ]
 score_inputs = [Input((i + "_score_graph"), "selectedData") for i in all_departments]
+
 
 
 def description_card():
@@ -461,7 +492,7 @@ def render_tab_content(active_tab, data):
     """
     if active_tab and data is not None:
         if active_tab == "scatter":
-            return  dcc.Graph(id='example-graph2', figure=fig)  #dcc.Graph(figure=data["scatter"])
+            return  dcc.Graph(figure=data["scatter"]) #dcc.Graph(id='example-graph2', figure=fig)  
            
         
         
@@ -490,107 +521,106 @@ def generate_graphs(n):
     #time.sleep(2)
         
     
-    #Graphtest function
+    # #Graphtest function
     
-    x = ['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
+    # x = ['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
 
-    x_rev = x[::-1]
+    # x_rev = x[::-1]
     
-    # Line 1
-    y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    y1_upper = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
-    y1_lower = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
-    y1_lower = y1_lower[::-1]
+    # # Line 1
+    # y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # y1_upper = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+    # y1_lower = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
+    # y1_lower = y1_lower[::-1]
     
-    # Line 2
-    y2 = [5, 2.5, 5, 7.5, 5, 2.5, 7.5, 4.5, 5.5, 5]
-    y2_upper = [5.5, 3, 5.5, 8, 6, 3, 8, 5, 6, 5.5]
-    y2_lower = [4.5, 2, 4.4, 7, 4, 2, 7, 4, 5, 4.75]
-    y2_lower = y2_lower[::-1]
+    # # Line 2
+    # y2 = [5, 2.5, 5, 7.5, 5, 2.5, 7.5, 4.5, 5.5, 5]
+    # y2_upper = [5.5, 3, 5.5, 8, 6, 3, 8, 5, 6, 5.5]
+    # y2_lower = [4.5, 2, 4.4, 7, 4, 2, 7, 4, 5, 4.75]
+    # y2_lower = y2_lower[::-1]
     
-    # Line 3
-    y3 = [10, 8, 6, 4, 2, 0, 2, 4, 2, 0]
-    y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    y3_lower = y3_lower[::-1]
+    # # Line 3
+    # y3 = [10, 8, 6, 4, 2, 0, 2, 4, 2, 0]
+    # y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
+    # y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
+    # y3_lower = y3_lower[::-1]
     
     
-    # Line 4
-    y4 = [10, 8, 6, 4, 5, 0, 2, 4, 2, 0]
-    y4_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    y4_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    y4_lower = y3_lower[::-1]
+    # # Line 4
+    # y4 = [10, 8, 6, 4, 5, 0, 2, 4, 2, 0]
+    # y4_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
+    # y4_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
+    # y4_lower = y3_lower[::-1]
 
-    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+  #  df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
   #  fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
     #fig.show()
 
     
-    fig.data = []
+    # fig.data = []
     
+    # # fig.add_trace(go.Scatter(
+    # #     x=df['Date'], y=df['AAPL.High'],
+    # #     line_color='rgb(231,107,243)',
+    # #     name='Ideal',
+    # # ))
+    
+
+
+
+
     # fig.add_trace(go.Scatter(
-    #     x=df['Date'], y=df['AAPL.High'],
+    #     x=x+x_rev,
+    #     y=y3_upper+y3_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(231,107,243,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     showlegend=False,
+    #     name='Ideal',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y3,
     #     line_color='rgb(231,107,243)',
     #     name='Ideal',
     # ))
-    
 
 
+    # fig.add_trace(go.Scatter(
+    #     x=x+x_rev,
+    #     y=y1_upper+y1_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(0,100,80,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     showlegend=False,
+    #     name='Fair',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x+x_rev,
+    #     y=y2_upper+y2_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(0,176,246,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     name='Premium',
+    #     showlegend=False,
+    # ))
+    
+    
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y1,
+    #     line_color='rgb(0,100,80)',
+    #     name='Fair',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y2,
+    #     line_color='rgb(0,176,246)',
+    #     name='Premium',
+    # ))
+    
+    
+    # fig.update_traces(mode='lines')
+    # #fig.show()
 
-
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y3_upper+y3_lower,
-        fill='toself',
-        fillcolor='rgba(231,107,243,0.2)',
-        line_color='rgba(255,255,255,0)',
-        showlegend=False,
-        name='Ideal',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=y3,
-        line_color='rgb(231,107,243)',
-        name='Ideal',
-    ))
-
-
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y1_upper+y1_lower,
-        fill='toself',
-        fillcolor='rgba(0,100,80,0.2)',
-        line_color='rgba(255,255,255,0)',
-        showlegend=False,
-        name='Fair',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y2_upper+y2_lower,
-        fill='toself',
-        fillcolor='rgba(0,176,246,0.2)',
-        line_color='rgba(255,255,255,0)',
-        name='Premium',
-        showlegend=False,
-    ))
-    
-    
-    fig.add_trace(go.Scatter(
-        x=x, y=y1,
-        line_color='rgb(0,100,80)',
-        name='Fair',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=y2,
-        line_color='rgb(0,176,246)',
-        name='Premium',
-    ))
-    
-    
-    
-    
-    fig.update_traces(mode='lines')
-    #fig.show()
-
+#    fig = plot_data_of_sector('energy_households')
 
 
 
@@ -600,8 +630,10 @@ def generate_graphs(n):
     scatter = go.Figure(
         data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
     )
-    hist_1 = go.Figure(data=[go.Histogram(x=data[:, 0])])
-    hist_2 = go.Figure(data=[go.Histogram(x=data[:, 1])])
+    
+    scatter = plot_data_of_sector('target_values')
+    hist_1 = plot_data_of_sector('economy')
+    hist_2 = plot_data_of_sector('energy_households')
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"scatter": scatter, "hist_1": hist_1, "hist_2": hist_2}
