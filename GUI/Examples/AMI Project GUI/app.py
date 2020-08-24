@@ -28,13 +28,21 @@ BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("data").resolve()
 
 
+global Data_plot_name
+Data_plot_name ='economy'
+
+Prediction_1 = pd.read_csv(DATA_PATH.joinpath("Prediction_1.csv"), sep=';')
+Prediction_2 = pd.read_csv(DATA_PATH.joinpath("Prediction_2.csv"), sep=';')
+Prediction_3 = pd.read_csv(DATA_PATH.joinpath("Prediction_3.csv"), sep=';')
+Prediction_4 = pd.read_csv(DATA_PATH.joinpath("Prediction_4.csv"), sep=';')
 
 
 
-
-#Import Data from json FIle
+#Import Data 
 category_list=[];
 sector_list=[];
+
+
 
 #open Data_Path
 
@@ -56,6 +64,48 @@ for i in database:
 
 
 
+
+def plot_prediction_data(Prediction_type):
+     # Concat data from sector economy
+    X_eco_raw = None 
+    for i in database:
+        feature = database.get(i)
+        if feature['sector'] == 'target_values':
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="inner")
+    
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    fig_data_of_sector = go.Figure()
+    for col in X_eco_raw.columns:
+        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+        #print(col)
+
+    if Prediction_type == 'Prediction_1':
+        Prediction=Prediction_1  
+    if Prediction_type == 'Prediction_2':
+        Prediction=Prediction_2 
+    if Prediction_type == 'Prediction_3':
+        Prediction=Prediction_3
+    if Prediction_type == 'Prediction_4':
+        Prediction=Prediction_4  
+        
+    Prediction.index=Prediction['date']
+
+    fig_data_of_sector.add_trace(go.Scatter(
+        x=Prediction.index, y=Prediction['CO2-Emission'],
+        line_color='rgb(0,100,80)',
+        name=Prediction_type,
+    ))    
+        
+    return fig_data_of_sector
 
 
 
@@ -86,6 +136,8 @@ def plot_data_of_sector(Sector):
 
 fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
 fig_range_plot = go.Figure()
+
+
 
 
 
@@ -197,6 +249,7 @@ app.config.suppress_callback_exceptions = True
 # Read data
 df = pd.read_csv(DATA_PATH.joinpath("clinical_analytics.csv"))
 
+
 # clinic_list = df["Clinic Name"].unique()
 df["Admit Source"] = df["Admit Source"].fillna("Not Identified")
 admit_list = df["Admit Source"].unique().tolist()
@@ -254,7 +307,7 @@ def description_card():
             html.H3("2020 Group 6"),
             html.Div(
                 id="intro",
-                children="Some description about our Project.",
+                children="In the project, we used machine learning algorithms in order to predict and compare the greenhouse gas emissions in Germany with and without the impact of the COVID-19 pandemic. By comparing the two scenarios, we forecast the impact of the pandemic on Germany’s climate targets on a long-term basis and its effect on reaching the EU Climate Goals.",
                 
             ),
         ],
@@ -279,12 +332,13 @@ def generate_control_card():
                 value=clinic_list[0],
             ),
             html.Br(),
+            html.Div(id='dd-output-container'),
             
-            dcc.Dropdown(
-                id="-select_co2_source",
-                options=[{"label": i, "value": i} for i in sector_list],
-                value=sector_list[0],
-            ),
+            # dcc.Dropdown(
+            #     id="-select_co2_source",
+            #     options=[{"label": i, "value": i} for i in sector_list],
+            #     value=sector_list[0],
+            # ),
             html.Br(),
             # html.P("Select Check-In Time"),
             # dcc.DatePickerRange(
@@ -311,17 +365,29 @@ def generate_control_card():
             html.Hr(),
             html.Br(),
                         
-                        
-            dcc.Checklist(
-                            options=[
-                                {'label': 'Mobility', 'value': 'NYC'},
-                                {'label': u'Energy', 'value': 'MTL'},
-                                {'label': 'Economy', 'value': 'SF'},
-                                {'label': 'All', 'value': 'all'},
-                            ],
-             value=['MTL'],
-
+        dcc.RadioItems(
+            id="Prediction_Selection",
+                options=[
+                    {'label': 'Mobility', 'value': 'Mob'},
+                    {'label': 'Energy', 'value': 'Ene'},
+                    {'label': 'Economy', 'value': 'Eco'},
+                    {'label': 'All', 'value': 'All'}
+                ],
+                value='Eco'
             ),
+        
+        
+        
+            # dcc.Checklist(
+            #                 options=[
+            #                     {'label': 'Mobility', 'value': 'NYC'},
+            #                     {'label': u'Energy', 'value': 'MTL'},
+            #                     {'label': 'Economy', 'value': 'SF'},
+            #                     {'label': 'All', 'value': 'all'},
+            #                 ],
+            #  value=['MTL'],
+
+            # ),
             
                     
                 dcc.Store(id="store"),                                                                                
@@ -357,8 +423,8 @@ def generate_control_card():
                         ),
 
                     
-                        # html.Label('Text Input'),
-                        # dcc.Input(value='MTL', type='text'),
+                        html.Label('Text Input'),
+                        dcc.Input(value='MTL', type='text'),
                         
                         html.Br(),
                         html.Label('Slider'),
@@ -508,17 +574,22 @@ def render_tab_content(active_tab, data):
 
 
 
-@app.callback(Output("store", "data"), [Input("button", "n_clicks"),Input("clinic-select","value")])
-def generate_graphs(n,value):
+@app.callback(Output(component_id="store", component_property="data"), 
+   [
+    Input(component_id="button", component_property="n_clicks"),
+    #Input(component_id="clinic-select", component_property="value")
+    ])
+
+def generate_graphs(n):
     """
     This callback generates three simple graphs from random data.
     """
-    #if not n:
-        # generate empty graphs when app loads
-    #    return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
+    if not n:
+         #generate empty graphs when app loads
+        return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
 
     # simulate expensive graph generation process
-    #time.sleep(2)
+    time.sleep(2)
         
     
     # #Graphtest function
@@ -624,20 +695,30 @@ def generate_graphs(n,value):
 
 
 
-    # generate 100 multivariate normal samples
-    data = np.random.multivariate_normal([0, 0], [[1, 0.5], [0.5, 1]], 100)
+    # # generate 100 multivariate normal samples
+    # data = np.random.multivariate_normal([0, 0], [[1, 0.5], [0.5, 1]], 100)
 
-    scatter = go.Figure(
-        data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
-    )
-    
-    scatter = plot_data_of_sector('target_values')
-    hist_1 = plot_data_of_sector('economy')
+    # scatter = go.Figure(
+    #     data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
+    # )
+    value='target_values'
+    scatter = plot_data_of_sector(value)
+ 
+    hist_1 = plot_prediction_data('Prediction_1')
     hist_2 = plot_data_of_sector('energy_households')
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"scatter": scatter, "hist_1": hist_1, "hist_2": hist_2}
 
+
+
+@app.callback(
+    Output('dd-output-container', 'children'),
+    [Input('clinic-select', 'value')])
+def update_output(value):
+    Data_plot_name=value
+    print(value)
+    return 'You have selected "{}"'.format(Data_plot_name)
 
 
 
