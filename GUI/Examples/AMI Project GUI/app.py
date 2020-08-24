@@ -508,8 +508,8 @@ def render_tab_content(active_tab, data):
 
 
 
-@app.callback(Output("store", "data"), [Input("button", "n_clicks")])
-def generate_graphs(n):
+@app.callback(Output("store", "data"), [Input("button", "n_clicks"),Input("clinic-select","value")])
+def generate_graphs(n,value):
     """
     This callback generates three simple graphs from random data.
     """
