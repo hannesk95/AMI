@@ -65,6 +65,142 @@ for i in database:
 
 
 
+def get_max_date(category):
+     # Concat data from sector economy
+    # Concat data from sector economy
+    X_eco_raw = None 
+    min_date=None
+    max_date=None
+    for i in database:
+        feature = database.get(i)
+        if  feature['category'] == category:
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
+
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    min_date=min(X_eco_raw['date'])
+    max_date=max(X_eco_raw['date'])
+
+    #print(min_date)
+    #print(max_date)
+      
+    return max_date
+
+def get_min_date(category):
+     # Concat data from sector economy
+    # Concat data from sector economy
+    X_eco_raw = None 
+    min_date=None
+    max_date=None
+    for i in database:
+        feature = database.get(i)
+        if  feature['category'] == category:
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
+
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    min_date=min(X_eco_raw['date'])
+
+    #print(min_date)
+    #print(max_date)
+      
+    return min_date
+
+def get_min_max_date():
+  size=len(category_list)
+  list_empty = [None] * size
+  data_min_max_full_header = {'Category':list_empty,'Start': list_empty,'End': list_empty, 'Selected': list_empty}
+  data_min_max_full = pd.DataFrame(data=data_min_max_full_header)
+  
+  Start_End_List=None
+  for j in range(1,size):
+      data_min_max_full['Category'][j]=category_list[j]
+      data_min_max_full['Start'][j]=pd.to_datetime(get_min_date(category_list[j]))
+      data_min_max_full['Start'][j]=data_min_max_full['Start'][j].year
+      data_min_max_full['End'][j]=pd.to_datetime(get_max_date(category_list[j]))
+      data_min_max_full['End'][j]=data_min_max_full['End'][j].year
+      data_min_max_full['Selected'][j]='yes'
+      
+      if j==4:
+        data_min_max_full['Selected'][j]='no'
+  return data_min_max_full
+
+
+
+def generate_data_availability_plot():
+    # Concat data from sector economy
+    fig_range_plot = go.Figure()
+    color_temp=None
+    df = get_min_max_date()
+    #print(df)
+    #df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+            
+            
+    w_lbl = [str(s) for s in df['Start'].tolist()]
+    m_lbl = [str(s) for s in df['End'].tolist()]
+        
+    for i in range(1,len(df)):
+        
+        if df['Selected'][i]=='yes':
+          fig_range_plot.add_trace(go.Scatter(
+          x=[df['Start'][i],df['End'][i]],
+                y=[df['Category'][i],df['Category'][i]],
+                orientation='h',
+                line=dict(color='rgb(244,165,130)', width=8),
+            ))
+        if df['Selected'][i]=='no':
+          fig_range_plot.add_trace(go.Scatter(
+          x=[df['Start'][i],df['End'][i]],
+                y=[df['Category'][i],df['Category'][i]],
+                orientation='h',
+                line=dict(color='rgb(34,165,130)', width=8),
+            ))
+        
+    fig_range_plot.add_trace(go.Scatter(
+            x=df['Start'],
+            y=df['Category'],
+            marker=dict(color='#CC5700', size=14),
+            mode='markers+text',
+            text=w_lbl,
+            textposition='middle left',
+            name='Start'))
+        
+    fig_range_plot.add_trace(go.Scatter(
+            x=df['End'],
+            y=df['Category'],
+            marker=dict(color='#227266', size=14),
+            mode='markers+text',
+            text=m_lbl,
+            textposition='middle right',
+            name='End'))
+        
+    fig_range_plot.update_layout(title="Data Availability", showlegend=False)    
+      
+    return fig_range_plot
+
+
+
+
+
+
+
+
 def plot_prediction_data(Prediction_type):
      # Concat data from sector economy
     X_eco_raw = None 
@@ -75,7 +211,7 @@ def plot_prediction_data(Prediction_type):
             if X_eco_raw is None:
                 X_eco_raw = new_data
             else:
-                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="inner")
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
     
     #convert index in datetime format
     X_eco_raw['date'] = X_eco_raw.index
@@ -148,7 +284,7 @@ def plot_data_of_sector(Sector):
             if X_eco_raw is None:
                 X_eco_raw = new_data
             else:
-                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="inner")
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
     
     #convert index in datetime format
     X_eco_raw['date'] = X_eco_raw.index
@@ -193,64 +329,123 @@ def plot_data_of_sector(Sector):
 )
     return fig_data_of_sector
 
+# def generate_data_availability_plot(Sector_list, choice):
+#      # Concat data from sector economy
+#     fig_range_plot = go.Figure()
+
+#     # Data Availability Plot
+#     data_range = '''
+#      Grade Start End
+#     0 "Sector 1" 1990 2020
+#     1 "Sector 2" 1999 2014
+#     2 "Sector 3" 1994 2002
+#     3 "Sector 4" 2001 2020
+#     4 "Sector 5" 2003 2007
+#     5 "Sector 6" 1990 2020
+#     6 "Sector 7" 2001 2010
+#     7 "Sector 8" 1994 2019
+#     8 "Sector 9" 2003 2019
+#     9 "Sector 10" 1997 2020
+#     '''
+#     max_sector_number=10
+    
+#     df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+#     df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+        
+        
+#     w_lbl = [str(s) for s in df['Start'].tolist()]
+#     m_lbl = [str(s) for s in df['End'].tolist()]
+    
+        
+#     for i in range(0,max_sector_number):
+#         fig_range_plot.add_trace(go.Scatter(
+#             x=[df['Start'][i],df['End'][i]],
+#             y=[df['Grade'][i],df['Grade'][i]],
+#             orientation='h',
+#             line=dict(color='rgb(244,165,130)', width=8),
+#                  ))
+    
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=df['Start'],
+#         y=df['Grade'],
+#         marker=dict(color='#CC5700', size=14),
+#         mode='markers+text',
+#         text=w_lbl,
+#         textposition='middle left',
+#         name='Start'))
+    
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=df['End'],
+#         y=df['Grade'],
+#         marker=dict(color='#227266', size=14),
+#         mode='markers+text',
+#         text=m_lbl,
+#         textposition='middle right',
+#         name='End'))
+    
+#     fig_range_plot.update_layout(title="Data Availability", showlegend=False)    
+#     return fig_range_plot
+
+
+
+
 fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
-fig_range_plot = go.Figure()
+fig_range_plot =  generate_data_availability_plot()
 
 
 
 
+# # Data Availability Plot
+# data_range = '''
+#  Grade Start End
+# 0 "Sector 1" 1990 2020
+# 1 "Sector 2" 1999 2014
+# 2 "Sector 3" 1994 2002
+# 3 "Sector 4" 2001 2020
+# 4 "Sector 5" 2003 2007
+# 5 "Sector 6" 1990 2020
+# 6 "Sector 7" 2001 2010
+# 7 "Sector 8" 1994 2019
+# 8 "Sector 9" 2003 2019
+# 9 "Sector 10" 1997 2020
+# '''
+# max_sector_number=10
 
-# Data Availability Plot
-data_range = '''
- Grade Start End
-0 "Sector 1" 1990 2020
-1 "Sector 2" 1999 2014
-2 "Sector 3" 1994 2002
-3 "Sector 4" 2001 2020
-4 "Sector 5" 2003 2007
-5 "Sector 6" 1990 2020
-6 "Sector 7" 2001 2010
-7 "Sector 8" 1994 2019
-8 "Sector 9" 2003 2019
-9 "Sector 10" 1997 2020
-'''
-max_sector_number=10
-
-df = pd.read_csv(io.StringIO(data_range), sep='\s+')
-df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+# df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+# df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
     
     
-w_lbl = [str(s) for s in df['Start'].tolist()]
-m_lbl = [str(s) for s in df['End'].tolist()]
+# w_lbl = [str(s) for s in df['Start'].tolist()]
+# m_lbl = [str(s) for s in df['End'].tolist()]
 
     
-for i in range(0,max_sector_number):
-    fig_range_plot.add_trace(go.Scatter(
-        x=[df['Start'][i],df['End'][i]],
-        y=[df['Grade'][i],df['Grade'][i]],
-        orientation='h',
-        line=dict(color='rgb(244,165,130)', width=8),
-             ))
+# for i in range(0,max_sector_number):
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=[df['Start'][i],df['End'][i]],
+#         y=[df['Grade'][i],df['Grade'][i]],
+#         orientation='h',
+#         line=dict(color='rgb(244,165,130)', width=8),
+#              ))
 
-fig_range_plot.add_trace(go.Scatter(
-    x=df['Start'],
-    y=df['Grade'],
-    marker=dict(color='#CC5700', size=14),
-    mode='markers+text',
-    text=w_lbl,
-    textposition='middle left',
-    name='Start'))
+# fig_range_plot.add_trace(go.Scatter(
+#     x=df['Start'],
+#     y=df['Grade'],
+#     marker=dict(color='#CC5700', size=14),
+#     mode='markers+text',
+#     text=w_lbl,
+#     textposition='middle left',
+#     name='Start'))
 
-fig_range_plot.add_trace(go.Scatter(
-    x=df['End'],
-    y=df['Grade'],
-    marker=dict(color='#227266', size=14),
-    mode='markers+text',
-    text=m_lbl,
-    textposition='middle right',
-    name='End'))
+# fig_range_plot.add_trace(go.Scatter(
+#     x=df['End'],
+#     y=df['Grade'],
+#     marker=dict(color='#227266', size=14),
+#     mode='markers+text',
+#     text=m_lbl,
+#     textposition='middle right',
+#     name='End'))
 
-fig_range_plot.update_layout(title="Data Availability", showlegend=False)
+# fig_range_plot.update_layout(title="Data Availability", showlegend=False)
     
     
     
@@ -586,6 +781,7 @@ app.layout = html.Div(
                         html.Hr(),
                         #html.Div(id="wait_time_table", children=initialize_table()),
                         dcc.Graph(figure=fig_range_plot),
+                        #dcc.Graph(figure=generate_data_availability_plot),
                     ],
                 ),
                 
