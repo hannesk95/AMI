@@ -63,91 +63,62 @@ for i in database:
     sector_list.append(feature['sector'])
 
 
-
-
-def get_max_date(category):
-     # Concat data from sector economy
-    # Concat data from sector economy
-    X_eco_raw = None 
-    min_date=None
-    max_date=None
-    for i in database:
-        feature = database.get(i)
-        if  feature['category'] == category:
-            new_data = pd.read_json(database[i]['data'])
-            if X_eco_raw is None:
-                X_eco_raw = new_data
-            else:
-                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
-
-    #convert index in datetime format
-    X_eco_raw['date'] = X_eco_raw.index
-    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
-    #X_eco_raw.index = X_eco_raw.date
-    #X_eco_raw = X_eco_raw.drop('date', axis=1)
-    X_eco_raw.head()
-    min_date=min(X_eco_raw['date'])
-    max_date=max(X_eco_raw['date'])
-
-    #print(min_date)
-    #print(max_date)
-      
-    return max_date
-
-def get_min_date(category):
-     # Concat data from sector economy
-    # Concat data from sector economy
-    X_eco_raw = None 
-    min_date=None
-    max_date=None
-    for i in database:
-        feature = database.get(i)
-        if  feature['category'] == category:
-            new_data = pd.read_json(database[i]['data'])
-            if X_eco_raw is None:
-                X_eco_raw = new_data
-            else:
-                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
-
-    #convert index in datetime format
-    X_eco_raw['date'] = X_eco_raw.index
-    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
-    #X_eco_raw.index = X_eco_raw.date
-    #X_eco_raw = X_eco_raw.drop('date', axis=1)
-    X_eco_raw.head()
-    min_date=min(X_eco_raw['date'])
-
-    #print(min_date)
-    #print(max_date)
-      
-    return min_date
-
-def get_min_max_date():
-  size=len(category_list)
-  list_empty = [None] * size
-  data_min_max_full_header = {'Category':list_empty,'Start': list_empty,'End': list_empty, 'Selected': list_empty}
+def get_min_max_date(sector_choice):
+  X_eco_raw = None 
+  data_name_list=[]
+  list_empty = []
+  data_min_max_full_header = {'Category':list_empty, 'Sector': list_empty,'Data_name': list_empty,'Start': list_empty,'End': list_empty, 'Selected': list_empty}
   data_min_max_full = pd.DataFrame(data=data_min_max_full_header)
-  
-  Start_End_List=None
-  for j in range(1,size):
-      data_min_max_full['Category'][j]=category_list[j]
-      data_min_max_full['Start'][j]=pd.to_datetime(get_min_date(category_list[j]))
-      data_min_max_full['Start'][j]=data_min_max_full['Start'][j].year
-      data_min_max_full['End'][j]=pd.to_datetime(get_max_date(category_list[j]))
-      data_min_max_full['End'][j]=data_min_max_full['End'][j].year
-      data_min_max_full['Selected'][j]='yes'
-      
-      if j==4:
-        data_min_max_full['Selected'][j]='no'
+
+  for cat in category_list:
+    for sect in sector_list:
+
+        for i in database:
+            feature = database.get(i)
+            
+            if feature['sector'] == sect and feature['category'] == cat:
+                new_data = pd.read_json(database[i]['data'])
+
+                new_data_name=new_data.columns.tolist()
+                new_data_name=''.join(new_data_name)
+                #data_name_list.extend(new_data_name)
+                df = pd.DataFrame(new_data)
+                min_date=min(df.index)
+                max_date=max(df.index)
+                #print(min_date)
+                #print(min(df.index))
+                #print([cat, sect, new_data_name, min_date, max_date])
+                #data_name_list.extend([cat, sect, new_data_name, min_date, max_date])
+                #print(new_data_name)
+                selected_yj='no'
+                if sector_choice==sect:
+                  selected_yj='yes'
+                new_row = {'Category':cat, 'Sector': sect,'Data_name': new_data_name,'Start': min_date,'End': max_date, 'Selected': selected_yj}
+                #append row to the dataframe
+                data_min_max_full = data_min_max_full.append(new_row, ignore_index=True)
+
+
+
+
+  #convert index in datetime format
+  #X_eco_raw['date'] = X_eco_raw.index
+  #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+  #X_eco_raw.index = X_eco_raw.date
+  #X_eco_raw = X_eco_raw.drop('date', axis=1)
+  #X_eco_raw.head()
+
+
+  #print(data_min_max_full)
+
   return data_min_max_full
 
 
 
-def generate_data_availability_plot():
+def generate_data_availability_plot(choice):
     # Concat data from sector economy
     fig_range_plot = go.Figure()
     color_temp=None
-    df = get_min_max_date()
+    df = get_min_max_date(choice)
     #print(df)
     #df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
             
@@ -155,45 +126,49 @@ def generate_data_availability_plot():
     w_lbl = [str(s) for s in df['Start'].tolist()]
     m_lbl = [str(s) for s in df['End'].tolist()]
         
-    for i in range(1,len(df)):
-        
-        if df['Selected'][i]=='yes':
+    for i in range(0,len(df)):
+      if df['Selected'][i]=='yes':
+
+          #print(type(df['Data_name'][i]))    
+          if df['Selected'][i]=='yes':
+            fig_range_plot.add_trace(go.Scatter(
+                  x=[df['Start'][i],df['End'][i]],
+                  y=[df['Data_name'][i],df['Data_name'][i]],
+                  orientation='h',
+                  line=dict(color='rgb(244,165,130)', width=8),
+              ))
+          if df['Selected'][i]=='no':
+            fig_range_plot.add_trace(go.Scatter(
+            x=[df['Start'][i],df['End'][i]],
+                  y=[df['Data_name'][i],df['Data_name'][i]],
+                  orientation='h',
+                  line=dict(color='rgb(34,165,130)', width=8),
+              ))
+          
           fig_range_plot.add_trace(go.Scatter(
-          x=[df['Start'][i],df['End'][i]],
-                y=[df['Category'][i],df['Category'][i]],
-                orientation='h',
-                line=dict(color='rgb(244,165,130)', width=8),
-            ))
-        if df['Selected'][i]=='no':
+                  x=[df['Start'][i]],
+                  y=[df['Data_name'][i]],
+                  marker=dict(color='#CC5700', size=14),
+                  mode='markers+text',
+                  #text=w_lbl,
+                  text='Start',
+                  textposition='middle left',
+                  name='Start'))
+              
           fig_range_plot.add_trace(go.Scatter(
-          x=[df['Start'][i],df['End'][i]],
-                y=[df['Category'][i],df['Category'][i]],
-                orientation='h',
-                line=dict(color='rgb(34,165,130)', width=8),
-            ))
+                  x=[df['End'][i]],
+                  y=[df['Data_name'][i]],
+                  marker=dict(color='#227266', size=14),
+                  mode='markers+text',
+                  #text=m_lbl,
+                  text='End',
+                  textposition='middle right',
+                  name='End'))
         
-    fig_range_plot.add_trace(go.Scatter(
-            x=df['Start'],
-            y=df['Category'],
-            marker=dict(color='#CC5700', size=14),
-            mode='markers+text',
-            text=w_lbl,
-            textposition='middle left',
-            name='Start'))
-        
-    fig_range_plot.add_trace(go.Scatter(
-            x=df['End'],
-            y=df['Category'],
-            marker=dict(color='#227266', size=14),
-            mode='markers+text',
-            text=m_lbl,
-            textposition='middle right',
-            name='End'))
-        
-    fig_range_plot.update_layout(title="Data Availability", showlegend=False)    
+    fig_range_plot.update_layout(title="Data Availability", showlegend=False)
+    #fig_range_plot.update_layout(title="Data Availability", showlegend=False, height=1800)    
       
     return fig_range_plot
-
 
 
 
@@ -240,7 +215,7 @@ def plot_prediction_data(Prediction_type):
         line_color='rgb(0,100,80)',
         name=Prediction_type,
     ))    
-    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=800)
+    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=400)
     fig_data_of_sector.update_layout(
     xaxis=dict(
         rangeselector=dict(
@@ -390,7 +365,7 @@ def plot_data_of_sector(Sector):
 
 
 fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
-fig_range_plot =  generate_data_availability_plot()
+fig_range_plot =  generate_data_availability_plot('energy_households')
 
 
 
@@ -759,7 +734,7 @@ app.layout = html.Div(
                 html.Div(
                     id="patient_volume_card",
                     children=[
-                        html.B("Patient Volume"),
+                        html.B("Prediction"),
                         html.Hr(),
                         dbc.Tabs(
                                 [
@@ -780,7 +755,8 @@ app.layout = html.Div(
                         html.B("Data availability"),
                         html.Hr(),
                         #html.Div(id="wait_time_table", children=initialize_table()),
-                        dcc.Graph(figure=fig_range_plot),
+                        #dcc.Graph(figure=fig_range_plot),
+                        #dcc.Graph(figure=data["hist_1"]),
                         #dcc.Graph(figure=generate_data_availability_plot),
                     ],
                 ),
@@ -796,34 +772,85 @@ app.layout = html.Div(
 
 
 
-
-
-
-
 @app.callback(
-    Output("tab-content", "children"),
-    [Input("tabs", "active_tab"), Input("store", "data")],
+    Output("patient_volume_card", "children"),
+    [Input("store", "data")],
 )
-def render_tab_content(active_tab, data):
+def render_tab1_content(data):
     """
     This callback takes the 'active_tab' property as input, as well as the
     stored graphs, and renders the tab content depending on what the value of
     'active_tab' is.
     """
-    if active_tab and data is not None:
-        if active_tab == "scatter":
-            return  dcc.Graph(figure=data["scatter"]) #dcc.Graph(id='example-graph2', figure=fig)  
-           
+
+    children=[
+                        html.B("Data availability"),
+                        html.Hr(),
+                        
+                        dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
         
+        ]
+
+    return children
+
+@app.callback(
+    Output("wait_time_card", "children"),
+    [Input("store", "data")],
+)
+def render_tab2_content(data):
+    """
+    This callback takes the 'active_tab' property as input, as well as the
+    stored graphs, and renders the tab content depending on what the value of
+    'active_tab' is.
+    """
+
+    children=[
+                        html.B("Data availability"),
+                        html.Hr(),
+                        
+                        dbc.Row(
+                        [
+                            dbc.Col(dcc.Graph(figure=data["scatter"]), width=6),
+                            dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+                        ]
+                        )
+        ]
+
+    return children
+
+
+
+
+# @app.callback(
+#     Output("tab-content", "children"),
+#     [Input("tabs", "active_tab"), Input("store", "data")],
+# )
+# def render_tab_content(active_tab, data):
+#     """
+#     This callback takes the 'active_tab' property as input, as well as the
+#     stored graphs, and renders the tab content depending on what the value of
+#     'active_tab' is.
+#     """
+#     if active_tab and data is not None:
+#         if active_tab == "scatter":
+
+#             return dbc.Row(
+#                 [
+#                     dbc.Col(dcc.Graph(figure=data["scatter"]), width=6),
+#                     dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+#                 ]
+#                 )
+                
+                
         
-        elif active_tab == "histogram":
-            return dbc.Row(
-                [
-                    dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
-                    dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
-                ]
-            )
-    return "No tab selected"
+#         elif active_tab == "histogram":
+#             return dbc.Row(
+#                 [
+#                     dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
+#                     #dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+#                 ]
+#             )
+#     return "No tab selected"
 
 
 
@@ -959,8 +986,10 @@ def generate_graphs(n, radio_button, val):
     #value='target_values'
     scatter = plot_data_of_sector(val)
  
+ 
+ 
     hist_1 = plot_prediction_data(radio_button)
-    hist_2 = plot_data_of_sector('energy_households')
+    hist_2 = generate_data_availability_plot(val)
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"scatter": scatter, "hist_1": hist_1, "hist_2": hist_2}
