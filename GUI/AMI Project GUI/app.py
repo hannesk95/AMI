@@ -16,43 +16,35 @@ import numpy as np
 import time
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.figure_factory as ff
 
 from dash.dependencies import Input, Output
 import json
+import io
 
-
-fig = go.Figure()
-
-
-
-
-
-
-
-
-
-app = dash.Dash(
-    __name__,
-    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
-)
-
-server = app.server
-app.config.suppress_callback_exceptions = True
 
 # Path
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("data").resolve()
 
 
+global Data_plot_name
+Data_plot_name ='economy'
+
+Prediction_1 = pd.read_csv(DATA_PATH.joinpath("Prediction_1.csv"), sep=';')
+Prediction_2 = pd.read_csv(DATA_PATH.joinpath("Prediction_2.csv"), sep=';')
+Prediction_3 = pd.read_csv(DATA_PATH.joinpath("Prediction_3.csv"), sep=';')
+Prediction_4 = pd.read_csv(DATA_PATH.joinpath("Prediction_4.csv"), sep=';')
 
 
 
-
-
-
-#Import Data from json FIle
+#Import Data 
 category_list=[];
 sector_list=[];
+
+
+
+#open Data_Path
 
 with open(DATA_PATH.joinpath("feature_database.json")) as json_file:
     database = json.load(json_file)
@@ -67,19 +59,431 @@ for i in database:
 
 for i in database:
   feature = database.get(i)
-  if feature['sector'] not in category_list:
+  if feature['sector'] not in sector_list:
     sector_list.append(feature['sector'])
+
+
+def get_min_max_date(sector_choice):
+  X_eco_raw = None 
+  data_name_list=[]
+  list_empty = []
+  data_min_max_full_header = {'Category':list_empty, 'Sector': list_empty,'Data_name': list_empty,'Start': list_empty,'End': list_empty, 'Selected': list_empty}
+  data_min_max_full = pd.DataFrame(data=data_min_max_full_header)
+
+  for cat in category_list:
+    for sect in sector_list:
+
+        for i in database:
+            feature = database.get(i)
+            
+            if feature['sector'] == sect and feature['category'] == cat:
+                new_data = pd.read_json(database[i]['data'])
+
+                new_data_name=new_data.columns.tolist()
+                new_data_name=''.join(new_data_name)
+                #data_name_list.extend(new_data_name)
+                df = pd.DataFrame(new_data)
+                min_date=min(df.index)
+                max_date=max(df.index)
+                #print(min_date)
+                #print(min(df.index))
+                #print([cat, sect, new_data_name, min_date, max_date])
+                #data_name_list.extend([cat, sect, new_data_name, min_date, max_date])
+                #print(new_data_name)
+                selected_yj='no'
+                if sector_choice==sect:
+                  selected_yj='yes'
+                new_row = {'Category':cat, 'Sector': sect,'Data_name': new_data_name,'Start': min_date,'End': max_date, 'Selected': selected_yj}
+                #append row to the dataframe
+                data_min_max_full = data_min_max_full.append(new_row, ignore_index=True)
+
+
+
+
+  #convert index in datetime format
+  #X_eco_raw['date'] = X_eco_raw.index
+  #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+  #X_eco_raw.index = X_eco_raw.date
+  #X_eco_raw = X_eco_raw.drop('date', axis=1)
+  #X_eco_raw.head()
+
+
+  #print(data_min_max_full)
+
+  return data_min_max_full
+
+
+
+def generate_data_availability_plot(choice):
+    # Concat data from sector economy
+    fig_range_plot = go.Figure()
+    color_temp=None
+    df = get_min_max_date(choice)
+    #print(df)
+    #df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+            
+            
+    w_lbl = [str(s) for s in df['Start'].tolist()]
+    m_lbl = [str(s) for s in df['End'].tolist()]
+        
+    for i in range(0,len(df)):
+      if df['Selected'][i]=='yes':
+
+          #print(type(df['Data_name'][i]))    
+          if df['Selected'][i]=='yes':
+            fig_range_plot.add_trace(go.Scatter(
+                  x=[df['Start'][i],df['End'][i]],
+                  y=[df['Data_name'][i],df['Data_name'][i]],
+                  orientation='h',
+                  line=dict(color='rgb(244,165,130)', width=8),
+              ))
+          if df['Selected'][i]=='no':
+            fig_range_plot.add_trace(go.Scatter(
+            x=[df['Start'][i],df['End'][i]],
+                  y=[df['Data_name'][i],df['Data_name'][i]],
+                  orientation='h',
+                  line=dict(color='rgb(34,165,130)', width=8),
+              ))
+          
+          fig_range_plot.add_trace(go.Scatter(
+                  x=[df['Start'][i]],
+                  y=[df['Data_name'][i]],
+                  marker=dict(color='#CC5700', size=14),
+                  mode='markers+text',
+                  #text=w_lbl,
+                  text='Start',
+                  textposition='middle left',
+                  name='Start'))
+              
+          fig_range_plot.add_trace(go.Scatter(
+                  x=[df['End'][i]],
+                  y=[df['Data_name'][i]],
+                  marker=dict(color='#227266', size=14),
+                  mode='markers+text',
+                  #text=m_lbl,
+                  text='End',
+                  textposition='middle right',
+                  name='End'))
+        
+    fig_range_plot.update_layout(title="Data Availability", showlegend=False)
+    #fig_range_plot.update_layout(title="Data Availability", showlegend=False, height=1800)    
+      
+    return fig_range_plot
+
+
+
+
+
+
+
+def plot_prediction_data(Prediction_type):
+     # Concat data from sector economy
+    X_eco_raw = None 
+    for i in database:
+        feature = database.get(i)
+        if feature['sector'] == 'target_values':
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
+    
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    fig_data_of_sector = go.Figure()
+    for col in X_eco_raw.columns:
+        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+        #print(col)
+
+    if Prediction_type == 'Prediction_1':
+        Prediction=Prediction_1  
+    if Prediction_type == 'Prediction_2':
+        Prediction=Prediction_2 
+    if Prediction_type == 'Prediction_3':
+        Prediction=Prediction_3
+    if Prediction_type == 'Prediction_4':
+        Prediction=Prediction_4  
+        
+    Prediction.index=Prediction['date']
+
+    fig_data_of_sector.add_trace(go.Scatter(
+        x=Prediction.index, y=Prediction['CO2-Emission'],
+        line_color='rgb(0,100,80)',
+        name=Prediction_type,
+    ))    
+    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=400)
+    fig_data_of_sector.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="YTD",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)        
+    return fig_data_of_sector
+
+
+
+def plot_data_of_sector(Sector):
+     # Concat data from sector economy
+    X_eco_raw = None 
+    for i in database:
+        feature = database.get(i)
+        if feature['sector'] == Sector:
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
+    
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    fig_data_of_sector = go.Figure()
+    for col in X_eco_raw.columns:
+        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+        #print(col)
+    #fig_data_of_sector.show()
+    fig_data_of_sector.update_layout(title=Sector, showlegend=True, height=800)
+    fig_data_of_sector.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="YTD",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)
+    return fig_data_of_sector
+
+# def generate_data_availability_plot(Sector_list, choice):
+#      # Concat data from sector economy
+#     fig_range_plot = go.Figure()
+
+#     # Data Availability Plot
+#     data_range = '''
+#      Grade Start End
+#     0 "Sector 1" 1990 2020
+#     1 "Sector 2" 1999 2014
+#     2 "Sector 3" 1994 2002
+#     3 "Sector 4" 2001 2020
+#     4 "Sector 5" 2003 2007
+#     5 "Sector 6" 1990 2020
+#     6 "Sector 7" 2001 2010
+#     7 "Sector 8" 1994 2019
+#     8 "Sector 9" 2003 2019
+#     9 "Sector 10" 1997 2020
+#     '''
+#     max_sector_number=10
+    
+#     df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+#     df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+        
+        
+#     w_lbl = [str(s) for s in df['Start'].tolist()]
+#     m_lbl = [str(s) for s in df['End'].tolist()]
+    
+        
+#     for i in range(0,max_sector_number):
+#         fig_range_plot.add_trace(go.Scatter(
+#             x=[df['Start'][i],df['End'][i]],
+#             y=[df['Grade'][i],df['Grade'][i]],
+#             orientation='h',
+#             line=dict(color='rgb(244,165,130)', width=8),
+#                  ))
+    
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=df['Start'],
+#         y=df['Grade'],
+#         marker=dict(color='#CC5700', size=14),
+#         mode='markers+text',
+#         text=w_lbl,
+#         textposition='middle left',
+#         name='Start'))
+    
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=df['End'],
+#         y=df['Grade'],
+#         marker=dict(color='#227266', size=14),
+#         mode='markers+text',
+#         text=m_lbl,
+#         textposition='middle right',
+#         name='End'))
+    
+#     fig_range_plot.update_layout(title="Data Availability", showlegend=False)    
+#     return fig_range_plot
+
+
+
+
+fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
+fig_range_plot =  generate_data_availability_plot('energy_households')
+
+
+
+
+# # Data Availability Plot
+# data_range = '''
+#  Grade Start End
+# 0 "Sector 1" 1990 2020
+# 1 "Sector 2" 1999 2014
+# 2 "Sector 3" 1994 2002
+# 3 "Sector 4" 2001 2020
+# 4 "Sector 5" 2003 2007
+# 5 "Sector 6" 1990 2020
+# 6 "Sector 7" 2001 2010
+# 7 "Sector 8" 1994 2019
+# 8 "Sector 9" 2003 2019
+# 9 "Sector 10" 1997 2020
+# '''
+# max_sector_number=10
+
+# df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+# df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+    
+    
+# w_lbl = [str(s) for s in df['Start'].tolist()]
+# m_lbl = [str(s) for s in df['End'].tolist()]
+
+    
+# for i in range(0,max_sector_number):
+#     fig_range_plot.add_trace(go.Scatter(
+#         x=[df['Start'][i],df['End'][i]],
+#         y=[df['Grade'][i],df['Grade'][i]],
+#         orientation='h',
+#         line=dict(color='rgb(244,165,130)', width=8),
+#              ))
+
+# fig_range_plot.add_trace(go.Scatter(
+#     x=df['Start'],
+#     y=df['Grade'],
+#     marker=dict(color='#CC5700', size=14),
+#     mode='markers+text',
+#     text=w_lbl,
+#     textposition='middle left',
+#     name='Start'))
+
+# fig_range_plot.add_trace(go.Scatter(
+#     x=df['End'],
+#     y=df['Grade'],
+#     marker=dict(color='#227266', size=14),
+#     mode='markers+text',
+#     text=m_lbl,
+#     textposition='middle right',
+#     name='End'))
+
+# fig_range_plot.update_layout(title="Data Availability", showlegend=False)
+    
+    
+    
+
+# Set title and heigh
+fig.update_layout(
+    title_text="Time series with range slider and selectors",
+    height=700
+)
+
+# Add range slider
+fig.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="YTD",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)
+
+
+
+
+app = dash.Dash(
+    __name__,
+    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
+)
+
+server = app.server
+app.config.suppress_callback_exceptions = True
 
 
 
 # Read data
 df = pd.read_csv(DATA_PATH.joinpath("clinical_analytics.csv"))
 
-clinic_list = df["Clinic Name"].unique()
+
+# clinic_list = df["Clinic Name"].unique()
 df["Admit Source"] = df["Admit Source"].fillna("Not Identified")
 admit_list = df["Admit Source"].unique().tolist()
 
-clinic_list = category_list
+#clinic_list = category_list
 
 # Date
 # Format checkin Time
@@ -119,6 +523,7 @@ wait_time_inputs = [
 score_inputs = [Input((i + "_score_graph"), "selectedData") for i in all_departments]
 
 
+
 def description_card():
     """
 
@@ -131,7 +536,8 @@ def description_card():
             html.H3("2020 Group 6"),
             html.Div(
                 id="intro",
-                children="Some description about our Project.",
+                children="In the project, we used machine learning algorithms in order to predict and compare the greenhouse gas emissions in Germany with and without the impact of the COVID-19 pandemic. By comparing the two scenarios, we forecast the impact of the pandemic on Germany’s climate targets on a long-term basis and its effect on reaching the EU Climate Goals.",
+                
             ),
         ],
     )
@@ -145,12 +551,23 @@ def generate_control_card():
     return html.Div(
         id="control-card",
         children=[
-            html.P("Select Data Sector"),
+            html.P(),
+            html.Label("Data visualisation of Sector:                                                        "),
+            html.Hr(),
+            html.Br(),
             dcc.Dropdown(
-                id="clinic-select",
-                options=[{"label": i, "value": i} for i in clinic_list],
-                value=clinic_list[0],
+                id="sector-select",
+                options=[{"label": i, "value": i} for i in sector_list],
+                value=sector_list[0],
             ),
+            # html.Br(),
+            # html.Div(id='dd-output-container'),
+            
+            # dcc.Dropdown(
+            #     id="-select_co2_source",
+            #     options=[{"label": i, "value": i} for i in sector_list],
+            #     value=sector_list[0],
+            # ),
             html.Br(),
             # html.P("Select Check-In Time"),
             # dcc.DatePickerRange(
@@ -161,77 +578,116 @@ def generate_control_card():
             #     max_date_allowed=dt(2014, 12, 31),
             #     initial_visible_month=dt(2014, 1, 1),
             # ),
-            html.Br(),
-            html.Br(),
-            html.P("Select Admit Source"),
-            dcc.Dropdown(
-                id="admit-select",
-                options=[{"label": i, "value": i} for i in admit_list],
-                value=admit_list[:],
-                multi=True,
-            ),
+            #html.Br(),
+            # html.Br(),
+            # html.P("Select Admit Source"),
+            # dcc.Dropdown(
+            #     id="admit-select",
+            #     options=[{"label": i, "value": i} for i in admit_list],
+            #     #value=admit_list[:],
+            #     multi=True,
+            # ),
 
-            html.Label('Checkboxes'),
-            dcc.Checklist(
-                            options=[
-                                {'label': 'New York City', 'value': 'NYC'},
-                                {'label': u'Montréal', 'value': 'MTL'},
-                                {'label': 'San Francisco', 'value': 'SF'}
-                            ],
-             value=['MTL'],
 
+            html.Br(),
+            html.Label('Select Prediction:'),
+            html.Hr(),
+            html.Br(),
+                        
+        dcc.RadioItems(
+            id="Prediction_Selection",
+                options=[
+                    {'label': 'Mobility', 'value': 'Prediction_1'},
+                    {'label': 'Energy', 'value': 'Prediction_2'},
+                    {'label': 'Economy', 'value': 'Prediction_3'},
+                    {'label': 'All', 'value': 'Prediction_4'}
+                ],
+                value='Prediction_1'
             ),
+        
+        
+        
+            # dcc.Checklist(
+            #                 options=[
+            #                     {'label': 'Mobility', 'value': 'NYC'},
+            #                     {'label': u'Energy', 'value': 'MTL'},
+            #                     {'label': 'Economy', 'value': 'SF'},
+            #                     {'label': 'All', 'value': 'all'},
+            #                 ],
+            #  value=['MTL'],
+
+            # ),
             
                     
-                            dcc.Store(id="store"),                                                                                
+                dcc.Store(id="store"),                                                                                
                             
-                            html.Label('Datatype'),
-                            dcc.Dropdown(
-                            options=[
-                                {'label': 'DAX Data', 'value': 'NYC'},
-                                {'label': u'Mobility Data', 'value': 'MTL'},
-                                {'label': 'Transportation Cars Data', 'value': 'SF'}
-                            ],
-                            value='MTL'
-                            
-                            
-                        ),
-
-
-                            
-                        html.Label('Multi-Select Dropdown'),
-                                
-                        dcc.Dropdown(
-                            options=[
-                                {'label': 'New York City', 'value': 'NYC'},
-                                {'label': u'Montréal', 'value': 'MTL'},
-                                {'label': 'San Francisco', 'value': 'SF'}
-                            ],
-                            value=['MTL', 'SF'],
-                            multi=True
-                        ),
-                    
-                    
-                        html.Label('Text Input'),
-                        dcc.Input(value='MTL', type='text'),
-                    
-                        html.Label('Slider'),
-                        dcc.Slider(
-                            min=0,
-                            max=9,
-                            marks={i: 'Label {}'.format(i) if i == 1 else str(i) for i in range(1, 6)},
-                            value=5,
-                        ),
                         
+                        # html.Br(),
+                        # html.Label('Datatype'),
+                        # html.Hr(),
+                        # html.Br(),
+                        #     dcc.Dropdown(
+                        #     options=[
+                        #         {'label': 'DAX Data', 'value': 'NYC'},
+                        #         {'label': u'Mobility Data', 'value': 'MTL'},
+                        #         {'label': 'Transportation Cars Data', 'value': 'SF'}
+                        #     ],
+                        #     value='MTL'
+                            
+                            
+                        # ),
+
+
+                            
+                        # html.Label('Multi-Select Dropdown'),
+                                
+                        # dcc.Dropdown(
+                        #     options=[
+                        #         {'label': 'New York City', 'value': 'NYC'},
+                        #         {'label': u'Montréal', 'value': 'MTL'},
+                        #         {'label': 'San Francisco', 'value': 'SF'}
+                        #     ],
+                        #     value=['MTL', 'SF'],
+                        #     multi=True
+                        # ),
+                        # html.Label('Text Input'),
+                        # dcc.Input(value='MTL', type='text'),
+                        
+                        
+                        # html.Br(),
+                        # html.Label('Slider'),
+                        # html.Hr(),
+                        # html.Br(),
+                        # dcc.Slider(
+                        #     min=0,
+                        #     max=9,
+                        #     marks={i: 'Infectionnumber'.format(i) if i == 1 else str(i) for i in range(1, 6)},
+                        #     value=5,
+                        # ),
+                        # html.Br(),
+                        # dcc.Slider(
+                        #     min=0,
+                        #     max=9,
+                        #     marks={i: 'R-Value'.format(i) if i == 1 else str(i) for i in range(1, 6)},
+                        #     value=2,
+                        # ),
+                        # daq.BooleanSwitch(
+                        #   on=True,
+                        #   label="Second Wave",
+                        #   labelPosition="top",
+                        #   id="button_second_wave",
+                        # ),
+                                                
                     
-                        daq.Slider(
-                            id='my-daq-slider-ex',
-                            value=17
-                        ),
+        
+                    
+                        html.Br(),
+                        html.Label('App Control'),
+                        html.Hr(),
                         html.Br(),
                         html.Div(
                             id="reset-btn-outer",
-                            children=html.Button(id="reset-btn", children="Reset", n_clicks=0),
+                            children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Update2", children="Update2", n_clicks=0),],
                         ),
                         
                         html.Br(),
@@ -247,414 +703,6 @@ def generate_control_card():
         ],
     )
 
-
-# def generate_patient_volume_heatmap(start, end, clinic, hm_click, admit_type, reset):
-#     """
-#     :param: start: start date from selection.
-#     :param: end: end date from selection.
-#     :param: clinic: clinic from selection.
-#     :param: hm_click: clickData from heatmap.
-#     :param: admit_type: admission type from selection.
-#     :param: reset (boolean): reset heatmap graph if True.
-
-#     :return: Patient volume annotated heatmap.
-#     """
-
-#     filtered_df = df[
-#         (df["Clinic Name"] == clinic) & (df["Admit Source"].isin(admit_type))
-#     ]
-#     filtered_df = filtered_df.sort_values("Check-In Time").set_index("Check-In Time")[
-#         start:end
-#     ]
-
-#     x_axis = [datetime.time(i).strftime("%I %p") for i in range(24)]  # 24hr time list
-#     y_axis = day_list
-
-#     hour_of_day = ""
-#     weekday = ""
-#     shapes = []
-
-#     if hm_click is not None:
-#         hour_of_day = hm_click["points"][0]["x"]
-#         weekday = hm_click["points"][0]["y"]
-
-#         # Add shapes
-#         x0 = x_axis.index(hour_of_day) / 24
-#         x1 = x0 + 1 / 24
-#         y0 = y_axis.index(weekday) / 7
-#         y1 = y0 + 1 / 7
-
-#         shapes = [
-#             dict(
-#                 type="rect",
-#                 xref="paper",
-#                 yref="paper",
-#                 x0=x0,
-#                 x1=x1,
-#                 y0=y0,
-#                 y1=y1,
-#                 line=dict(color="#ff6347"),
-#             )
-#         ]
-
-#     # Get z value : sum(number of records) based on x, y,
-
-#     z = np.zeros((7, 24))
-#     annotations = []
-
-#     for ind_y, day in enumerate(y_axis):
-#         filtered_day = filtered_df[filtered_df["Days of Wk"] == day]
-#         for ind_x, x_val in enumerate(x_axis):
-#             sum_of_record = filtered_day[filtered_day["Check-In Hour"] == x_val][
-#                 "Number of Records"
-#             ].sum()
-#             z[ind_y][ind_x] = sum_of_record
-
-#             annotation_dict = dict(
-#                 showarrow=False,
-#                 text="<b>" + str(sum_of_record) + "<b>",
-#                 xref="x",
-#                 yref="y",
-#                 x=x_val,
-#                 y=day,
-#                 font=dict(family="sans-serif"),
-#             )
-#             # Highlight annotation text by self-click
-#             if x_val == hour_of_day and day == weekday:
-#                 if not reset:
-#                     annotation_dict.update(size=15, font=dict(color="#ff6347"))
-
-#             annotations.append(annotation_dict)
-
-#     # Heatmap
-#     hovertemplate = "<b> %{y}  %{x} <br><br> %{z} Patient Records"
-
-#     data = [
-#         dict(
-#             x=x_axis,
-#             y=y_axis,
-#             z=z,
-#             type="heatmap",
-#             name="",
-#             hovertemplate=hovertemplate,
-#             showscale=False,
-#             colorscale=[[0, "#caf3ff"], [1, "#2c82ff"]],
-#         )
-#     ]
-
-#     layout = dict(
-#         margin=dict(l=70, b=50, t=50, r=50),
-#         modebar={"orientation": "v"},
-#         font=dict(family="Open Sans"),
-#         annotations=annotations,
-#         shapes=shapes,
-#         xaxis=dict(
-#             side="top",
-#             ticks="",
-#             ticklen=2,
-#             tickfont=dict(family="sans-serif"),
-#             tickcolor="#ffffff",
-#         ),
-#         yaxis=dict(
-#             side="left", ticks="", tickfont=dict(family="sans-serif"), ticksuffix=" "
-#         ),
-#         hovermode="closest",
-#         showlegend=False,
-#     )
-#     return {"data": data, "layout": layout}
-
-
-# def generate_table_row(id, style, col1, col2, col3):
-#     """ Generate table rows.
-
-#     :param id: The ID of table row.
-#     :param style: Css style of this row.
-#     :param col1 (dict): Defining id and children for the first column.
-#     :param col2 (dict): Defining id and children for the second column.
-#     :param col3 (dict): Defining id and children for the third column.
-#     """
-
-#     return html.Div(
-#         id=id,
-#         className="row table-row",
-#         style=style,
-#         children=[
-#             html.Div(
-#                 id=col1["id"],
-#                 style={"display": "table", "height": "100%"},
-#                 className="two columns row-department",
-#                 children=col1["children"],
-#             ),
-#             html.Div(
-#                 id=col2["id"],
-#                 style={"textAlign": "center", "height": "100%"},
-#                 className="five columns",
-#                 children=col2["children"],
-#             ),
-#             html.Div(
-#                 id=col3["id"],
-#                 style={"textAlign": "center", "height": "100%"},
-#                 className="five columns",
-#                 children=col3["children"],
-#             ),
-#         ],
-#     )
-
-
-# def generate_table_row_helper(department):
-#     """Helper function.
-
-#     :param: department (string): Name of department.
-#     :return: Table row.
-#     """
-#     return generate_table_row(
-#         department,
-#         {},
-#         {"id": department + "_department", "children": html.B(department)},
-#         {
-#             "id": department + "wait_time",
-#             "children": dcc.Graph(
-#                 id=department + "_wait_time_graph",
-#                 style={"height": "100%", "width": "100%"},
-#                 className="wait_time_graph",
-#                 config={
-#                     "staticPlot": False,
-#                     "editable": False,
-#                     "displayModeBar": False,
-#                 },
-#                 figure={
-#                     "layout": dict(
-#                         margin=dict(l=0, r=0, b=0, t=0, pad=0),
-#                         xaxis=dict(
-#                             showgrid=False,
-#                             showline=False,
-#                             showticklabels=False,
-#                             zeroline=False,
-#                         ),
-#                         yaxis=dict(
-#                             showgrid=False,
-#                             showline=False,
-#                             showticklabels=False,
-#                             zeroline=False,
-#                         ),
-#                         paper_bgcolor="rgba(0,0,0,0)",
-#                         plot_bgcolor="rgba(0,0,0,0)",
-#                     )
-#                 },
-#             ),
-#         },
-#         {
-#             "id": department + "_patient_score",
-#             "children": dcc.Graph(
-#                 id=department + "_score_graph",
-#                 style={"height": "100%", "width": "100%"},
-#                 className="patient_score_graph",
-#                 config={
-#                     "staticPlot": False,
-#                     "editable": False,
-#                     "displayModeBar": False,
-#                 },
-#                 figure={
-#                     "layout": dict(
-#                         margin=dict(l=0, r=0, b=0, t=0, pad=0),
-#                         xaxis=dict(
-#                             showgrid=False,
-#                             showline=False,
-#                             showticklabels=False,
-#                             zeroline=False,
-#                         ),
-#                         yaxis=dict(
-#                             showgrid=False,
-#                             showline=False,
-#                             showticklabels=False,
-#                             zeroline=False,
-#                         ),
-#                         paper_bgcolor="rgba(0,0,0,0)",
-#                         plot_bgcolor="rgba(0,0,0,0)",
-#                     )
-#                 },
-#             ),
-#         },
-#     )
-
-
-# def initialize_table():
-#     """
-#     :return: empty table children. This is intialized for registering all figure ID at page load.
-#     """
-
-#     # header_row
-#     header = [
-#         generate_table_row(
-#             "header",
-#             {"height": "50px"},
-#             {"id": "header_department", "children": html.B("Department")},
-#             {"id": "header_wait_time_min", "children": html.B("Wait Time Minutes")},
-#             {"id": "header_care_score", "children": html.B("Care Score")},
-#         )
-#     ]
-
-#     # department_row
-#     rows = [generate_table_row_helper(department) for department in all_departments]
-#     header.extend(rows)
-#     empty_table = header
-
-#     return empty_table
-
-
-# def generate_patient_table(figure_list, departments, wait_time_xrange, score_xrange):
-#     """
-#     :param score_xrange: score plot xrange [min, max].
-#     :param wait_time_xrange: wait time plot xrange [min, max].
-#     :param figure_list:  A list of figures from current selected metrix.
-#     :param departments:  List of departments for making table.
-#     :return: Patient table.
-#     """
-#     # header_row
-#     header = [
-#         generate_table_row(
-#             "header",
-#             {"height": "50px"},
-#             {"id": "header_department", "children": html.B("Department")},
-#             {"id": "header_wait_time_min", "children": html.B("Wait Time Minutes")},
-#             {"id": "header_care_score", "children": html.B("Care Score")},
-#         )
-#     ]
-
-#     # department_row
-#     rows = [generate_table_row_helper(department) for department in departments]
-#     # empty_row
-#     empty_departments = [item for item in all_departments if item not in departments]
-#     empty_rows = [
-#         generate_table_row_helper(department) for department in empty_departments
-#     ]
-
-#     # fill figures into row contents and hide empty rows
-#     for ind, department in enumerate(departments):
-#         rows[ind].children[1].children.figure = figure_list[ind]
-#         rows[ind].children[2].children.figure = figure_list[ind + len(departments)]
-#     for row in empty_rows[1:]:
-#         row.style = {"display": "none"}
-
-#     # convert empty row[0] to axis row
-#     empty_rows[0].children[0].children = html.B(
-#         "graph_ax", style={"visibility": "hidden"}
-#     )
-
-#     empty_rows[0].children[1].children.figure["layout"].update(
-#         dict(margin=dict(t=-70, b=50, l=0, r=0, pad=0))
-#     )
-
-#     empty_rows[0].children[1].children.config["staticPlot"] = True
-
-#     empty_rows[0].children[1].children.figure["layout"]["xaxis"].update(
-#         dict(
-#             showline=True,
-#             showticklabels=True,
-#             tick0=0,
-#             dtick=20,
-#             range=wait_time_xrange,
-#         )
-#     )
-#     empty_rows[0].children[2].children.figure["layout"].update(
-#         dict(margin=dict(t=-70, b=50, l=0, r=0, pad=0))
-#     )
-
-#     empty_rows[0].children[2].children.config["staticPlot"] = True
-
-#     empty_rows[0].children[2].children.figure["layout"]["xaxis"].update(
-#         dict(showline=True, showticklabels=True, tick0=0, dtick=0.5, range=score_xrange)
-#     )
-
-#     header.extend(rows)
-#     header.extend(empty_rows)
-#     return header
-
-
-# def create_table_figure(
-#     department, filtered_df, category, category_xrange, selected_index
-# ):
-#     """Create figures.
-
-#     :param department: Name of department.
-#     :param filtered_df: Filtered dataframe.
-#     :param category: Defining category of figure, either 'wait time' or 'care score'.
-#     :param category_xrange: x axis range for this figure.
-#     :param selected_index: selected point index.
-#     :return: Plotly figure dictionary.
-#     """
-#     aggregation = {
-#         "Wait Time Min": "mean",
-#         "Care Score": "mean",
-#         "Days of Wk": "first",
-#         "Check-In Time": "first",
-#         "Check-In Hour": "first",
-#     }
-
-#     df_by_department = filtered_df[
-#         filtered_df["Department"] == department
-#     ].reset_index()
-#     grouped = (
-#         df_by_department.groupby("Encounter Number").agg(aggregation).reset_index()
-#     )
-#     patient_id_list = grouped["Encounter Number"]
-
-#     x = grouped[category]
-#     y = list(department for _ in range(len(x)))
-
-#     f = lambda x_val: dt.strftime(x_val, "%Y-%m-%d")
-#     check_in = (
-#         grouped["Check-In Time"].apply(f)
-#         + " "
-#         + grouped["Days of Wk"]
-#         + " "
-#         + grouped["Check-In Hour"].map(str)
-#     )
-
-#     text_wait_time = (
-#         "Patient # : "
-#         + patient_id_list
-#         + "<br>Check-in Time: "
-#         + check_in
-#         + "<br>Wait Time: "
-#         + grouped["Wait Time Min"].round(decimals=1).map(str)
-#         + " Minutes,  Care Score : "
-#         + grouped["Care Score"].round(decimals=1).map(str)
-#     )
-
-#     layout = dict(
-#         margin=dict(l=0, r=0, b=0, t=0, pad=0),
-#         clickmode="event+select",
-#         hovermode="closest",
-#         xaxis=dict(
-#             showgrid=False,
-#             showline=False,
-#             showticklabels=False,
-#             zeroline=False,
-#             range=category_xrange,
-#         ),
-#         yaxis=dict(
-#             showgrid=False, showline=False, showticklabels=False, zeroline=False
-#         ),
-#         paper_bgcolor="rgba(0,0,0,0)",
-#         plot_bgcolor="rgba(0,0,0,0)",
-#     )
-
-#     trace = dict(
-#         x=x,
-#         y=y,
-#         mode="markers",
-#         marker=dict(size=14, line=dict(width=1, color="#ffffff")),
-#         color="#2c82ff",
-#         selected=dict(marker=dict(color="#ff6347", opacity=1)),
-#         unselected=dict(marker=dict(opacity=0.1)),
-#         selectedpoints=selected_index,
-#         hoverinfo="text",
-#         customdata=patient_id_list,
-#         text=text_wait_time,
-#     )
-
-#     return {"data": [trace], "layout": layout}
 
 
 app.layout = html.Div(
@@ -686,7 +734,7 @@ app.layout = html.Div(
                 html.Div(
                     id="patient_volume_card",
                     children=[
-                        html.B("Patient Volume"),
+                        html.B("Prediction"),
                         html.Hr(),
                         dbc.Tabs(
                                 [
@@ -707,7 +755,9 @@ app.layout = html.Div(
                         html.B("Data availability"),
                         html.Hr(),
                         #html.Div(id="wait_time_table", children=initialize_table()),
-                        dcc.Graph(id="patient_volume_hm"),
+                        #dcc.Graph(figure=fig_range_plot),
+                        #dcc.Graph(figure=data["hist_1"]),
+                        #dcc.Graph(figure=generate_data_availability_plot),
                     ],
                 ),
                 
@@ -722,178 +772,237 @@ app.layout = html.Div(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.callback(
-    Output("tab-content", "children"),
-    [Input("tabs", "active_tab"), Input("store", "data")],
+    Output("patient_volume_card", "children"),
+    [Input("store", "data")],
 )
-def render_tab_content(active_tab, data):
+def render_tab1_content(data):
     """
     This callback takes the 'active_tab' property as input, as well as the
     stored graphs, and renders the tab content depending on what the value of
     'active_tab' is.
     """
-    if active_tab and data is not None:
-        if active_tab == "scatter":
-            return  dcc.Graph(id='example-graph2', figure=fig)  #dcc.Graph(figure=data["scatter"])
-           
+
+    children=[
+                        html.B("Data availability"),
+                        html.Hr(),
+                        
+                        dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
         
+        ]
+
+    return children
+
+@app.callback(
+    Output("wait_time_card", "children"),
+    [Input("store", "data")],
+)
+def render_tab2_content(data):
+    """
+    This callback takes the 'active_tab' property as input, as well as the
+    stored graphs, and renders the tab content depending on what the value of
+    'active_tab' is.
+    """
+
+    children=[
+                        html.B("Data availability"),
+                        html.Hr(),
+                        
+                        dbc.Row(
+                        [
+                            dbc.Col(dcc.Graph(figure=data["scatter"]), width=6),
+                            dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+                        ]
+                        )
+        ]
+
+    return children
+
+
+
+
+# @app.callback(
+#     Output("tab-content", "children"),
+#     [Input("tabs", "active_tab"), Input("store", "data")],
+# )
+# def render_tab_content(active_tab, data):
+#     """
+#     This callback takes the 'active_tab' property as input, as well as the
+#     stored graphs, and renders the tab content depending on what the value of
+#     'active_tab' is.
+#     """
+#     if active_tab and data is not None:
+#         if active_tab == "scatter":
+
+#             return dbc.Row(
+#                 [
+#                     dbc.Col(dcc.Graph(figure=data["scatter"]), width=6),
+#                     dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+#                 ]
+#                 )
+                
+                
         
-        elif active_tab == "histogram":
-            return dbc.Row(
-                [
-                    dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
-                    dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
-                ]
-            )
-    return "No tab selected"
+#         elif active_tab == "histogram":
+#             return dbc.Row(
+#                 [
+#                     dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
+#                     #dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+#                 ]
+#             )
+#     return "No tab selected"
 
 
 
 
-@app.callback(Output("store", "data"), [Input("button", "n_clicks")])
-def generate_graphs(n):
+@app.callback(Output(component_id="store", component_property="data"), 
+   [
+    Input(component_id="button", component_property="n_clicks"),
+    Input(component_id="Prediction_Selection", component_property="value"),
+    Input('sector-select', 'value'),
+    ])
+
+def generate_graphs(n, radio_button, val):
     """
     This callback generates three simple graphs from random data.
     """
-    if not n:
-        # generate empty graphs when app loads
-        return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
+    # if not n:
+    #      #generate empty graphs when app loads
+    #     return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
 
-    # simulate expensive graph generation process
-    #time.sleep(2)
+    # # simulate expensive graph generation process
+    # time.sleep(2)
         
     
-    #Graphtest function
+    # #Graphtest function
     
-    x = ['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
+    # x = ['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
 
-    x_rev = x[::-1]
+    # x_rev = x[::-1]
     
-    # Line 1
-    y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    y1_upper = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-    y1_lower = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    y1_lower = y1_lower[::-1]
+    # # Line 1
+    # y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # y1_upper = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+    # y1_lower = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
+    # y1_lower = y1_lower[::-1]
     
-    # Line 2
-    y2 = [5, 2.5, 5, 7.5, 5, 2.5, 7.5, 4.5, 5.5, 5]
-    y2_upper = [5.5, 3, 5.5, 8, 6, 3, 8, 5, 6, 5.5]
-    y2_lower = [4.5, 2, 4.4, 7, 4, 2, 7, 4, 5, 4.75]
-    y2_lower = y2_lower[::-1]
+    # # Line 2
+    # y2 = [5, 2.5, 5, 7.5, 5, 2.5, 7.5, 4.5, 5.5, 5]
+    # y2_upper = [5.5, 3, 5.5, 8, 6, 3, 8, 5, 6, 5.5]
+    # y2_lower = [4.5, 2, 4.4, 7, 4, 2, 7, 4, 5, 4.75]
+    # y2_lower = y2_lower[::-1]
     
-    # Line 3
-    y3 = [10, 8, 6, 4, 2, 0, 2, 4, 2, 0]
-    y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    y3_lower = y3_lower[::-1]
+    # # Line 3
+    # y3 = [10, 8, 6, 4, 2, 0, 2, 4, 2, 0]
+    # y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
+    # y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
+    # y3_lower = y3_lower[::-1]
     
     
-    
-    # Line 4
-    y4 = [10, 8, 6, 4, 5, 0, 2, 4, 2, 0]
-    y4_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    y4_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    y4_lower = y3_lower[::-1]
+    # # Line 4
+    # y4 = [10, 8, 6, 4, 5, 0, 2, 4, 2, 0]
+    # y4_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
+    # y4_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
+    # y4_lower = y3_lower[::-1]
 
-    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+  #  df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
   #  fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
     #fig.show()
 
     
-    fig.data = []
+    # fig.data = []
     
+    # # fig.add_trace(go.Scatter(
+    # #     x=df['Date'], y=df['AAPL.High'],
+    # #     line_color='rgb(231,107,243)',
+    # #     name='Ideal',
+    # # ))
+    
+
+
+
+
     # fig.add_trace(go.Scatter(
-    #     x=df['Date'], y=df['AAPL.High'],
+    #     x=x+x_rev,
+    #     y=y3_upper+y3_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(231,107,243,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     showlegend=False,
+    #     name='Ideal',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y3,
     #     line_color='rgb(231,107,243)',
     #     name='Ideal',
     # ))
-    
 
 
-
-
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y3_upper+y3_lower,
-        fill='toself',
-        fillcolor='rgba(231,107,243,0.2)',
-        line_color='rgba(255,255,255,0)',
-        showlegend=False,
-        name='Ideal',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=y3,
-        line_color='rgb(231,107,243)',
-        name='Ideal',
-    ))
-
-
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y1_upper+y1_lower,
-        fill='toself',
-        fillcolor='rgba(0,100,80,0.2)',
-        line_color='rgba(255,255,255,0)',
-        showlegend=False,
-        name='Fair',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x+x_rev,
-        y=y2_upper+y2_lower,
-        fill='toself',
-        fillcolor='rgba(0,176,246,0.2)',
-        line_color='rgba(255,255,255,0)',
-        name='Premium',
-        showlegend=False,
-    ))
+    # fig.add_trace(go.Scatter(
+    #     x=x+x_rev,
+    #     y=y1_upper+y1_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(0,100,80,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     showlegend=False,
+    #     name='Fair',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x+x_rev,
+    #     y=y2_upper+y2_lower,
+    #     fill='toself',
+    #     fillcolor='rgba(0,176,246,0.2)',
+    #     line_color='rgba(255,255,255,0)',
+    #     name='Premium',
+    #     showlegend=False,
+    # ))
     
     
-    fig.add_trace(go.Scatter(
-        x=x, y=y1,
-        line_color='rgb(0,100,80)',
-        name='Fair',
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=y2,
-        line_color='rgb(0,176,246)',
-        name='Premium',
-    ))
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y1,
+    #     line_color='rgb(0,100,80)',
+    #     name='Fair',
+    # ))
+    # fig.add_trace(go.Scatter(
+    #     x=x, y=y2,
+    #     line_color='rgb(0,176,246)',
+    #     name='Premium',
+    # ))
     
     
-    
-    
-    fig.update_traces(mode='lines')
-    #fig.show()
+    # fig.update_traces(mode='lines')
+    # #fig.show()
+
+#    fig = plot_data_of_sector('energy_households')
 
 
 
+    # # generate 100 multivariate normal samples
+    # data = np.random.multivariate_normal([0, 0], [[1, 0.5], [0.5, 1]], 100)
 
-    # generate 100 multivariate normal samples
-    data = np.random.multivariate_normal([0, 0], [[1, 0.5], [0.5, 1]], 100)
-
-    scatter = go.Figure(
-        data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
-    )
-    hist_1 = go.Figure(data=[go.Histogram(x=data[:, 0])])
-    hist_2 = go.Figure(data=[go.Histogram(x=data[:, 1])])
+    # scatter = go.Figure(
+    #     data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
+    # )
+    #value='target_values'
+    scatter = plot_data_of_sector(val)
+ 
+ 
+ 
+    hist_1 = plot_prediction_data(radio_button)
+    hist_2 = generate_data_availability_plot(val)
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"scatter": scatter, "hist_1": hist_1, "hist_2": hist_2}
 
+
+
+@app.callback(
+    Output('dd-output-container', 'children'),
+    [Input('sector-select', 'value')])
+def update_output(value):
+    Data_plot_name=value
+    print(value)
+    return 'You have selected "{}"'.format(Data_plot_name)
 
 
 
