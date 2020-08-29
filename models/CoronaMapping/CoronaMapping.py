@@ -23,14 +23,12 @@ plt.rcParams.update({'font.size':16})
 
 # In[2]:
 
-
 #Function to train the linear regression with Corona cases on co2 emissions
 # df_cor needs one column named 'cases' with the Covid-19 cases in Germany
-# df_co2 needs one column named 'co2' 
-#Function to train the linear regression with Corona cases on co2 emissions
-# df_cor needs one column named 'cases' with the Covid-19 cases in Germany
-# df_co2 needs one column named 'co2' 
+# df_co2 needs one column named 'co2' needs to be at least from 01/2019 to 06/2020
 
+#return: lr_cor_co2: Linear regression model that maps monthyl corona cases on the Emission reduction to the year before. 
+# This model is the input for EstimateCO2withCorona
 def TrainLRCoronaOnCO2(df_cor, df_co2, verbose=True):
     
     #convert datetime index to string index if needed
@@ -87,8 +85,15 @@ def TrainLRCoronaOnCO2(df_cor, df_co2, verbose=True):
         
     return lr_cor_co2
     
+    
 #use the linear model from "TrainLRCoronaOnCO2" to estimate the impact of cases on co2 
-def EstimateCO2withCorona(lr_cor_co2, df_co2, df_cases_new):
+#Input: 
+#lr_cor_co2: Linear regression model that maps monthyl corona cases on the Emission reduction to the year before. 
+# df_cases_new needs one column named 'cases' with the Covid-19 cases in Germany
+# df_co2 needs one column named 'co2' needs to be at least from 01/2019 to 06/2020
+
+#return: dataframe with CO2 emissions for the time span 07/2020 to 12/2020
+def EstimateCO2withCorona(lr_cor_co2, df_cases_new, df_co2):
     
     cases = df_cases_new.cases.to_numpy()
     for i in range(len(cases)):
@@ -114,7 +119,8 @@ def EstimateCO2withCorona(lr_cor_co2, df_co2, df_cases_new):
     
     pred = df_co2.loc['2019-07':'2019-12', 'co2'].to_numpy() * (1-pred_diff) 
     
-    df_ret = pd.DataFrame({'co2':pred}, index=pd.to_datetime(df_cases_new.index))
+    df_cases_new['date'] = df_cases_new.index
+    df_ret = pd.DataFrame({'co2':pred}, index=pd.to_datetime(df_cases_new.date).dt.to_period('m'))
     
     return df_ret
     

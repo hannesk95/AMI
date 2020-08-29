@@ -6,19 +6,21 @@
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import fair
-
-plt.rcParams.update({'font.size':16})
 
 
 # In[80]:
 
 
+#df_co2_Cor: Dataframe with column 'co2_Cor' which has the monthly co2 emissions from 01/2011 to 12/2020
+#df_co2_noCor: Dataframe with column 'co2_noCor' which has the monthly co2 emissions from 01/2011 to 12/2020
+#start date 01/2011 can also be another date but both dataframes must have the same number of rows.
+
+#return: dictionary with: 'delta_CO2_in_MioTons', 'savedEmission_in_Days', 'delta_T_in_GradK', 'delta_C_in_ppm''
+
 def ImpactOfReduction(df_co2_Cor, df_co2_noCor):
     
-    #yearly sums
+   
     
     #convert to datetime if needed
     try: 
@@ -30,6 +32,7 @@ def ImpactOfReduction(df_co2_Cor, df_co2_noCor):
     except: 
         pass
 
+    #yearly sums
     df_co2_noCor['year'] = df_co2_noCor.index.year
     df_co2_Cor['year'] = df_co2_Cor.index.year
 
@@ -86,5 +89,4 @@ def ImpactOfReduction(df_co2_Cor, df_co2_noCor):
     
     return dic_ret
     
-
-
+    
