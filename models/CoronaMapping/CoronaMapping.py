@@ -27,6 +27,9 @@ plt.rcParams.update({'font.size':16})
 #Function to train the linear regression with Corona cases on co2 emissions
 # df_cor needs one column named 'cases' with the Covid-19 cases in Germany
 # df_co2 needs one column named 'co2' 
+#Function to train the linear regression with Corona cases on co2 emissions
+# df_cor needs one column named 'cases' with the Covid-19 cases in Germany
+# df_co2 needs one column named 'co2' 
 
 def TrainLRCoronaOnCO2(df_cor, df_co2, verbose=True):
     
@@ -94,12 +97,24 @@ def EstimateCO2withCorona(lr_cor_co2, df_co2, df_cases_new):
         elif cases[i] < 0:
             cases[i] = 0
         
+    #convert datetime index to string index if needed
+    #for corona case numbers dataframe
+    try: 
+        df_cases_new.index = df_cases_new.index.strftime('%Y-%m')
+    except:
+        pass
+    
+    #for co2 emissions dataframe
+    try: 
+        df_co2.index = df_co2.index.strftime('%Y-%m')
+    except:
+        pass
         
     pred_diff = lr_cor_co2.predict(df_cases_new.cases.values.reshape(-1, 1))
     
     pred = df_co2.loc['2019-07':'2019-12', 'co2'].to_numpy() * (1-pred_diff) 
     
-    df_ret = pd.DataFrame({'co2':pred}, index=df_cases_new.index)
+    df_ret = pd.DataFrame({'co2':pred}, index=pd.to_datetime(df_cases_new.index))
     
     return df_ret
     
