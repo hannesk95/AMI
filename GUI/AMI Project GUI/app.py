@@ -698,15 +698,6 @@ def generate_control_card():
                                                 
                     
         
-                    
-                        html.Br(),
-                        html.Label('App Control'),
-                        html.Hr(),
-                        html.Br(),
-                        html.Div(
-                            id="reset-btn-outer",
-                            children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Update2", children="Update2", n_clicks=0),],
-                        ),
                         
                         html.Br(),
                         #html.Div(id="barchart"),
@@ -724,100 +715,86 @@ def generate_control_card():
                             #id="barchart",
                             id="barchart_plot"
                         ),             
-                                                
-                                
+
+                        # html.Div(
+                        #     id="chartplot_div",
+                        #     children=[
+                        #             html.B("Data availability"),
+                        #             html.Hr(),
+                        #     #html.Div(id="wait_time_table", children=initialize_table()),
+                        #     #dcc.Graph(figure=fig_range_plot),
+                        #     #dcc.Graph(figure=data["hist_1"]),
+                        #     #dcc.Graph(figure=generate_data_availability_plot),
+                        #     ],
+                        # ),
                         
-                        
-                        
-                        
-                        
-                        html.Div(
-                            id="chartplot_div",
-                            children=[
-                                    html.B("Data availability"),
-                                    html.Hr(),
-                            #html.Div(id="wait_time_table", children=initialize_table()),
-                            #dcc.Graph(figure=fig_range_plot),
-                            #dcc.Graph(figure=data["hist_1"]),
-                            #dcc.Graph(figure=generate_data_availability_plot),
-                            ],
-                        ),
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+  
                         html.Div(
                             id="monthly_values",
                             children=[
-                            daq.NumericInput(
-                                    id="Month1",
-                                    children="Month_c1",
-                                    label='Label1',
-                                    labelPosition='right',
-                                    disabled=True,
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),  
-                            daq.NumericInput(
-                                    id="Month2",
-                                    children="Month_c2",
-                                    label='Label2',
-                                    labelPosition='right',
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),  
-                            daq.NumericInput(
-                                    id="Month3",
-                                    children="Month_c3",
-                                    label='Label3',
-                                    labelPosition='right',
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),  
-                            daq.NumericInput(
-                                    id="Month4",
-                                    children="Month_c4",
-                                    label='Label4',
-                                    labelPosition='right',
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),  
-                            daq.NumericInput(
-                                    id="Month5",
-                                    children="Month_c5",
-                                    label='Label5',
-                                    labelPosition='right',
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),  
-                            daq.NumericInput(
-                                    id="Month6",
-                                    children="Month_c6",
-                                    label='Label6',
-                                    labelPosition='right',
-                                    min=0,
-                                    max=10,
-                                    value=2
-                                ),   
+                            # daq.NumericInput(
+                            #         id="Month1",
+                            #         children="Month_c1",
+                            #         label='Label1',
+                            #         labelPosition='right',
+                            #         disabled=True,
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),  
+                            # daq.NumericInput(
+                            #         id="Month2",
+                            #         children="Month_c2",
+                            #         label='Label2',
+                            #         labelPosition='right',
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),  
+                            # daq.NumericInput(
+                            #         id="Month3",
+                            #         children="Month_c3",
+                            #         label='Label3',
+                            #         labelPosition='right',
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),  
+                            # daq.NumericInput(
+                            #         id="Month4",
+                            #         children="Month_c4",
+                            #         label='Label4',
+                            #         labelPosition='right',
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),  
+                            # daq.NumericInput(
+                            #         id="Month5",
+                            #         children="Month_c5",
+                            #         label='Label5',
+                            #         labelPosition='right',
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),  
+                            # daq.NumericInput(
+                            #         id="Month6",
+                            #         children="Month_c6",
+                            #         label='Label6',
+                            #         labelPosition='right',
+                            #         min=0,
+                            #         max=10,
+                            #         value=2
+                            #     ),   
                             daq.NumericInput(
                                     id="Month7",
                                     children="Month_c7",
                                     label='Label7',
                                     labelPosition='right',
-                                    disabled=True,
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),  
                             daq.NumericInput(
                                     id="Month8",
@@ -825,8 +802,8 @@ def generate_control_card():
                                     label='Label8',
                                     labelPosition='right',
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),  
                             daq.NumericInput(
                                     id="Month9",
@@ -834,8 +811,8 @@ def generate_control_card():
                                     label='Label9',
                                     labelPosition='right',
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),  
                             daq.NumericInput(
                                     id="Month10",
@@ -843,8 +820,8 @@ def generate_control_card():
                                     label='Label10',
                                     labelPosition='right',
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),  
                             daq.NumericInput(
                                     id="Month11",
@@ -852,8 +829,8 @@ def generate_control_card():
                                     label='Label11',
                                     labelPosition='right',
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),  
                             daq.NumericInput(
                                     id="Month12",
@@ -861,21 +838,22 @@ def generate_control_card():
                                     label='Label12',
                                     labelPosition='right',
                                     min=0,
-                                    max=10,
-                                    value=2
+                                    max=100000,
+                                    value=2000
                                 ),   
                                 
                                 ],
                         ),
                         
 
-                
-                        
-                        
-                        
-                        
-
-                        
+                        html.Br(),
+                        html.B('App Control'),
+                        html.Hr(),
+                        html.Br(),
+                        html.Div(
+                            id="reset-btn-outer",
+                            children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Initialise", children="Initialisation", n_clicks=0),],
+                        ),
                         
                         html.Br(),
                         dbc.Button(
@@ -932,7 +910,7 @@ app.layout = html.Div(
                                 active_tab="scatter",
                             ),
                             html.Div(id="tab-content", className="p-4"),                                                                                                    
-                        
+
                     ],
                 ),
                 # Availability of Data
@@ -945,6 +923,7 @@ app.layout = html.Div(
                         #dcc.Graph(figure=fig_range_plot),
                         #dcc.Graph(figure=data["hist_1"]),
                         #dcc.Graph(figure=generate_data_availability_plot),
+
                     ],
                 ),
                 
@@ -1009,6 +988,28 @@ def render_tab1_content(data):
                         
                         dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
                        # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
+                        daq.Gauge(
+                          id='my-daq-gauge',
+                          min=0,
+                          max=10,
+                          value=6
+                        ),
+                        daq.Thermometer(
+                          id='my-daq-thermometer',
+                          min=95,
+                          max=105,
+                          value=98.6
+                        ),
+                        daq.LEDDisplay(
+                            label="color",
+                            value='1.001',
+                            color="#FF5E5E"
+                        ),  
+                        daq.LEDDisplay(
+                            label="color",
+                            value='1.001',
+                            color="#FF5E5E"
+                        ),  
         
         ]
 
@@ -1235,12 +1236,13 @@ def update_output(value):
 
 
 @app.callback(Output(component_id="store2", component_property="data"),
-                        [Input('Month1', 'value'),
-                          Input('Month2', 'value'),
-                          Input('Month3', 'value'),
-                          Input('Month4', 'value'),
-                          Input('Month5', 'value'),
-                          Input('Month6', 'value'),
+                        [
+                          # Input('Month1', 'value'),
+                          # Input('Month2', 'value'),
+                          # Input('Month3', 'value'),
+                          # Input('Month4', 'value'),
+                          # Input('Month5', 'value'),
+                          # Input('Month6', 'value'),
                           Input('Month7', 'value'),
                           Input('Month8', 'value'),
                           Input('Month9', 'value'),
@@ -1251,11 +1253,16 @@ def update_output(value):
                     ])
                     
                     
-def on_click(v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12):
+def on_click(v7,v8,v9,v10,v11,v12):
 
         # Give a default data dict with 0 clicks if there's no data.
-        
-        monat_value=[v1,v2,v3,v4,v5,v6],
+        v1=23
+        v2=34
+        v3=24
+        v4=24
+        v5=44
+        v6=23
+        monat_value=[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12],
         #monat_value=[3,665,322,2542,23,5],
         #data = {'barchart_plot': plot_barchart([3,665,322,2542,23,5])},
         #print(data['barchart_plot']),
