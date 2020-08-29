@@ -1,7 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output, ClientsideFunction
+from dash.dependencies import Input, Output, ClientsideFunction, State
 
 import numpy as np
 import pandas as pd
@@ -21,6 +21,8 @@ import plotly.figure_factory as ff
 from dash.dependencies import Input, Output
 import json
 import io
+
+
 
 
 # Path
@@ -61,6 +63,27 @@ for i in database:
   feature = database.get(i)
   if feature['sector'] not in sector_list:
     sector_list.append(feature['sector'])
+
+
+def plot_barchart(monat_value):
+  #import plotly.express as px
+  #import pandas as pd
+
+  size=len(monat_value)
+
+  monate_liste=['Month 1', 'Month 2', 'Month 3','Month 4', 'Month 5', 'Month 6']
+  data_min_max_full_header = {'Month': monate_liste, 'Value': monat_value}
+  df = pd.DataFrame(data=data_min_max_full_header)
+
+  fig=go.Figure()  
+  #df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+  #df['Value'][3]=80
+  #print(df)
+  fig = px.bar(x=df['Month'], y=df['Value'], labels={'x':'', 'y':'Total Number'}, width=400, height=200)
+
+
+
+  return fig
 
 
 def get_min_max_date(sector_choice):
@@ -171,11 +194,6 @@ def generate_data_availability_plot(choice):
     return fig_range_plot
 
 
-
-
-
-
-
 def plot_prediction_data(Prediction_type):
      # Concat data from sector economy
     X_eco_raw = None 
@@ -215,7 +233,7 @@ def plot_prediction_data(Prediction_type):
         line_color='rgb(0,100,80)',
         name=Prediction_type,
     ))    
-    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=400)
+    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=500)
     fig_data_of_sector.update_layout(
     xaxis=dict(
         rangeselector=dict(
@@ -247,8 +265,6 @@ def plot_prediction_data(Prediction_type):
 )        
     return fig_data_of_sector
 
-
-
 def plot_data_of_sector(Sector):
      # Concat data from sector economy
     X_eco_raw = None 
@@ -272,7 +288,7 @@ def plot_data_of_sector(Sector):
         fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
         #print(col)
     #fig_data_of_sector.show()
-    fig_data_of_sector.update_layout(title=Sector, showlegend=True, height=800)
+    fig_data_of_sector.update_layout(title=Sector, showlegend=True, height=500)
     fig_data_of_sector.update_layout(
     xaxis=dict(
         rangeselector=dict(
@@ -303,6 +319,7 @@ def plot_data_of_sector(Sector):
     )
 )
     return fig_data_of_sector
+
 
 # def generate_data_availability_plot(Sector_list, choice):
 #      # Concat data from sector economy
@@ -619,7 +636,8 @@ def generate_control_card():
             # ),
             
                     
-                dcc.Store(id="store"),                                                                                
+                dcc.Store(id="store"),  
+                dcc.Store(id="store2"),                                                                              
                             
                         
                         # html.Br(),
@@ -689,6 +707,175 @@ def generate_control_card():
                             id="reset-btn-outer",
                             children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Update2", children="Update2", n_clicks=0),],
                         ),
+                        
+                        html.Br(),
+                        #html.Div(id="barchart"),
+                        
+                        # html.Div(
+                        #     id="wait_time_card",
+                        #     children=[
+                        #     html.B("Data availability"),
+                        #     html.Hr(),
+                        #     dcc.graph(figure=plot_barchart([3,665,322,2542,23,5])),
+                        #     ],
+                        # ),
+                        
+                        html.Div(
+                            #id="barchart",
+                            id="barchart_plot"
+                        ),             
+                                                
+                                
+                        
+                        
+                        
+                        
+                        
+                        html.Div(
+                            id="chartplot_div",
+                            children=[
+                                    html.B("Data availability"),
+                                    html.Hr(),
+                            #html.Div(id="wait_time_table", children=initialize_table()),
+                            #dcc.Graph(figure=fig_range_plot),
+                            #dcc.Graph(figure=data["hist_1"]),
+                            #dcc.Graph(figure=generate_data_availability_plot),
+                            ],
+                        ),
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        html.Div(
+                            id="monthly_values",
+                            children=[
+                            daq.NumericInput(
+                                    id="Month1",
+                                    children="Month_c1",
+                                    label='Label1',
+                                    labelPosition='right',
+                                    disabled=True,
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month2",
+                                    children="Month_c2",
+                                    label='Label2',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month3",
+                                    children="Month_c3",
+                                    label='Label3',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month4",
+                                    children="Month_c4",
+                                    label='Label4',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month5",
+                                    children="Month_c5",
+                                    label='Label5',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month6",
+                                    children="Month_c6",
+                                    label='Label6',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),   
+                            daq.NumericInput(
+                                    id="Month7",
+                                    children="Month_c7",
+                                    label='Label7',
+                                    labelPosition='right',
+                                    disabled=True,
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month8",
+                                    children="Month_c8",
+                                    label='Label8',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month9",
+                                    children="Month_c9",
+                                    label='Label9',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month10",
+                                    children="Month_c10",
+                                    label='Label10',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month11",
+                                    children="Month_c11",
+                                    label='Label11',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),  
+                            daq.NumericInput(
+                                    id="Month12",
+                                    children="Month_c12",
+                                    label='Label12',
+                                    labelPosition='right',
+                                    min=0,
+                                    max=10,
+                                    value=2
+                                ),   
+                                
+                                ],
+                        ),
+                        
+
+                
+                        
+                        
+                        
+                        
+
+                        
                         
                         html.Br(),
                         dbc.Button(
@@ -772,6 +959,39 @@ app.layout = html.Div(
 
 
 
+
+
+
+
+
+
+@app.callback(
+    
+    Output("barchart_plot", "children"),
+    [Input("store2", "data")],
+)
+
+def render_chartplot(data):
+    """
+    This callback takes the 'active_tab' property as input, as well as the
+    stored graphs, and renders the tab content depending on what the value of
+    'active_tab' is.
+    """
+
+    children=[
+                        html.B("Prediction"),
+                        html.Hr(),
+                        
+                        #dbc.Col(dcc.Graph(figure=plot_barchart([3,665,322,2542,23,5])), width=6),
+                        dbc.Col(dcc.Graph(figure=data['barchart']), width=6),
+        
+        ]
+
+    return children
+
+
+
+
 @app.callback(
     Output("patient_volume_card", "children"),
     [Input("store", "data")],
@@ -784,14 +1004,23 @@ def render_tab1_content(data):
     """
 
     children=[
-                        html.B("Data availability"),
+                        html.B("Prediction"),
                         html.Hr(),
                         
                         dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
+                       # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
         
         ]
 
     return children
+
+
+                
+                
+                
+                
+                
+                
 
 @app.callback(
     Output("wait_time_card", "children"),
@@ -805,7 +1034,7 @@ def render_tab2_content(data):
     """
 
     children=[
-                        html.B("Data availability"),
+                        html.B("Data Visualisation"),
                         html.Hr(),
                         
                         dbc.Row(
@@ -1005,7 +1234,122 @@ def update_output(value):
     return 'You have selected "{}"'.format(Data_plot_name)
 
 
+@app.callback(Output(component_id="store2", component_property="data"),
+                        [Input('Month1', 'value'),
+                          Input('Month2', 'value'),
+                          Input('Month3', 'value'),
+                          Input('Month4', 'value'),
+                          Input('Month5', 'value'),
+                          Input('Month6', 'value'),
+                          Input('Month7', 'value'),
+                          Input('Month8', 'value'),
+                          Input('Month9', 'value'),
+                          Input('Month10', 'value'),
+                          Input('Month11', 'value'),
+                          Input('Month12', 'value'),
+                   
+                    ])
+                    
+                    
+def on_click(v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12):
 
+        # Give a default data dict with 0 clicks if there's no data.
+        
+        monat_value=[v1,v2,v3,v4,v5,v6],
+        #monat_value=[3,665,322,2542,23,5],
+        #data = {'barchart_plot': plot_barchart([3,665,322,2542,23,5])},
+        #print(data['barchart_plot']),
+        #fig=plot_barchart([3,665,322,2542,23,5]),
+        #fig=generate_data_availability_plot('mobility')
+        fig=  go.Figure(
+        data=[go.Bar(y=[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12])],
+        layout_title_text="Infectionrate"
+    )
+        return {"barchart": fig, "monat_value":monat_value}
+
+    
+    
+    
+# @app.callback(
+#     Output("patient_volume_card", "children"),
+#     [Input("store", "data")],
+# )
+# def render_tab1_content(data):
+#     """
+#     This callback takes the 'active_tab' property as input, as well as the
+#     stored graphs, and renders the tab content depending on what the value of
+#     'active_tab' is.
+#     """
+
+#     children=[
+#                         html.B("Prediction"),
+#                         html.Hr(),
+                        
+#                         dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
+#                        # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
+        
+#         ]
+
+#     return children    
+
+# @app.callback(
+#     Output('barchart', 'children'),
+#     [Input('Month1', 'value'),
+#      Input('Month2', 'value'),
+#      Input('Month3', 'value'),
+#      Input('Month4', 'value'),
+#      Input('Month5', 'value'),
+#      Input('Month6', 'value'),
+      
+#      ]
+    
+#     )
+# def plot_barchart_callback(v1,v2,v3,v4,v5,v6):
+    
+#     monat_value=[v1,v2,v3,v4,v5,v6],
+#     #chart_plot=plot_barchart([3,665,322,2542,23,5])
+#     children=[
+#         html.B("Data availability"),
+#         html.Hr(),
+#         dcc.graph(),
+#         ],
+    
+#     return children
+
+
+
+# @app.callback(Output(component_id="store2", component_property="data"), 
+#    [
+#     #Input(component_id="button", component_property="n_clicks"),
+#     #Input(component_id="Prediction_Selection", component_property="value"),
+#     #Input('sector-select', 'value'),
+#     Input('Month1', 'value'),
+#     Input('Month2', 'value'),
+#     Input('Month3', 'value'),
+#     Input('Month4', 'value'),
+#     Input('Month5', 'value'),
+#     Input('Month6', 'value'),
+#     ])
+
+# def plot_barchart_callback(v1,v2,v3,v4,v5,v6):
+#     """
+#     This callback generates three simple graphs from random data.
+#     """
+#     # if not n:
+#     #      #generate empty graphs when app loads
+#     #     return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
+
+#     # # simulate expensive graph generation process
+#     # time.sleep(2)
+#     monat_value=[v1,v2,v3,v4,v5,v6]
+#     barchartplot = plot_barchart(monat_value)
+ 
+ 
+
+#     # save figures in a dictionary for sending to the dcc.Store
+#     return {"barchart_fallzahl": barchartplot}
+
+                            
 
 # Run the server
 if __name__ == "__main__":
