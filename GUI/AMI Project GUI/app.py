@@ -65,14 +65,654 @@ df_cor.index = df_cor.date
 df_cor = df_cor.drop('date', axis=1)
 lr_cor_co2 = TrainLRCoronaOnCO2(df_cor, df_co2) #im storage ablegen
 
-sector = 'mobility' #oder/'energy'
-Sarima_nn = Sarima(database, sector, period=24)
-Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
-sector = 'energy' #oder/'energy'
-Sarima_energy = Sarima(database, sector, period=24)
+# sector = 'mobility' #oder/'energy'
+# Sarima_nn = Sarima(database, sector, period=24)
+# Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
+# sector = 'energy' #oder/'energy'
+# Sarima_energy = Sarima(database, sector, period=24)
+
+
+trained_values = '''
+    date	co2
+    2020-07	13.04337751944985
+    2020-08	13.156913446270348
+    2020-09	13.657888124166371
+    2020-10	13.540523830698467
+    2020-11	13.042690775806712
+    2020-12	12.03894312182359
+    '''
+
+
+Sarima_mobility = '''
+    date	co2
+    2011-01	11.3596383952
+    2011-02	11.8759855949
+    2011-03	12.6505063946
+    2011-04	13.2959403943
+    2011-05	13.5541139942
+    2011-06	13.6832007942
+    2011-07	13.0377667944
+    2011-08	13.1668535944
+    2011-09	13.6832007942
+    2011-10	13.5541139942
+    2011-11	13.0377667944
+    2011-12	12.0050723949
+    2012-01	11.2496027047
+    2012-02	11.7609482822
+    2012-03	12.5279666484
+    2012-04	13.1671486203
+    2012-05	13.422821409
+    2012-06	13.5506578034
+    2012-07	12.9114758315
+    2012-08	13.0393122259
+    2012-09	13.5506578034
+    2012-10	13.422821409
+    2012-11	12.9114758315
+    2012-12	11.8887846766
+    2013-01	11.5535088375
+    2013-02	12.0786683301
+    2013-03	12.866407569
+    2013-04	13.5228569348
+    2013-05	13.7854366811
+    2013-06	13.9167265542
+    2013-07	13.2602771885
+    2013-08	13.3915670616
+    2013-09	13.9167265542
+    2013-10	13.7854366811
+    2013-11	13.2602771885
+    2013-12	12.2099582033
+    2014-01	11.6397150011
+    2014-02	12.1687929557
+    2014-03	12.9624098876
+    2014-04	13.6237573308
+    2014-05	13.8882963081
+    2014-06	14.0205657968
+    2014-07	13.3592183535
+    2014-08	13.4914878422
+    2014-09	14.0205657968
+    2014-10	13.8882963081
+    2014-11	13.3592183535
+    2014-12	12.3010624443
+    2015-01	11.8358875662
+    2015-02	12.3738824555
+    2015-03	13.1808747896
+    2015-04	13.8533684013
+    2015-05	14.122365846
+    2015-06	14.2568645683
+    2015-07	13.5843709566
+    2015-08	13.718869679
+    2015-09	14.2568645683
+    2015-10	14.122365846
+    2015-11	13.5843709566
+    2015-12	12.5083811779
+    2016-01	12.0802591544
+    2016-02	12.6293618432
+    2016-03	13.4530158765
+    2016-04	14.1393942375
+    2016-05	14.4139455819
+    2016-06	14.5512212541
+    2016-07	13.8648428931
+    2016-08	14.0021185653
+    2016-09	14.5512212541
+    2016-10	14.4139455819
+    2016-11	13.8648428931
+    2016-12	12.7666375154
+    2017-01	12.2235916771
+    2017-02	12.7792094806
+    2017-03	13.6126361858
+    2017-04	14.3071584402
+    2017-05	14.5849673419
+    2017-06	14.7238717928
+    2017-07	14.0293495384
+    2017-08	14.1682539893
+    2017-09	14.7238717928
+    2017-10	14.5849673419
+    2017-11	14.0293495384
+    2017-12	12.9181139314
+    2018-01	12.400805397
+    2018-02	12.9644783695
+    2018-03	13.8099878284
+    2018-04	14.5145790442
+    2018-05	14.7964155305
+    2018-06	14.9373337736
+    2018-07	14.2327425579
+    2018-08	14.373660801
+    2018-09	14.9373337736
+    2018-10	14.7964155305
+    2018-11	14.2327425579
+    2018-12	13.1053966127
+    2019-01	12.584731153702087
+    2019-02	13.13630291461399
+    2019-03	13.965281506159862
+    2019-04	14.656243025419112
+    2019-05	14.93263653570251
+    2019-06	15.070835660052525
+    2019-07	14.379832990655554
+    2019-08	14.518033429604197
+    2019-09	15.070835357714579
+    2019-10	14.932634867832679
+    2019-11	14.379832908176544
+    2019-12	13.274228911633744
+    2020-01	12.739336946975065
+    2020-02	13.303109339647442
+    2020-03	14.148460701841396
+    2020-04	14.852892493308458
+    2020-05	15.134663522502182
+    2020-06	15.27554858802773
+    2020-07	14.571124596051055
+    2020-08	14.712009412454616
+    2020-09	15.27554864559533
+    2020-10	15.134663840084018
+    2020-11	14.571124619692483
+    2020-12	13.444046216400702
+    '''
 
 
 
+Sarima_energy = '''
+    date	co2
+    2011-01	22.715520554
+    2011-02	20.56840417
+    2011-03	22.929275004
+    2011-04	19.069879616
+    2011-05	19.70017687
+    2011-06	18.0529371
+    2011-07	18.035262914
+    2011-08	18.400988488
+    2011-09	19.235636128
+    2011-10	21.915504204
+    2011-11	23.975563942
+    2011-12	20.95507185
+    2012-01	22.2701572966
+    2012-02	25.4391550999
+    2012-03	22.9194477247
+    2012-04	21.2980544728
+    2012-05	18.4966057034
+    2012-06	18.4514011449
+    2012-07	19.0318575704
+    2012-08	18.931776697
+    2012-09	19.3552399799
+    2012-10	22.5161932317
+    2012-11	23.5390869761
+    2012-12	22.3471548016
+    2013-01	24.8794828093
+    2013-02	23.988860629
+    2013-03	24.275772624
+    2013-04	21.3434093725
+    2013-05	18.4988130942
+    2013-06	17.711603035
+    2013-07	20.0022003544
+    2013-08	18.8771919712
+    2013-09	20.5664833797
+    2013-10	21.6772764697
+    2013-11	23.0901481216
+    2013-12	20.7411114831
+    2014-01	24.0329701195
+    2014-02	20.9320919134
+    2014-03	21.777202733
+    2014-04	19.672004479599998
+    2014-05	18.2608556751
+    2014-06	17.9194650248
+    2014-07	19.1690043596
+    2014-08	16.3621219313
+    2014-09	21.1161360792
+    2014-10	22.9338449579
+    2014-11	22.8455601589
+    2014-12	20.9998082613
+    2015-01	16.024816434
+    2015-02	18.157190569
+    2015-03	17.488797564
+    2015-04	14.930166786000001
+    2015-05	12.151842289
+    2015-06	14.678542364
+    2015-07	15.219528863
+    2015-08	16.387648019
+    2015-09	18.390157339
+    2015-10	20.158339568
+    2015-11	17.291961428
+    2015-12	15.497556566
+    2016-01	18.32973709
+    2016-02	16.75147702
+    2016-03	16.96737318
+    2016-04	16.03253468
+    2016-05	13.920995538
+    2016-06	15.043322681
+    2016-07	15.119940897
+    2016-08	14.94581755
+    2016-09	16.936178962
+    2016-10	17.077560647
+    2016-11	18.139668567
+    2016-12	17.200716754
+    2017-01	19.857348702
+    2017-02	18.013545214
+    2017-03	16.297641486
+    2017-04	14.741333098
+    2017-05	15.464551291
+    2017-06	13.38125963
+    2017-07	14.447825816
+    2017-08	14.095212921
+    2017-09	15.102453822
+    2017-10	13.858252728
+    2017-11	17.320814287
+    2017-12	13.772421684
+    2018-01	18.32973709
+    2018-02	16.75147702
+    2018-03	16.96737318
+    2018-04	16.03253468
+    2018-05	13.920995538
+    2018-06	15.043322681
+    2018-07	15.119940897
+    2018-08	14.94581755
+    2018-09	16.936178962
+    2018-10	17.077560647
+    2018-11	18.139668567
+    2018-12	17.200716754
+    2019-01	19.93897342053495
+    2019-02	18.303397244141927
+    2019-03	18.102324876943726
+    2019-04	17.03334547264661
+    2019-05	15.533673324884289
+    2019-06	15.964085037220002
+    2019-07	16.254378152787936
+    2019-08	16.04172880502971
+    2019-09	17.819888987452863
+    2019-10	17.662200145396895
+    2019-11	19.242432962638528
+    2019-12	17.740247509458705
+    2020-01	20.84571453375946
+    2020-02	19.157653287239093
+    2020-03	18.57475766357563
+    2020-04	17.382943768032668
+    2020-05	16.443565822408992
+    2020-06	16.240381985675317
+    2020-07	16.726339859267387
+    2020-08	16.47841177436577
+    2020-09	18.062256656669284
+    2020-10	17.630705220425213
+    2020-11	19.685391437902712
+    2020-12	17.667445948613455
+'''
+
+
+
+    # Data Availability Plot
+data_range = '''
+    date	cases	deaths
+    1990-01	0	0
+    1990-02	0	0
+    1990-03	0	0
+    1990-04	0	0
+    1990-05	0	0
+    1990-06	0	0
+    1990-07	0	0
+    1990-08	0	0
+    1990-09	0	0
+    1990-10	0	0
+    1990-11	0	0
+    1990-12	0	0
+    1991-01	0	0
+    1991-02	0	0
+    1991-03	0	0
+    1991-04	0	0
+    1991-05	0	0
+    1991-06	0	0
+    1991-07	0	0
+    1991-08	0	0
+    1991-09	0	0
+    1991-10	0	0
+    1991-11	0	0
+    1991-12	0	0
+    1992-01	0	0
+    1992-02	0	0
+    1992-03	0	0
+    1992-04	0	0
+    1992-05	0	0
+    1992-06	0	0
+    1992-07	0	0
+    1992-08	0	0
+    1992-09	0	0
+    1992-10	0	0
+    1992-11	0	0
+    1992-12	0	0
+    1993-01	0	0
+    1993-02	0	0
+    1993-03	0	0
+    1993-04	0	0
+    1993-05	0	0
+    1993-06	0	0
+    1993-07	0	0
+    1993-08	0	0
+    1993-09	0	0
+    1993-10	0	0
+    1993-11	0	0
+    1993-12	0	0
+    1994-01	0	0
+    1994-02	0	0
+    1994-03	0	0
+    1994-04	0	0
+    1994-05	0	0
+    1994-06	0	0
+    1994-07	0	0
+    1994-08	0	0
+    1994-09	0	0
+    1994-10	0	0
+    1994-11	0	0
+    1994-12	0	0
+    1995-01	0	0
+    1995-02	0	0
+    1995-03	0	0
+    1995-04	0	0
+    1995-05	0	0
+    1995-06	0	0
+    1995-07	0	0
+    1995-08	0	0
+    1995-09	0	0
+    1995-10	0	0
+    1995-11	0	0
+    1995-12	0	0
+    1996-01	0	0
+    1996-02	0	0
+    1996-03	0	0
+    1996-04	0	0
+    1996-05	0	0
+    1996-06	0	0
+    1996-07	0	0
+    1996-08	0	0
+    1996-09	0	0
+    1996-10	0	0
+    1996-11	0	0
+    1996-12	0	0
+    1997-01	0	0
+    1997-02	0	0
+    1997-03	0	0
+    1997-04	0	0
+    1997-05	0	0
+    1997-06	0	0
+    1997-07	0	0
+    1997-08	0	0
+    1997-09	0	0
+    1997-10	0	0
+    1997-11	0	0
+    1997-12	0	0
+    1998-01	0	0
+    1998-02	0	0
+    1998-03	0	0
+    1998-04	0	0
+    1998-05	0	0
+    1998-06	0	0
+    1998-07	0	0
+    1998-08	0	0
+    1998-09	0	0
+    1998-10	0	0
+    1998-11	0	0
+    1998-12	0	0
+    1999-01	0	0
+    1999-02	0	0
+    1999-03	0	0
+    1999-04	0	0
+    1999-05	0	0
+    1999-06	0	0
+    1999-07	0	0
+    1999-08	0	0
+    1999-09	0	0
+    1999-10	0	0
+    1999-11	0	0
+    1999-12	0	0
+    2000-01	0	0
+    2000-02	0	0
+    2000-03	0	0
+    2000-04	0	0
+    2000-05	0	0
+    2000-06	0	0
+    2000-07	0	0
+    2000-08	0	0
+    2000-09	0	0
+    2000-10	0	0
+    2000-11	0	0
+    2000-12	0	0
+    2001-01	0	0
+    2001-02	0	0
+    2001-03	0	0
+    2001-04	0	0
+    2001-05	0	0
+    2001-06	0	0
+    2001-07	0	0
+    2001-08	0	0
+    2001-09	0	0
+    2001-10	0	0
+    2001-11	0	0
+    2001-12	0	0
+    2002-01	0	0
+    2002-02	0	0
+    2002-03	0	0
+    2002-04	0	0
+    2002-05	0	0
+    2002-06	0	0
+    2002-07	0	0
+    2002-08	0	0
+    2002-09	0	0
+    2002-10	0	0
+    2002-11	0	0
+    2002-12	0	0
+    2003-01	0	0
+    2003-02	0	0
+    2003-03	0	0
+    2003-04	0	0
+    2003-05	0	0
+    2003-06	0	0
+    2003-07	0	0
+    2003-08	0	0
+    2003-09	0	0
+    2003-10	0	0
+    2003-11	0	0
+    2003-12	0	0
+    2004-01	0	0
+    2004-02	0	0
+    2004-03	0	0
+    2004-04	0	0
+    2004-05	0	0
+    2004-06	0	0
+    2004-07	0	0
+    2004-08	0	0
+    2004-09	0	0
+    2004-10	0	0
+    2004-11	0	0
+    2004-12	0	0
+    2005-01	0	0
+    2005-02	0	0
+    2005-03	0	0
+    2005-04	0	0
+    2005-05	0	0
+    2005-06	0	0
+    2005-07	0	0
+    2005-08	0	0
+    2005-09	0	0
+    2005-10	0	0
+    2005-11	0	0
+    2005-12	0	0
+    2006-01	0	0
+    2006-02	0	0
+    2006-03	0	0
+    2006-04	0	0
+    2006-05	0	0
+    2006-06	0	0
+    2006-07	0	0
+    2006-08	0	0
+    2006-09	0	0
+    2006-10	0	0
+    2006-11	0	0
+    2006-12	0	0
+    2007-01	0	0
+    2007-02	0	0
+    2007-03	0	0
+    2007-04	0	0
+    2007-05	0	0
+    2007-06	0	0
+    2007-07	0	0
+    2007-08	0	0
+    2007-09	0	0
+    2007-10	0	0
+    2007-11	0	0
+    2007-12	0	0
+    2008-01	0	0
+    2008-02	0	0
+    2008-03	0	0
+    2008-04	0	0
+    2008-05	0	0
+    2008-06	0	0
+    2008-07	0	0
+    2008-08	0	0
+    2008-09	0	0
+    2008-10	0	0
+    2008-11	0	0
+    2008-12	0	0
+    2009-01	0	0
+    2009-02	0	0
+    2009-03	0	0
+    2009-04	0	0
+    2009-05	0	0
+    2009-06	0	0
+    2009-07	0	0
+    2009-08	0	0
+    2009-09	0	0
+    2009-10	0	0
+    2009-11	0	0
+    2009-12	0	0
+    2010-01	0	0
+    2010-02	0	0
+    2010-03	0	0
+    2010-04	0	0
+    2010-05	0	0
+    2010-06	0	0
+    2010-07	0	0
+    2010-08	0	0
+    2010-09	0	0
+    2010-10	0	0
+    2010-11	0	0
+    2010-12	0	0
+    2011-01	0	0
+    2011-02	0	0
+    2011-03	0	0
+    2011-04	0	0
+    2011-05	0	0
+    2011-06	0	0
+    2011-07	0	0
+    2011-08	0	0
+    2011-09	0	0
+    2011-10	0	0
+    2011-11	0	0
+    2011-12	0	0
+    2012-01	0	0
+    2012-02	0	0
+    2012-03	0	0
+    2012-04	0	0
+    2012-05	0	0
+    2012-06	0	0
+    2012-07	0	0
+    2012-08	0	0
+    2012-09	0	0
+    2012-10	0	0
+    2012-11	0	0
+    2012-12	0	0
+    2013-01	0	0
+    2013-02	0	0
+    2013-03	0	0
+    2013-04	0	0
+    2013-05	0	0
+    2013-06	0	0
+    2013-07	0	0
+    2013-08	0	0
+    2013-09	0	0
+    2013-10	0	0
+    2013-11	0	0
+    2013-12	0	0
+    2014-01	0	0
+    2014-02	0	0
+    2014-03	0	0
+    2014-04	0	0
+    2014-05	0	0
+    2014-06	0	0
+    2014-07	0	0
+    2014-08	0	0
+    2014-09	0	0
+    2014-10	0	0
+    2014-11	0	0
+    2014-12	0	0
+    2015-01	0	0
+    2015-02	0	0
+    2015-03	0	0
+    2015-04	0	0
+    2015-05	0	0
+    2015-06	0	0
+    2015-07	0	0
+    2015-08	0	0
+    2015-09	0	0
+    2015-10	0	0
+    2015-11	0	0
+    2015-12	0	0
+    2016-01	0	0
+    2016-02	0	0
+    2016-03	0	0
+    2016-04	0	0
+    2016-05	0	0
+    2016-06	0	0
+    2016-07	0	0
+    2016-08	0	0
+    2016-09	0	0
+    2016-10	0	0
+    2016-11	0	0
+    2016-12	0	0
+    2017-01	0	0
+    2017-02	0	0
+    2017-03	0	0
+    2017-04	0	0
+    2017-05	0	0
+    2017-06	0	0
+    2017-07	0	0
+    2017-08	0	0
+    2017-09	0	0
+    2017-10	0	0
+    2017-11	0	0
+    2017-12	0	0
+    2018-01	0	0
+    2018-02	0	0
+    2018-03	0	0
+    2018-04	0	0
+    2018-05	0	0
+    2018-06	0	0
+    2018-07	0	0
+    2018-08	0	0
+    2018-09	0	0
+    2018-10	0	0
+    2018-11	0	0
+    2018-12	0	0
+    2019-01	0	0
+    2019-02	0	0
+    2019-03	0	0
+    2019-04	0	0
+    2019-05	0	0
+    2019-06	0	0
+    2019-07	0	0
+    2019-08	0	0
+    2019-09	0	0
+    2019-10	0	0
+    2019-11	0	0
+    2019-12	0	0
+    2020-01	5	0
+    2020-02	52	0
+    2020-03	61856	583
+    2020-04	97206	5705
+    2020-05	22363	2212
+    2020-06	12777	473
+    2020-07	2685	51
+
+    '''
+
+df = pd.read_csv(io.StringIO(data_range), sep='\s+')
+#df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
+Sarima_energy = pd.read_csv(io.StringIO(Sarima_energy), sep='\s+')
+Sarima_mobility = pd.read_csv(io.StringIO(Sarima_mobility), sep='\s+')
+trained_values = pd.read_csv(io.StringIO(trained_values), sep='\s+')
 
 #%%
 
@@ -92,12 +732,34 @@ d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'case
 df_slider_estimation = pd.DataFrame(data=d)
 df_slider_estimation.index=df_slider_estimation['date']
         
-trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
+#trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
 
 # trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
 # df_trained_values = pd.DataFrame(data=trained_values)
 # df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #%%
 
@@ -320,8 +982,9 @@ def plot_prediction_data(Prediction_type):
 )        
     return fig_data_of_sector
 
+
+
 def plot_prediction_data_slider(Prediction_type):
-    
     if Prediction_type == 'energy':
         Prediction=Sarima_energy  
     if Prediction_type == 'mobility':
@@ -357,9 +1020,9 @@ def plot_prediction_data_slider(Prediction_type):
             ),
         )
     fig_data_of_sector.add_trace(go.Scatter(
-      x=[min(Prediction['date']), max(Prediction['date'])],
-      y=[0.75, 0.75],
-      text=["Unfilled Rectangle", "Filled Rectangle"],
+      x=['2005-01','2015-01'],
+      y=[125, 125],
+      text=["Available Data", "Prediction"],
       mode="text",
     ))
 
@@ -696,7 +1359,7 @@ def description_card():
         id="description-card",
         children=[
             html.H5("AMI Projekt"),
-            html.H3("2020 Group 6"),
+            html.H3("2020 Group 10"),
             html.Div(
                 id="intro",
                 children="In the project, we used machine learning algorithms in order to predict and compare the greenhouse gas emissions in Germany with and without the impact of the COVID-19 pandemic. By comparing the two scenarios, we forecast the impact of the pandemic on Germany’s climate targets on a long-term basis and its effect on reaching the EU Climate Goals.",
@@ -856,149 +1519,30 @@ def generate_control_card():
                             id="barchart_plot"
                         ),             
 
-                        html.Div(
-                            id="chartplot_div",
-                            children=[
-                                    #html.B("Data availability"),
-                                    #html.Hr(),
-                            #html.Div(id="wait_time_table", children=initialize_table()),
-                            #dcc.Graph(figure=fig_range_plot),
-                            #dcc.Graph(figure=data["hist_1"]),
-                            #dcc.Graph(figure=generate_data_availability_plot),
-                            ],
-                        ),
+                        # html.Div(
+                        #     id="chartplot_div",
+                        #     children=[
+                        #             #html.B("Data availability"),
+                        #             #html.Hr(),
+                        #     #html.Div(id="wait_time_table", children=initialize_table()),
+                        #     #dcc.Graph(figure=fig_range_plot),
+                        #     #dcc.Graph(figure=data["hist_1"]),
+                        #     #dcc.Graph(figure=generate_data_availability_plot),
+                        #     ],
+                        # ),
 
                         html.Label('Estimate Infectionrate from July to December 2020:'),
                         #html.Hr(),
                         html.Br(),
                         html.Br(),
                         
-                        html.Div(
-                            id="monthly_values",
-                            children=[
-                            # # daq.NumericInput(
-                            # #         id="Month1",
-                            # #         children="Month_c1",
-                            # #         label='Label1',
-                            # #         labelPosition='right',
-                            # #         disabled=True,
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),  
-                            # # daq.NumericInput(
-                            # #         id="Month2",
-                            # #         children="Month_c2",
-                            # #         label='Label2',
-                            # #         labelPosition='right',
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),  
-                            # # daq.NumericInput(
-                            # #         id="Month3",
-                            # #         children="Month_c3",
-                            # #         label='Label3',
-                            # #         labelPosition='right',
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),  
-                            # # daq.NumericInput(
-                            # #         id="Month4",
-                            # #         children="Month_c4",
-                            # #         label='Label4',
-                            # #         labelPosition='right',
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),  
-                            # # daq.NumericInput(
-                            # #         id="Month5",
-                            # #         children="Month_c5",
-                            # #         label='Label5',
-                            # #         labelPosition='right',
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),  
-                            # # daq.NumericInput(
-                            # #         id="Month6",
-                            # #         children="Month_c6",
-                            # #         label='Label6',
-                            # #         labelPosition='right',
-                            # #         min=0,
-                            # #         max=10,
-                            # #         value=2
-                            # #     ),   
-                            # daq.NumericInput(
-                            #         id="Month7",
-                            #         children="Month_c7",
-                            #         label='Label7',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),  
-                            # daq.NumericInput(
-                            #         id="Month8",
-                            #         children="Month_c8",
-                            #         label='Label8',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),  
-                            # daq.NumericInput(
-                            #         id="Month9",
-                            #         children="Month_c9",
-                            #         label='Label9',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),  
-                            # daq.NumericInput(
-                            #         id="Month10",
-                            #         children="Month_c10",
-                            #         label='Label10',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),  
-                            # daq.NumericInput(
-                            #         id="Month11",
-                            #         children="Month_c11",
-                            #         label='Label11',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),  
-                            # daq.NumericInput(
-                            #         id="Month12",
-                            #         children="Month_c12",
-                            #         label='Label12',
-                            #         labelPosition='right',
-                            #         min=0,
-                            #         max=100000,
-                            #         value=2000
-                            #     ),   
-                            # daq.Slider(
-                            #     id="Month1",
-                            #     min=0,
-                            #     max=100,
-                            #     value=50,
-                            #     handleLabel={"showCurrentValue": True,"label": "Month1"},
-                            #     step=10,
-                            #     vertical=True
-                            #     ), 
-                            # daq.Slider(id="Month2", min=0,max=100,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=10,vertical=True),
-                      
-                                ],           
+                        # html.Div(
+                        #     id="monthly_values",
+                        #     children=[
+                                           
+                        #         ],           
                         
-                        ),
+                        # ),
                         
                         dbc.Row(
                                      [
@@ -1008,10 +1552,10 @@ def generate_control_card():
                                          # dbc.Col(daq.Slider(id="Month4", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
                                          # dbc.Col(daq.Slider(id="Month5", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
                                          # dbc.Col(daq.Slider(id="Month6", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),    
-                                         dbc.Col(daq.Slider(id="Month7", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "Juli"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month7", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "July"},step=1000,vertical=True)),
                                          dbc.Col(daq.Slider(id="Month8", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "August"},step=1000,vertical=True)),
                                          dbc.Col(daq.Slider(id="Month9", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "September"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month10", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "Oktober"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month10", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "October"},step=1000,vertical=True)),
                                          dbc.Col(daq.Slider(id="Month11", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "November"},step=1000,vertical=True)),
                                          dbc.Col(daq.Slider(id="Month12", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "December"},step=1000,vertical=True)), 
                                      ]
@@ -1022,10 +1566,10 @@ def generate_control_card():
                         html.Br(),
                         html.Br(),
                         html.Br(),
-                        html.Div(
-                            id="reset-btn-outer",
-                            children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Initialise", children="Initialisation", n_clicks=0),],
-                        ),
+                        # html.Div(
+                        #     id="reset-btn-outer",
+                        #     children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Initialise", children="Initialisation", n_clicks=0),],
+                        # ),
                         
                         html.Br(),
                         dbc.Button(
@@ -1033,6 +1577,13 @@ def generate_control_card():
                                 color="primary",
                                 block=True,
                                 id="button",
+                                className="mb-3",
+                        ),
+                        dbc.Button(
+                                "Apply Allgorithm",
+                                color="primary",
+                                block=True,
+                                id="button1",
                                 className="mb-3",
                         ),
                         html.Br(),
@@ -1103,13 +1654,15 @@ app.layout = html.Div(
                   html.Div(
                              [
                                  dbc.Row(dbc.Col(html.Div(id="patient_volume_card",))),
-                                 dbc.Row(
-                                     [
-                                         dbc.Col(html.Div("One of three columns")),
-                                         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
-                                         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
-                                     ]
-                                 ),
+                                 # dbc.Row(
+                                 #     [
+                  
+                                 #         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
+                                 #         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
+                                 #     ]
+                                 # ),
+                                 
+
                              ]
                          ),
                                         
@@ -1167,7 +1720,7 @@ def render_chartplot(data):
                         #html.Br(),
                         
                         #dbc.Col(dcc.Graph(figure=plot_barchart([3,665,322,2542,23,5])), width=6),
-                        dbc.Col(dcc.Graph(figure=data['barchart']), width=6),
+                        dbc.Col(dcc.Graph(figure=data['barchart'])),
         
         ]
 
@@ -1188,7 +1741,7 @@ def render_tab1_content(data):
     """
 
     children=[                        
-                        dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
+                        
                        # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
                         # daq.Gauge(
                         #   id='my-daq-gauge',
@@ -1218,9 +1771,21 @@ def render_tab1_content(data):
                        #     daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"),
                        #     style={'display': 'inline-block'}
                        #     ),
-
-                       
-                       
+                       html.B("Prediction"),
+                       html.Hr(),
+                       html.Div(
+                            [
+                                dbc.Row(dbc.Col(dcc.Graph(figure=data["hist_1"]))),
+                                dbc.Row(
+                                    [
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"))),
+                                    ]
+                                ),
+                            ]
+                        )        
 
         ]
 
@@ -1251,17 +1816,25 @@ def render_tab2_content(data):
                         
                         #dcc.Graph(figure=data["scatter"],
                         #dcc.Graph(figure=data["hist_2"],
-                        dbc.Row(
-                        [
-                            dcc.Graph(figure=data["scatter"]),
+                        # dbc.Row(
+                        # [
+                        #     dcc.Graph(figure=data["scatter"]),
                          
-                            dcc.Graph(figure=data["hist_2"]),
-                        ]
+                        #     dcc.Graph(figure=data["hist_2"]),
+                        # ]
+                        # )
+                        
+                        html.Div(
+                            [
+                                dbc.Row(dbc.Col(dcc.Graph(figure=data["scatter"]))),
+                                dbc.Row(dbc.Col(dcc.Graph(figure=data["hist_2"]))),
+                            ]
+                        )    
                         
                         
                         
                         
-                        )
+                        
         ]
 
     return children
@@ -1498,8 +2071,8 @@ def on_click(v7,v8,v9,v10,v11,v12):
         )
         fig.update_layout(
         autosize=True,
-        width=700,
-        height=500,
+        # width=700,
+        # height=500,
         paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
@@ -1519,7 +2092,7 @@ def on_click(v7,v8,v9,v10,v11,v12):
         df_slider_estimation = pd.DataFrame(data=d)
         df_slider_estimation.index=df_slider_estimation['date']
                 
-        trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
+        #trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
         
         trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
         df_trained_values = pd.DataFrame(data=trained_values)
