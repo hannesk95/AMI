@@ -119,7 +119,8 @@ def EstimateCO2withCorona(lr_cor_co2, df_cases_new, df_co2):
     pred = df_co2.loc['2019-07':'2019-12', 'co2'].to_numpy() * (1-pred_diff) 
     
     df_ret = pd.DataFrame({'co2':pred}, index=df_cases_new.index)
-
+    #df_ret.columns = ['co2']
+    
     return df_ret
     
-    
+
