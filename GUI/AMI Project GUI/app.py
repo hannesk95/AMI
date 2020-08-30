@@ -1,3 +1,5 @@
+#%%
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -5,6 +7,7 @@ from dash.dependencies import Input, Output, ClientsideFunction, State
 
 import numpy as np
 import pandas as pd
+
 import datetime
 from datetime import datetime as dt
 import pathlib
@@ -63,14 +66,45 @@ df_cor = df_cor.drop('date', axis=1)
 lr_cor_co2 = TrainLRCoronaOnCO2(df_cor, df_co2) #im storage ablegen
 
 sector = 'mobility' #oder/'energy'
-#Sarima_Prediction = Sarima(database, sector, period=24)
-# Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
-# sector = 'energy' #oder/'energy'
-# Sarima_energy = Sarima(database, sector, period=24)
+Sarima_nn = Sarima(database, sector, period=24)
+Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
+sector = 'energy' #oder/'energy'
+Sarima_energy = Sarima(database, sector, period=24)
+
+
+
+
+#%%
 
 #  EstimateCO2withCorona(lr_cor_co2,df_slider(juli-december),Sarima_mobility/Sarima_energy)
 # data   cases
 # 303-1   juli 12
+v7=3
+v8=344
+v9=344
+v10=123
+v11=23
+v12=53
+
+        
+d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
+        
+df_slider_estimation = pd.DataFrame(data=d)
+df_slider_estimation.index=df_slider_estimation['date']
+        
+trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
+
+# trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
+# df_trained_values = pd.DataFrame(data=trained_values)
+# df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
+        
+
+#%%
+
+
+
+
+
 
 
 for i in database:
@@ -589,14 +623,7 @@ def generate_control_card():
         id="control-card",
         children=[
             html.P(),
-            html.Label("Data visualisation of Sector:                                                        "),
-            html.Hr(),
-            html.Br(),
-            dcc.Dropdown(
-                id="sector-select",
-                options=[{"label": i, "value": i} for i in sector_list],
-                value=sector_list[0],
-            ),
+
             # html.Br(),
             # html.Div(id='dd-output-container'),
             
@@ -625,11 +652,12 @@ def generate_control_card():
             #     multi=True,
             # ),
 
-
-            html.Br(),
-            html.Label('Select Prediction:'),
+            html.B("Prediction Controll"),
             html.Hr(),
             html.Br(),
+            html.Label('Select Prediction Data:'),
+            html.Br(),
+
                         
         dcc.Dropdown(
             id="Prediction_Selection",
@@ -739,16 +767,20 @@ def generate_control_card():
                         html.Div(
                             id="chartplot_div",
                             children=[
-                                    html.B("Data availability"),
-                                    html.Hr(),
+                                    #html.B("Data availability"),
+                                    #html.Hr(),
                             #html.Div(id="wait_time_table", children=initialize_table()),
                             #dcc.Graph(figure=fig_range_plot),
                             #dcc.Graph(figure=data["hist_1"]),
                             #dcc.Graph(figure=generate_data_availability_plot),
                             ],
                         ),
+
+                        html.Label('Estimate Infectionrate from July to December 2020:'),
+                        #html.Hr(),
+                        html.Br(),
+                        html.Br(),
                         
-  
                         html.Div(
                             id="monthly_values",
                             children=[
@@ -896,8 +928,7 @@ def generate_control_card():
 
 
                         html.Br(),
-                        html.B('App Control'),
-                        html.Hr(),
+                        html.Br(),
                         html.Br(),
                         html.Div(
                             id="reset-btn-outer",
@@ -911,6 +942,15 @@ def generate_control_card():
                                 block=True,
                                 id="button",
                                 className="mb-3",
+                        ),
+                        html.Br(),
+                        html.B('Data Visualisation Control:'),
+                        html.Hr(),
+                        html.Br(),
+                        dcc.Dropdown(
+                            id="sector-select",
+                            options=[{"label": i, "value": i} for i in sector_list],
+                            value=sector_list[0],
                         ),
                         
             
@@ -974,8 +1014,8 @@ app.layout = html.Div(
                                  dbc.Row(
                                      [
                                          dbc.Col(html.Div("One of three columns")),
-                                         dbc.Col(html.Div("One of three columns")),
-                                         dbc.Col(html.Div("One of three columns")),
+                                         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
+                                         dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
                                      ]
                                  ),
                              ]
@@ -1030,8 +1070,9 @@ def render_chartplot(data):
     """
 
     children=[
-                        html.B("Prediction"),
-                        html.Hr(),
+                        html.Label("Estimate Infection Rate of COVID-19 in Germany:"),
+                        #html.Hr(),
+                        #html.Br(),
                         
                         #dbc.Col(dcc.Graph(figure=plot_barchart([3,665,322,2542,23,5])), width=6),
                         dbc.Col(dcc.Graph(figure=data['barchart']), width=6),
@@ -1054,10 +1095,7 @@ def render_tab1_content(data):
     'active_tab' is.
     """
 
-    children=[
-                        html.B("Prediction"),
-                        html.Hr(),
-                        
+    children=[                        
                         dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
                        # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
                         # daq.Gauge(
@@ -1119,11 +1157,18 @@ def render_tab2_content(data):
                         html.B("Data Visualisation"),
                         html.Hr(),
                         
+                        #dcc.Graph(figure=data["scatter"],
+                        #dcc.Graph(figure=data["hist_2"],
                         dbc.Row(
                         [
-                            dbc.Col(dcc.Graph(figure=data["scatter"]), width=6),
-                            dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
+                            dcc.Graph(figure=data["scatter"]),
+                         
+                            dcc.Graph(figure=data["hist_2"]),
                         ]
+                        
+                        
+                        
+                        
                         )
         ]
 
@@ -1298,8 +1343,8 @@ def generate_graphs(n, radio_button, val):
     scatter = plot_data_of_sector(val)
     scatter.update_layout(
         autosize=True,
-        width=500,
-        height=900,
+        #width=1200,
+        #height=900,
         #paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
@@ -1356,18 +1401,45 @@ def on_click(v7,v8,v9,v10,v11,v12):
         #fig=plot_barchart([3,665,322,2542,23,5]),
         #fig=generate_data_availability_plot('mobility')
         fig=  go.Figure(
-        data=[go.Bar(x=["1","2","3","jj","5","6","7","88","9","10","11","12"],y=[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12])],
+        data=[go.Bar(x=["2020-01","2020-02","2020-03","2020-04","2020-05","2020-06","2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"],y=[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12])],
         layout_title_text="Infectionrate"
         )
         fig.update_layout(
-        autosize=False,
-        width=500,
-        height=300,
+        autosize=True,
+        width=700,
+        height=500,
         paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
+
         
-        return {"barchart": fig, "monat_value":monat_value}
+        d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
+        
+        df_slider_estimation = pd.DataFrame(data=d)
+        df_slider_estimation.index=df_slider_estimation['date']
+        
+        #trained_values=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
+        trained_values=23
+        
+        
+        d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
+        
+        df_slider_estimation = pd.DataFrame(data=d)
+        df_slider_estimation.index=df_slider_estimation['date']
+                
+        trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
+        
+        trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
+        df_trained_values = pd.DataFrame(data=trained_values)
+        df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
+                
+        
+        prediction_figure_slider=plot_prediction_silder('energy')
+        
+                
+
+        
+        return {"barchart": fig, "monat_value":monat_value, "trained_values":trained_values, "prediction_figure_slider": prediction_figure_slider}
 
     
     
