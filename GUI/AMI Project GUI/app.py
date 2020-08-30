@@ -71,8 +71,6 @@ df_cor = df_cor.drop('date', axis=1)
 #lr_cor_co2 = TrainLRCoronaOnCO2(df_cor, df_co2) #im storage ablegen
 
 
-
-
 sector = 'mobility' #oder/'energy'
 #Sarima_nn = Sarima(database, sector, period=24)
 Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
@@ -735,89 +733,6 @@ lr_cor_co2_energy = TrainLRCoronaOnCO2(df_cor, Sarima_energy) #im storage ablege
 # #trained_values = pd.read_csv(io.StringIO(trained_values), sep='\s+')
 
 
-#  EstimateCO2withCorona(lr_cor_co2,df_slider(juli-december),Sarima_mobility/Sarima_energy)
-# data   cases
-# 303-1   juli 12
-# v7=3
-# v8=344
-# v9=344
-# v10=123
-# v11=23
-# v12=53
-
-        
-# d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
-        
-# df_slider_estimation = pd.DataFrame(data=d)
-# df_slider_estimation.index=df_slider_estimation['date']
-        
-# #trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-
-# trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
-# df_trained_values = pd.DataFrame(data=trained_values)
-# df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-        
-
-
-# # Give a default data dict with 0 clicks if there's no data.
-# v7=5
-# v8=52
-# v9=61856
-# v10=97206
-# v11=22363
-# v12=12777
-# monat_value=[5,52,61856,97206,22363,12777,v7,v8,v9,v10,v11,v12],
-
-
-
-# d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
-
-# df_slider_estimation = pd.DataFrame(data=d)
-# df_slider_estimation.index=df_slider_estimation['date']
-        
-# #trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-
-# trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
-# df_trained_values = pd.DataFrame(data=trained_values)
-# df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-        
-
-# prediction_figure_slider=0#plot_prediction_silder('energy')
-
-                
-  
-#a=EstimateCO2withCorona([97206,22363,12777,97206,22363,12777],df_co2,Sarima_mobility),
-
-        # Give a default data dict with 0 clicks if there's no data.
-     
-
-        
-        #monat_value=[3,665,322,2542,23,5],
-        #data = {'barchart_plot': plot_barchart([3,665,322,2542,23,5])},
-        #print(data['barchart_plot']),
-        #fig=plot_barchart([3,665,322,2542,23,5]),
-        #fig=generate_data_availability_plot('mobility')
-
-
-        
-# d = {'cases': [v7,v8,v9,v10,v11,v12]}
-        
-# df_slider_estimation = pd.DataFrame(data=d)
-# df_slider_estimation.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-# #%%        
-# #trained_values=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-# trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility),
-# #trained_values=trained_values[0],
-# #prediction_figure_slider=0 #plot_prediction_data_slider(Prediction_type,trained_values),
-# trained_values=trained_values[0]
-
-
-
-
-
-
-
-
 
 for i in database:
   feature = database.get(i)
@@ -874,11 +789,7 @@ def get_min_max_date(sector_choice):
                 df = pd.DataFrame(new_data)
                 min_date=min(df.index)
                 max_date=max(df.index)
-                #print(min_date)
-                #print(min(df.index))
-                #print([cat, sect, new_data_name, min_date, max_date])
-                #data_name_list.extend([cat, sect, new_data_name, min_date, max_date])
-                #print(new_data_name)
+
                 selected_yj='no'
                 if sector_choice==sect:
                   selected_yj='yes'
@@ -1060,13 +971,6 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
     y_data2 = Sarima_energy['co2'][0:len(df_co2['co2'])]
 
 
-
-
-#    fig_data_of_sector.add_trace(go.Scatter(x=x_data1, y=y_data2)) # fill to trace0 y
-#    fig_data_of_sector.add_trace(go.Scatter(x=x_data1, y=feature_maping['co2'],fill='tonexty')) # fill down to xaxis
-
-
-
     fig_data_of_sector.add_trace(go.Scatter(
         x=trained_values_joined_complete.index, y=trained_values_joined_complete['co2'],
         line_color='rgb(255,100,80)',
@@ -1080,24 +984,12 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
         name='sarimma',
         fill='tonexty'
     ))
-    #fig_data_of_sector.add_trace(go.Scatter(
-    #    x=trained_values_joined.index, y=trained_values_joined['co2'],
-    #    line_color='rgb(255,100,80)',
-    #    name='trained_values_joined',
-        
-    #))
 
-    #fig_data_of_sector.add_trace(go.Scatter(
-    #    x=trained_values.index, y=trained_values['co2'],
-    #    line_color='rgb(255,100,80)',
-    #    name='trained_values',
-    #))
     fig_data_of_sector.add_trace(go.Scatter(
         x=df_co2.index, y=df_co2['co2'],
         line_color='rgb(23,130,80)',
         name='feature_maping',
     ))
-
 
 
         
@@ -1192,126 +1084,12 @@ def plot_data_of_sector(Sector):
     return fig_data_of_sector
 
 
-# def generate_data_availability_plot(Sector_list, choice):
-#      # Concat data from sector economy
-#     fig_range_plot = go.Figure()
-
-#     # Data Availability Plot
-#     data_range = '''
-#      Grade Start End
-#     0 "Sector 1" 1990 2020
-#     1 "Sector 2" 1999 2014
-#     2 "Sector 3" 1994 2002
-#     3 "Sector 4" 2001 2020
-#     4 "Sector 5" 2003 2007
-#     5 "Sector 6" 1990 2020
-#     6 "Sector 7" 2001 2010
-#     7 "Sector 8" 1994 2019
-#     8 "Sector 9" 2003 2019
-#     9 "Sector 10" 1997 2020
-#     '''
-#     max_sector_number=10
     
-#     df = pd.read_csv(io.StringIO(data_range), sep='\s+')
-#     df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
-        
-        
-#     w_lbl = [str(s) for s in df['Start'].tolist()]
-#     m_lbl = [str(s) for s in df['End'].tolist()]
-    
-        
-#     for i in range(0,max_sector_number):
-#         fig_range_plot.add_trace(go.Scatter(
-#             x=[df['Start'][i],df['End'][i]],
-#             y=[df['Grade'][i],df['Grade'][i]],
-#             orientation='h',
-#             line=dict(color='rgb(244,165,130)', width=8),
-#                  ))
-    
-#     fig_range_plot.add_trace(go.Scatter(
-#         x=df['Start'],
-#         y=df['Grade'],
-#         marker=dict(color='#CC5700', size=14),
-#         mode='markers+text',
-#         text=w_lbl,
-#         textposition='middle left',
-#         name='Start'))
-    
-#     fig_range_plot.add_trace(go.Scatter(
-#         x=df['End'],
-#         y=df['Grade'],
-#         marker=dict(color='#227266', size=14),
-#         mode='markers+text',
-#         text=m_lbl,
-#         textposition='middle right',
-#         name='End'))
-    
-#     fig_range_plot.update_layout(title="Data Availability", showlegend=False)    
-#     return fig_range_plot
-
-
-
 
 fig = go.Figure()#plot_data_of_sector('mobility')#go.Figure()
 fig_range_plot =  generate_data_availability_plot('energy_households')
 
 
-
-
-# # Data Availability Plot
-# data_range = '''
-#  Grade Start End
-# 0 "Sector 1" 1990 2020
-# 1 "Sector 2" 1999 2014
-# 2 "Sector 3" 1994 2002
-# 3 "Sector 4" 2001 2020
-# 4 "Sector 5" 2003 2007
-# 5 "Sector 6" 1990 2020
-# 6 "Sector 7" 2001 2010
-# 7 "Sector 8" 1994 2019
-# 8 "Sector 9" 2003 2019
-# 9 "Sector 10" 1997 2020
-# '''
-# max_sector_number=10
-
-# df = pd.read_csv(io.StringIO(data_range), sep='\s+')
-# df.sort_values('End', ascending=False, inplace=True, ignore_index=True)
-    
-    
-# w_lbl = [str(s) for s in df['Start'].tolist()]
-# m_lbl = [str(s) for s in df['End'].tolist()]
-
-    
-# for i in range(0,max_sector_number):
-#     fig_range_plot.add_trace(go.Scatter(
-#         x=[df['Start'][i],df['End'][i]],
-#         y=[df['Grade'][i],df['Grade'][i]],
-#         orientation='h',
-#         line=dict(color='rgb(244,165,130)', width=8),
-#              ))
-
-# fig_range_plot.add_trace(go.Scatter(
-#     x=df['Start'],
-#     y=df['Grade'],
-#     marker=dict(color='#CC5700', size=14),
-#     mode='markers+text',
-#     text=w_lbl,
-#     textposition='middle left',
-#     name='Start'))
-
-# fig_range_plot.add_trace(go.Scatter(
-#     x=df['End'],
-#     y=df['Grade'],
-#     marker=dict(color='#227266', size=14),
-#     mode='markers+text',
-#     text=m_lbl,
-#     textposition='middle right',
-#     name='End'))
-
-# fig_range_plot.update_layout(title="Data Availability", showlegend=False)
-    
-    
-    
 
 # Set title and heigh
 fig.update_layout(
@@ -1481,12 +1259,12 @@ def generate_control_card():
         dcc.Dropdown(
             id="Prediction_Selection",
                 options=[
-                    {'label': 'Mobility', 'value': 'Prediction_1'},
-                    {'label': 'Energy', 'value': 'Prediction_2'},
-                    {'label': 'Economy', 'value': 'Prediction_3'},
-                    {'label': 'All', 'value': 'Prediction_4'}
+                    {'label': 'Mobility', 'value': 'mobility'},
+                    {'label': 'Energy', 'value': 'energy'},
+                    #{'label': 'Economy', 'value': 'Prediction_3'},
+                    #{'label': 'All', 'value': 'Prediction_4'}
                 ],
-                value='Prediction_1'
+                value='energy'
             ),
         
         
@@ -1636,20 +1414,20 @@ def generate_control_card():
                         # ),
                         
                         html.Br(),
-                        dbc.Button(
-                                "Generate Graphs",
-                                color="primary",
-                                block=True,
-                                id="button",
-                                className="mb-3",
-                        ),
-                        dbc.Button(
-                                "Apply Allgorithm",
-                                color="primary",
-                                block=True,
-                                id="button1",
-                                className="mb-3",
-                        ),
+                        # dbc.Button(
+                        #         "Generate Graphs",
+                        #         color="primary",
+                        #         block=True,
+                        #         id="button",
+                        #         className="mb-3",
+                        # ),
+                        # dbc.Button(
+                        #         "Apply Allgorithm",
+                        #         color="primary",
+                        #         block=True,
+                        #         id="button1",
+                        #         className="mb-3",
+                        # ),
                         html.Br(),
                         html.B('Data Visualisation Control:'),
                         html.Hr(),
@@ -1678,7 +1456,7 @@ app.layout = html.Div(
         html.Div(
             id="banner",
             className="banner",
-            children=[html.Img(src=app.get_asset_url("tum_logo.png"))],
+            children=[html.Img(src=app.get_asset_url("8_tum.svg"))],
         ),
         #Left column
         html.Div(
@@ -1940,133 +1718,13 @@ def render_tab2_content(data):
 
 @app.callback(Output(component_id="store", component_property="data"), 
    [
-    Input(component_id="button", component_property="n_clicks"),
-    Input(component_id="Prediction_Selection", component_property="value"),
+    #Input(component_id="button", component_property="n_clicks"),
+    #Input(component_id="Prediction_Selection", component_property="value"),
     Input('sector-select', 'value'),
     ])
 
-def generate_graphs(n, radio_button, val):
-    """
-    This callback generates three simple graphs from random data.
-    """
-    # if not n:
-    #      #generate empty graphs when app loads
-    #     return {k: go.Figure(data=[]) for k in ["scatter", "hist_1", "hist_2"]}
+def generate_graphs(val):
 
-    # # simulate expensive graph generation process
-    # time.sleep(2)
-        
-    
-    # #Graphtest function
-    
-    # x = ['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
-
-    # x_rev = x[::-1]
-    
-    # # Line 1
-    # y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    # y1_upper = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
-    # y1_lower = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
-    # y1_lower = y1_lower[::-1]
-    
-    # # Line 2
-    # y2 = [5, 2.5, 5, 7.5, 5, 2.5, 7.5, 4.5, 5.5, 5]
-    # y2_upper = [5.5, 3, 5.5, 8, 6, 3, 8, 5, 6, 5.5]
-    # y2_lower = [4.5, 2, 4.4, 7, 4, 2, 7, 4, 5, 4.75]
-    # y2_lower = y2_lower[::-1]
-    
-    # # Line 3
-    # y3 = [10, 8, 6, 4, 2, 0, 2, 4, 2, 0]
-    # y3_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    # y3_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    # y3_lower = y3_lower[::-1]
-    
-    
-    # # Line 4
-    # y4 = [10, 8, 6, 4, 5, 0, 2, 4, 2, 0]
-    # y4_upper = [11, 9, 7, 20, 3, 1, 3, 5, 3, 1]
-    # y4_lower = [9, 7, 5, 3, 1, -.5, 1, 3, 1, -1]
-    # y4_lower = y3_lower[::-1]
-
-  #  df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-  #  fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
-    #fig.show()
-
-    
-    # fig.data = []
-    
-    # # fig.add_trace(go.Scatter(
-    # #     x=df['Date'], y=df['AAPL.High'],
-    # #     line_color='rgb(231,107,243)',
-    # #     name='Ideal',
-    # # ))
-    
-
-
-
-
-    # fig.add_trace(go.Scatter(
-    #     x=x+x_rev,
-    #     y=y3_upper+y3_lower,
-    #     fill='toself',
-    #     fillcolor='rgba(231,107,243,0.2)',
-    #     line_color='rgba(255,255,255,0)',
-    #     showlegend=False,
-    #     name='Ideal',
-    # ))
-    # fig.add_trace(go.Scatter(
-    #     x=x, y=y3,
-    #     line_color='rgb(231,107,243)',
-    #     name='Ideal',
-    # ))
-
-
-    # fig.add_trace(go.Scatter(
-    #     x=x+x_rev,
-    #     y=y1_upper+y1_lower,
-    #     fill='toself',
-    #     fillcolor='rgba(0,100,80,0.2)',
-    #     line_color='rgba(255,255,255,0)',
-    #     showlegend=False,
-    #     name='Fair',
-    # ))
-    # fig.add_trace(go.Scatter(
-    #     x=x+x_rev,
-    #     y=y2_upper+y2_lower,
-    #     fill='toself',
-    #     fillcolor='rgba(0,176,246,0.2)',
-    #     line_color='rgba(255,255,255,0)',
-    #     name='Premium',
-    #     showlegend=False,
-    # ))
-    
-    
-    # fig.add_trace(go.Scatter(
-    #     x=x, y=y1,
-    #     line_color='rgb(0,100,80)',
-    #     name='Fair',
-    # ))
-    # fig.add_trace(go.Scatter(
-    #     x=x, y=y2,
-    #     line_color='rgb(0,176,246)',
-    #     name='Premium',
-    # ))
-    
-    
-    # fig.update_traces(mode='lines')
-    # #fig.show()
-
-#    fig = plot_data_of_sector('energy_households')
-
-
-
-    # # generate 100 multivariate normal samples
-    # data = np.random.multivariate_normal([0, 0], [[1, 0.5], [0.5, 1]], 100)
-
-    # scatter = go.Figure(
-    #     data=[go.Scatter(x=data[:, 0], y=data[:, 1], mode="markers")]
-    # )
-    #value='target_values'
     scatter = plot_data_of_sector(val)
     scatter.update_layout(
         autosize=True,
@@ -2075,7 +1733,6 @@ def generate_graphs(n, radio_button, val):
         #paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
- 
  
     hist_1 = generate_data_availability_plot(val)
     hist_2 = generate_data_availability_plot(val)
@@ -2096,12 +1753,6 @@ def generate_graphs(n, radio_button, val):
 
 @app.callback(Output(component_id="store2", component_property="data"),
                         [
-                          # Input('Month1', 'value'),
-                          # Input('Month2', 'value'),
-                          # Input('Month3', 'value'),
-                          # Input('Month4', 'value'),
-                          # Input('Month5', 'value'),
-                          # Input('Month6', 'value'),
                           Input('Month7', 'value'),
                           Input('Month8', 'value'),
                           Input('Month9', 'value'),
@@ -2124,12 +1775,6 @@ def on_click(v7,v8,v9,v10,v11,v12,Prediction_type):
         v6=12777
         monat_value=[5,52,61856,97206,22363,12777,v7,v8,v9,v10,v11,v12],
         
-        
-        #monat_value=[3,665,322,2542,23,5],
-        #data = {'barchart_plot': plot_barchart([3,665,322,2542,23,5])},
-        #print(data['barchart_plot']),
-        #fig=plot_barchart([3,665,322,2542,23,5]),
-        #fig=generate_data_availability_plot('mobility')
         fig=  go.Figure(
         data=[go.Bar(x=["2020-01","2020-02","2020-03","2020-04","2020-05","2020-06","2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"],y=[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12])],
         layout_title_text="Infectionrate"
@@ -2141,67 +1786,31 @@ def on_click(v7,v8,v9,v10,v11,v12,Prediction_type):
         paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
-        # d = {'date':["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"], 'cases': [v7,v8,v9,v10,v11,v12]}
-        
-        # df_slider_estimation = pd.DataFrame(data=d)
-        # df_slider_estimation.index=df_slider_estimation['date']
-                
-        # #trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-        
-        # trained_values= {'cases': [13.041935514899228,13.167659103529827,13.669042942906339,13.532680100891733,13.031704074531671,12.036724563547219]}
-        # df_trained_values = pd.DataFrame(data=trained_values)
-        # df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-                
-        
-        # prediction_figure_slider=0#plot_prediction_silder('energy')
-        
-                        
-  
-        #a=EstimateCO2withCorona([97206,22363,12777,97206,22363,12777],df_co2,Sarima_mobility),
-        
-                # Give a default data dict with 0 clicks if there's no data.
-             
-        
-                
-                #monat_value=[3,665,322,2542,23,5],
-                #data = {'barchart_plot': plot_barchart([3,665,322,2542,23,5])},
-                #print(data['barchart_plot']),
-                #fig=plot_barchart([3,665,322,2542,23,5]),
-                #fig=generate_data_availability_plot('mobility')
 
-#
-       
+
         d = {'cases': [v7,v8,v9,v10,v11,v12]}
                 
         df_slider_estimation = pd.DataFrame(data=d)
         df_slider_estimation.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
                 
-        #trained_values_wrongformat=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-        Prediction_type='mobility'
-        Prediction_type = 'mobility'
+        
         if Prediction_type == 'energy':
-            Prediction=Sarima_energy  
+            Prediction=Sarima_energy 
+            trained_values=EstimateCO2withCorona(lr_cor_co2_energy,df_slider_estimation,Sarima_energy),
+            trained_values=trained_values[0]
+            
         if Prediction_type == 'mobility':
             Prediction=Sarima_mobility
-        #trained_values=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Prediction),
-        
-        
-        #prediction_figure_slider=plot_prediction_data_slider(Prediction_type,trained_values),
-        prediction_figure_slider=0#prediction_figure_slider[0]
-        trained_values=0                        
-        d = {'cases': [v7,v8,v9,v10,v11,v12]}
-        
-        df_slider_estimation = pd.DataFrame(data=d)
-        df_slider_estimation.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-                
-        #trained_values=EstimateCO2withCorona(lr_cor_co2,df_slider_estimation,Sarima_mobility),
-        trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility),
-        #trained_values=trained_values[0],
+            trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility),
+            trained_values=trained_values[0]
+        else:
+            Prediction=Sarima_mobility
+            trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility),
+            trained_values=trained_values[0]
+                                
 
-        trained_values=trained_values[0]
         prediction_figure_slider=plot_prediction_data_slider(Prediction_type,trained_values,df_co2),  
         prediction_figure_slider=prediction_figure_slider[0]
-        
 
         trained_values_joined=pd.concat([df_co2[-1:], trained_values])
         trained_values_joined = trained_values_joined.rename(columns={'co2': 'co2_Cor'})
