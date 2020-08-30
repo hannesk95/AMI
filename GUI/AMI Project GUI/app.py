@@ -249,6 +249,7 @@ def generate_data_availability_plot(choice):
 
 
 def plot_prediction_data(Prediction_type):
+    
      # Concat data from sector economy
     X_eco_raw = None 
     for i in database:
@@ -287,6 +288,97 @@ def plot_prediction_data(Prediction_type):
         line_color='rgb(0,100,80)',
         name=Prediction_type,
     ))    
+    fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=500)
+    fig_data_of_sector.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="YTD",
+                     step="year",
+                     stepmode="todate"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)        
+    return fig_data_of_sector
+
+def plot_prediction_data_slider(Prediction_type):
+    
+    if Prediction_type == 'energy':
+        Prediction=Sarima_energy  
+    if Prediction_type == 'mobility':
+        Prediction=Sarima_mobility
+ 
+     # Concat data from sector economy
+    X_eco_raw = None 
+    for i in database:
+        feature = database.get(i)
+        if feature['sector'] == 'target_values':
+            new_data = pd.read_json(database[i]['data'])
+            if X_eco_raw is None:
+                X_eco_raw = new_data
+            else:
+                X_eco_raw = pd.concat([X_eco_raw, new_data], axis=1, join="outer")
+    
+    #convert index in datetime format
+    X_eco_raw['date'] = X_eco_raw.index
+    #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
+    #X_eco_raw.index = X_eco_raw.date
+    #X_eco_raw = X_eco_raw.drop('date', axis=1)
+    X_eco_raw.head()
+    fig_data_of_sector = go.Figure()
+    fig_data_of_sector.add_shape(
+        # unfilled Rectangle
+            type="rect",
+            x0=min(Prediction['date']),
+            y0=0,
+            x1=max(Prediction['date']),
+            y1=100,
+            line=dict(
+                color="RoyalBlue",
+            ),
+        )
+    fig_data_of_sector.add_trace(go.Scatter(
+      x=[min(Prediction['date']), max(Prediction['date'])],
+      y=[0.75, 0.75],
+      text=["Unfilled Rectangle", "Filled Rectangle"],
+      mode="text",
+    ))
+
+
+    for col in X_eco_raw.columns:
+        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+        #print(col)
+
+
+        
+    Prediction.index=Prediction['date']
+
+    fig_data_of_sector.add_trace(go.Scatter(
+        x=Prediction.index, y=Prediction['co2'],
+        line_color='rgb(0,100,80)',
+        name=Prediction_type,
+    ))
+
+        
     fig_data_of_sector.update_layout(title=Prediction_type, showlegend=True, height=500)
     fig_data_of_sector.update_layout(
     xaxis=dict(
@@ -1350,7 +1442,7 @@ def generate_graphs(n, radio_button, val):
         )
  
  
-    hist_1 = plot_prediction_data(radio_button)
+    hist_1 = plot_prediction_data_slider('mobility')
     hist_2 = generate_data_availability_plot(val)
 
     # save figures in a dictionary for sending to the dcc.Store
@@ -1434,7 +1526,7 @@ def on_click(v7,v8,v9,v10,v11,v12):
         df_trained_values.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
                 
         
-        prediction_figure_slider=plot_prediction_silder('energy')
+        prediction_figure_slider=0#plot_prediction_silder('energy')
         
                 
 
