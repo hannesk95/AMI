@@ -22,6 +22,8 @@ import plotly.graph_objects as go
 import plotly.figure_factory as ff
 import json
 import io
+import webbrowser
+from threading import Timer
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -495,7 +497,7 @@ def generate_control_card():
             
             html.P(),
             html.Br(),
-            html.B("Prediction Controll:"),
+            html.B("Prediction Control:"),
             html.Hr(),
             html.Br(),
             html.Label('Select Prediction Data:'),
@@ -894,6 +896,13 @@ def on_click(v7,v8,v9,v10,v11,v12,Prediction_type):
 
         return {"barchart": fig, "monat_value":monat_value, "prediction_figure_plot": prediction_figure_slider, "delta_CO2_in_MioTons":Impact["delta_CO2_in_MioTons"], "delta_C_in_ppm":Impact["delta_C_in_ppm"] ,"delta_T_in_GradK":Impact["delta_T_in_GradK"],"savedEmission_in_Days":Impact["savedEmission_in_Days"]}
 
-# Run the server
+# Run the server and automatically open GUI in browser
+port = port = 8050 # default: `8050` port
+
+def open_browser():
+      webbrowser.open_new("http://localhost:{}".format(port))
+      #webbrowser.open_new('http://127.0.0.1:8050/')
+     
 if __name__ == "__main__":
-    app.run_server(debug=True)
+      Timer(1, open_browser).start();
+      app.run_server(debug=True, use_reloader=False)
