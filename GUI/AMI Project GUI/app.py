@@ -184,9 +184,9 @@ def generate_data_availability_plot(choice):
                   x=[df['Start'][i]],
                   y=[df['Data_name'][i]],
                   marker=dict(color='#CC5700', size=14),
-                  mode='markers+text',
+                  mode='markers',
                   #text=w_lbl,
-                  text='Start',
+                  text='',
                   textposition='middle left',
                   name='Start'))
               
@@ -194,9 +194,9 @@ def generate_data_availability_plot(choice):
                   x=[df['End'][i]],
                   y=[df['Data_name'][i]],
                   marker=dict(color='#227266', size=14),
-                  mode='markers+text',
+                  mode='markers',
                   #text=m_lbl,
-                  text='End',
+                  text='',
                   textposition='middle right',
                   name='End'))
         
@@ -210,11 +210,11 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
 
     if Prediction_type == 'energy':
         Prediction=Sarima_energy  
-        Prediction_type_titel='Prediction based on Energy'
+        Prediction_type_titel='Prediction of Energy CO2 Emissions'
         trained_values_joined_complete=pd.concat([df_energy, trained_values])
     if Prediction_type == 'mobility':
         Prediction=Sarima_mobility
-        Prediction_type_titel='Prediction based on Mobility'
+        Prediction_type_titel='Prediction of Mobility CO2 Emissions'
         trained_values_joined_complete=pd.concat([Sarima_mobility.loc[:'2020-01'], df_co2.loc['2020-02':], trained_values])
 
     fig_data_of_sector = go.Figure()
@@ -333,7 +333,7 @@ def plot_data_of_sector(Sector):
     )
 )
     
-    initial_range = ['2017-01', '2020-12']
+    initial_range = ['2017-01', '2019-12']
     fig_data_of_sector['layout']['xaxis'].update(range=initial_range)
 
     return fig_data_of_sector
@@ -382,7 +382,7 @@ fig.update_layout(
         type="date"
     )
 )
-initial_range = ['2017-01', '2020-12']
+initial_range = ['2017-01', '2018-12']
 fig['layout']['xaxis'].update(range=initial_range)
 
 
@@ -471,6 +471,8 @@ def generate_control_card():
         children=[
             html.H5("AMI Projekt"),
             html.H3("2020 Group 10"),
+            html.Div(html.Img(src=app.get_asset_url("8_tum.svg"), style={'height':'15%', 'width':'15%'})),
+
             #html.Label(""),
             dbc.Row(
             [
@@ -619,7 +621,7 @@ app.layout = html.Div(
         html.Div(
             id="banner",
             className="banner",
-            children=[html.Div(html.Img(src=app.get_asset_url("8_tum.svg"), style={'height':'12%', 'width':'12%'}))],
+            #children=[html.Div(html.Img(src=app.get_asset_url("8_tum.svg"), style={'height':'12%', 'width':'12%'}))],
 
         ),
         #Left column
@@ -822,7 +824,7 @@ def generate_graphs(val):
     scatter.update_layout(
         autosize=True,
         #width=1200,
-        height=800,
+        height=1000,
         #paper_bgcolor='rgba(0,0,0,0)',
         #plot_bgcolor='rgba(0,0,0,0)'
         )
