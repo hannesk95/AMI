@@ -1,13 +1,8 @@
-#%%
-
 import numpy as np
 import pandas as pd
-
 import datetime
 from datetime import datetime as dt
 import pathlib
-
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -24,7 +19,6 @@ import json
 import io
 import webbrowser
 from threading import Timer
-
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -66,10 +60,9 @@ df_cor = df_cor.rename(columns={'myDt': 'date'})
 df_cor.index = df_cor.date
 df_cor = df_cor.drop('date', axis=1)
 
-sector = 'mobility' #oder/'energy'
-#Sarima_nn = Sarima(database, sector, period=24)
+sector = 'mobility'
 Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
-sector = 'energy' #oder/'energy'
+sector = 'energy'
 Sarima_energy = Sarima(database, sector, period=12)
 lr_cor_co2_mobility = TrainLRCoronaOnCO2(df_cor, df_co2) #im storage ablegen
 lr_cor_co2_energy = TrainLRCoronaOnCO2(df_cor, df_energy) #im storage ablegen
@@ -89,8 +82,6 @@ for i in database_gui:
 
 #Subprograms
 def plot_barchart(monat_value):
-  #import plotly.express as px
-  #import pandas as pd
 
   size=len(monat_value)
 
@@ -99,9 +90,6 @@ def plot_barchart(monat_value):
   df = pd.DataFrame(data=data_min_max_full_header)
 
   fig=go.Figure()  
-  #df = pd.read_csv(io.StringIO(data_range), sep='\s+')
-  #df['Value'][3]=80
-  #print(df)
   fig = px.bar(x=df['Month'], y=df['Value'], labels={'x':'', 'y':'Total Number'})
 
   return fig
@@ -136,18 +124,6 @@ def get_min_max_date(sector_choice):
                 #append row to the dataframe
                 data_min_max_full = data_min_max_full.append(new_row, ignore_index=True)
 
-
-
-
-  #convert index in datetime format
-  #X_eco_raw['date'] = X_eco_raw.index
-  #X_eco_raw.date = pd.to_datetime(X_eco_raw.date).dt.to_period('m')
-  #X_eco_raw.index = X_eco_raw.date
-  #X_eco_raw = X_eco_raw.drop('date', axis=1)
-  #X_eco_raw.head()
-
-
-  #print(data_min_max_full)
 
   return data_min_max_full
 
@@ -229,7 +205,7 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
     fig_data_of_sector.add_trace(go.Scatter(
         x=trained_values_joined_complete.index, y=trained_values_joined_complete['co2'],
         line_color='rgb(255,100,80)',
-        name='CO2 Emission Aproximation with COVID-19',
+        name='CO2 Emission Aproximation with COVID-19 [Mio. Tons]',
         
     ))
 
@@ -302,8 +278,12 @@ def plot_data_of_sector(Sector):
     X_eco_raw.head()
     fig_data_of_sector = go.Figure()
     for col in X_eco_raw.columns:
-        fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
-
+        if col != 'date':
+            if col in ['Inland Shipping Total Transport Performance [Mio.Tons*km]','Ships German Flag [Tons]', 'Ships Foreign Flag [Tons]', 'Total Rail Freights [Tons*km]']:
+                fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col,visible = "legendonly"))
+            else:
+                fig_data_of_sector.add_trace(go.Scatter(x=X_eco_raw.index, y=X_eco_raw[col], name=col))
+ 
     fig_data_of_sector.update_layout(title=Sector_titel, showlegend=True, height=700)
     fig_data_of_sector.update_layout(
     xaxis=dict(
@@ -397,72 +377,6 @@ server = app.server
 app.config.suppress_callback_exceptions = True
 
 
-
-# # Read data
-# df = pd.read_csv(DATA_PATH.joinpath("clinical_analytics.csv"))
-
-
-# # clinic_list = df["Clinic Name"].unique()
-# df["Admit Source"] = df["Admit Source"].fillna("Not Identified")
-# admit_list = df["Admit Source"].unique().tolist()
-
-# #clinic_list = category_list
-
-# # Date
-# # Format checkin Time
-# df["Check-In Time"] = df["Check-In Time"].apply(
-#     lambda x: dt.strptime(x, "%Y-%m-%d %I:%M:%S %p")
-# )  # String -> Datetime
-
-# # Insert weekday and hour of checkin time
-# df["Days of Wk"] = df["Check-In Hour"] = df["Check-In Time"]
-# df["Days of Wk"] = df["Days of Wk"].apply(
-#     lambda x: dt.strftime(x, "%A")
-# )  # Datetime -> weekday string
-
-# df["Check-In Hour"] = df["Check-In Hour"].apply(
-#     lambda x: dt.strftime(x, "%I %p")
-# )  # Datetime -> int(hour) + AM/PM
-
-# day_list = [
-#     "Monday",
-#     "Tuesday",
-#     "Wednesday",
-#     "Thursday",
-#     "Friday",
-#     "Saturday",
-#     "Sunday",
-# ]
-
-
-
-# check_in_duration = df["Check-In Time"].describe()
-
-# # Register all departments for callbacks
-# all_departments = df["Department"].unique().tolist()
-# wait_time_inputs = [
-#     Input((i + "_wait_time_graph"), "selectedData") for i in all_departments
-# ]
-# score_inputs = [Input((i + "_score_graph"), "selectedData") for i in all_departments]
-
-
-
-# def description_card():
-#     """
-
-#     :return: A Div containing dashboard title & descriptions.
-#     """
-#     return html.Div(
-#         id="description-card",
-#         children=[
-#             html.H5("AMI Projekt"),
-#             html.H3("2020 Group 10"),
-#             html.Label("In the project, we used machine learning algorithms in order to predict and compare the greenhouse gas emissions in Germany with and without the impact of the COVID-19 pandemic. By comparing the two scenarios, we forecast the impact of the pandemic on Germany’s climate targets on a long-term basis and its effect on reaching the EU Climate Goals.",
-# ),
-#         ],
-#     )
-
-
 def generate_control_card():
     """
     :return: A Div containing controls for graphs.
@@ -475,26 +389,11 @@ def generate_control_card():
             html.H3("2020 Group 10"),
             html.Div(html.Img(src=app.get_asset_url("8_tum.svg"), style={'height':'15%', 'width':'15%'})),
 
-            #html.Label(""),
             dbc.Row(
             [
-  
                 dbc.Col(html.Label(html.Label("In the project, we used machine learning algorithms in order to predict and compare the greenhouse gas emissions in Germany with and without the impact of the COVID-19 pandemic. By comparing the two scenarios, we forecast the impact of the pandemic on Germany’s climate targets on a long-term basis and its effect on reaching the EU Climate Goals."))),
-
-                
             ]
             ),
-                                    
-                                    
-            # dcc.Markdown('''
-            # In the project, we used machine learning algorithms in order to predict
-            # and compare the greenhouse gas emissions in Germany with and without 
-            # the impact of the COVID-19 pandemic. By comparing the two scenarios, we 
-            # forecast the impact of the pandemic on Germany’s climate targets on a 
-            # long-term basis and its effect on reaching the EU Climate Goals.
-            # '''),
-            
-            
             html.P(),
             html.Br(),
             html.B("Prediction Control:"),
@@ -519,31 +418,16 @@ def generate_control_card():
       
             html.Br(),     
             html.Div(
-                            #id="barchart",
+        
                             id="barchart_plot"
                         ),             
 
 
                         html.Label('Estimate Infectionrate from July to December 2020:'),
-                        #html.Hr(),
                         html.Br(),
                         html.Br(),
-                        
-                        # html.Div(
-                        #     id="monthly_values",
-                        #     children=[
-                                           
-                        #         ],           
-                        
-                        # ),
-                        
                         dbc.Row(
                                      [
-                                         # dbc.Col(daq.Slider(id="Month1", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
-                                         # dbc.Col(daq.Slider(id="Month2", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
-                                         # dbc.Col(daq.Slider(id="Month3", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
-                                         # dbc.Col(daq.Slider(id="Month4", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
-                                         # dbc.Col(daq.Slider(id="Month5", min=0,max=100000,  value=50,handleLabel={"showCurrentValue": True,"label": "VALUE"},step=1000,vertical=True)),
                                          dbc.Col(),    
                                          dbc.Col(daq.Slider(id="Month7", min=0,max=90000,  value=4000,handleLabel={"showCurrentValue": True,"label": "July"},step=1000,vertical=True)),
                                          dbc.Col(daq.Slider(id="Month8", min=0,max=90000,  value=2000,handleLabel={"showCurrentValue": True,"label": "August"},step=1000,vertical=True)),
@@ -553,32 +437,10 @@ def generate_control_card():
                                          dbc.Col(daq.Slider(id="Month12", min=0,max=90000,  value=50,handleLabel={"showCurrentValue": True,"label": "December"},step=1000,vertical=True)), 
                                      ]
                                  ),
-            
-
-
                         html.Br(),
                         html.Br(),
+                        html.Br(),                        
                         html.Br(),
-                        # html.Div(
-                        #     id="reset-btn-outer",
-                        #     children=[html.Button(id="reset-btn", children="Reset", n_clicks=0), html.Button(id="Update", children="Update", n_clicks=0), html.Button(id="Initialise", children="Initialisation", n_clicks=0),],
-                        # ),
-                        
-                        html.Br(),
-                        # dbc.Button(
-                        #         "Generate Graphs",
-                        #         color="primary",
-                        #         block=True,
-                        #         id="button",
-                        #         className="mb-3",
-                        # ),
-                        # dbc.Button(
-                        #         "Apply Allgorithm",
-                        #         color="primary",
-                        #         block=True,
-                        #         id="button1",
-                        #         className="mb-3",
-                        # ),
                         html.Br(),
                         html.B('Data Visualisation:'),
                         html.Hr(),
@@ -708,49 +570,25 @@ def render_tab1_content(data):
 
     children=[                        
                         
-                       # dbc.Col(dcc.Graph(figure=data["barchart_fallzahl"]), width=6),
-                        # daq.Gauge(
-                        #   id='my-daq-gauge',
-                        #   min=0,
-                        #   max=10,
-                        #   value=6
-                        # ),
-                        # daq.Thermometer(
-                        #   id='my-daq-thermometer',
-                        #   min=95,
-                        #   max=105,
-                        #   value=98.6
-                        # ),
-      
-                                                
-                                                
-                        # dbc.Row(
-                        # [
-                        #     dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
-                        #     dbc.Col(daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"), width=6),
-                        # ]
-                        # )
-                       # html.Div(
-                       #     daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"),
-                       #     daq.LEDDisplay(label="color", value='1.001',color="#FF5E5E"),
-                       #     style={'display': 'inline-block'}
-                       #     ),
                        html.B("Prediction:"),
                        html.Hr(),
+                       dcc.Graph(figure=data["prediction_figure_plot"]),
+                       html.B("Saved CO2 emissions in million tons, in equivalent emission days, and their impact on decreasing the global CO2 concentration and global temperature increase:"),
+                       html.Hr(),
+                       html.Br(),
                        html.Div(
-                            [
-                                dbc.Row(dbc.Col(dcc.Graph(figure=data["prediction_figure_plot"]))),
-                                dbc.Row(
+                            [ dbc.Row(
                                     [
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 CO2 [Mio. Tons]", value=round(data['delta_CO2_in_MioTons'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="Days of emission of \u0394 CO2", value=round(data['savedEmission_in_Days'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 C [ppb]", value=round(data['delta_C_in_ppm']*1000,2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 T [\u03BC ° K]", value=round(data['delta_T_in_GradK']*(10**6),2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 CO2 [Mio. Tons]", value=round(data['delta_CO2_in_MioTons'],2),color="#FF5E5E", labelPosition='bottom'))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="Days of emission of \u0394 CO2", value=round(data['savedEmission_in_Days'],2),color="#FF5E5E", labelPosition='bottom'))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 C [ppb]", value=round(data['delta_C_in_ppm']*1000,2),color="#FF5E5E", labelPosition='bottom'))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 T [\u03BC ° K]", value=round(data['delta_T_in_GradK']*(10**6),2),color="#FF5E5E", labelPosition='bottom'))),
                                         
                                     ]
                                 ),
                             ]
-                        )        
+                        )
+                       
 
         ]
 
@@ -836,6 +674,20 @@ def generate_graphs(val):
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"scatter": scatter, "hist_1": hist_1, "hist_2": hist_2}
+
+
+
+@app.callback(Output('sector-select', 'value'),
+                        [
+                          Input(component_id="Prediction_Selection", component_property="value"),
+                   
+                    ])
+def force_data_selection(value):
+    if value=='energy':
+        value='energy_households'
+    if value=='mobility':
+        value='mobility'
+    return value
 
 
 @app.callback(Output(component_id="store2", component_property="data"),
