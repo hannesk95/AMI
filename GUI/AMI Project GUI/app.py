@@ -738,10 +738,10 @@ def render_tab1_content(data):
                                 dbc.Row(dbc.Col(dcc.Graph(figure=data["prediction_figure_plot"]))),
                                 dbc.Row(
                                     [
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta CO2 [Mio Tons]", value=round(data['delta_CO2_in_MioTons'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="Saved Emission [Days]", value=round(data['savedEmission_in_Days'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta C [ppb]", value=round(data['delta_C_in_ppm']*1000,2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta T [micro ° K]", value=round(data['delta_T_in_GradK']*(10**6),2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 CO2 [Mio. Tons]", value=round(data['delta_CO2_in_MioTons'],2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="Days of emission of \u0394 CO2", value=round(data['savedEmission_in_Days'],2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 C [ppb]", value=round(data['delta_C_in_ppm']*1000,2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="\u0394 T [\u03BC ° K]", value=round(data['delta_T_in_GradK']*(10**6),2),color="#FF5E5E"))),
                                         
                                     ]
                                 ),
