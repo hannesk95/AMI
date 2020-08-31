@@ -23,10 +23,15 @@ import plotly.figure_factory as ff
 import json
 import io
 
+import warnings
+warnings.filterwarnings("ignore")
+
+
 from src.MappingMobility import featureMapping
 from src.CoronaMapping import TrainLRCoronaOnCO2, EstimateCO2withCorona
 from src.ImpactOfSavedCO2 import ImpactOfReduction
 from src.Sarima_gui import Sarima
+from src.ReadEnergyValues import ReadEnergyValues
 
 # Path
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
@@ -41,7 +46,6 @@ category_list=[];
 sector_list=[];
 
 
-
 #open Data_Path
 with open(DATA_PATH.joinpath("feature_database_gui.json")) as json_file:
     database_gui = json.load(json_file)
@@ -49,6 +53,9 @@ with open(DATA_PATH.joinpath("feature_database_gui.json")) as json_file:
 with open(DATA_PATH.joinpath("feature_database.json")) as json_file:
     database = json.load(json_file)
 
+#read energy values for 2011 to 06/2020
+df_energy = ReadEnergyValues(database)
+df_energy = df_energy.loc[:'2020-06']
 
 # Do Machine Learning Allgorithm
 df_co2 = featureMapping(database)
@@ -61,9 +68,9 @@ sector = 'mobility' #oder/'energy'
 #Sarima_nn = Sarima(database, sector, period=24)
 Sarima_mobility = Sarima(database, sector, period=24)#co2 ohne corona
 sector = 'energy' #oder/'energy'
-Sarima_energy = Sarima(database, sector, period=24)
+Sarima_energy = Sarima(database, sector, period=12)
 lr_cor_co2_mobility = TrainLRCoronaOnCO2(df_cor, df_co2) #im storage ablegen
-lr_cor_co2_energy = TrainLRCoronaOnCO2(df_cor, Sarima_energy) #im storage ablegen
+lr_cor_co2_energy = TrainLRCoronaOnCO2(df_cor, df_energy) #im storage ablegen
 
 
 
@@ -199,17 +206,21 @@ def generate_data_availability_plot(choice):
     return fig_range_plot
 
 def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
+    pd.set_option('display.max_rows', None)
+
     if Prediction_type == 'energy':
         Prediction=Sarima_energy  
         Prediction_type_titel='Prediction based on Energy'
+        trained_values_joined_complete=pd.concat([df_energy, trained_values])
     if Prediction_type == 'mobility':
         Prediction=Sarima_mobility
         Prediction_type_titel='Prediction based on Mobility'
- 
-    
+        trained_values_joined_complete=pd.concat([Sarima_mobility.loc[:'2020-01'], df_co2.loc['2020-02':], trained_values])
+
     fig_data_of_sector = go.Figure()
     trained_values_joined=pd.concat([df_co2[-1:], trained_values])
-    trained_values_joined_complete=pd.concat([df_co2, trained_values])
+    
+    #trained_values_joined_complete=pd.concat([df_co2, trained_values])
     x_data1 = df_co2.index #['2015-02-17','2015-02-18','2015-02-19','2015-02-20','2015-02-23','2015-02-24','2015-02-25','2015-02-26','2015-02-27','2015-03-02']
     y_data2 = Sarima_energy['co2'][0:len(df_co2['co2'])]
 
@@ -221,17 +232,12 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
     ))
 
     fig_data_of_sector.add_trace(go.Scatter(
-        x=Sarima_mobility.index, y=Sarima_mobility['co2'],
+        x=Prediction.index, y=Prediction['co2'],
         line_color='rgb(56,100,80)',
         name='CO2 Emission Aproximation without COVID-19 [Mio. Tons]',
         fill='tonexty'
     ))
-
-    fig_data_of_sector.add_trace(go.Scatter(
-        x=df_co2.index, y=df_co2['co2'],
-        line_color='rgb(23,130,80)',
-        name='Real CO2 Values [Mio. Tons]',
-    ))
+    
 
     fig_data_of_sector.update_layout(title=Prediction_type_titel, showlegend=True, height=800)
     fig_data_of_sector.update_layout(
@@ -263,7 +269,7 @@ def plot_prediction_data_slider(Prediction_type,trained_values, df_co2):
         type="date"
     )
 )
-    initial_range = ['2017-01', '2020-01']
+    initial_range = ['2018-01', '2020-12']
     fig_data_of_sector['layout']['xaxis'].update(range=initial_range)
         
     return fig_data_of_sector
@@ -733,9 +739,10 @@ def render_tab1_content(data):
                                 dbc.Row(
                                     [
                                         dbc.Col(html.Div(daq.LEDDisplay(label="delta CO2 [Mio Tons]", value=round(data['delta_CO2_in_MioTons'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta C [ppm]", value=round(data['delta_C_in_ppm'],2),color="#FF5E5E"))),
-                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta T [Grad K]", value=round(data['delta_T_in_GradK'],2),color="#FF5E5E"))),
                                         dbc.Col(html.Div(daq.LEDDisplay(label="Saved Emission [Days]", value=round(data['savedEmission_in_Days'],2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta C [ppb]", value=round(data['delta_C_in_ppm']*1000,2),color="#FF5E5E"))),
+                                        dbc.Col(html.Div(daq.LEDDisplay(label="delta T [micro ° K]", value=round(data['delta_T_in_GradK']*(10**6),2),color="#FF5E5E"))),
+                                        
                                     ]
                                 ),
                             ]
@@ -861,28 +868,27 @@ def on_click(v7,v8,v9,v10,v11,v12,Prediction_type):
                 
         df_slider_estimation = pd.DataFrame(data=d)
         df_slider_estimation.index=["2020-07","2020-08","2020-09","2020-10","2020-11","2020-12"]
-                
         
         if Prediction_type == 'energy':
             Prediction=Sarima_energy 
-            trained_values=EstimateCO2withCorona(lr_cor_co2_energy,df_slider_estimation,Sarima_energy),
-            trained_values=trained_values[0]
-            
+            trained_values=EstimateCO2withCorona(lr_cor_co2_energy,df_slider_estimation,Sarima_energy)
+
+            trained_values_joined = pd.concat([df_energy, trained_values])
+            trained_values_joined = trained_values_joined.rename(columns={'co2': 'co2_Cor'})
+            print(trained_values_joined)
         if Prediction_type == 'mobility':
             Prediction=Sarima_mobility
-            trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility),
-            trained_values=trained_values[0]
-       
-        prediction_figure_slider=plot_prediction_data_slider(Prediction_type,trained_values,df_co2),  
-        prediction_figure_slider=prediction_figure_slider[0]
+            trained_values=EstimateCO2withCorona(lr_cor_co2_mobility,df_slider_estimation,Sarima_mobility)
 
-        trained_values_joined=pd.concat([df_co2[-1:], trained_values])
-        trained_values_joined = trained_values_joined.rename(columns={'co2': 'co2_Cor'})
-        Sarima_temp=Sarima_energy.rename(columns={'co2': 'co2_noCor'})
-        Impact=ImpactOfReduction(trained_values_joined, Sarima_temp)
+            trained_values_joined = pd.concat([df_co2, trained_values])
+            trained_values_joined = trained_values_joined.rename(columns={'co2': 'co2_Cor'})
+       
+
+        prediction_figure_slider = plot_prediction_data_slider(Prediction_type,trained_values,df_co2) 
+
+        Sarima_temp = Prediction.rename(columns={'co2': 'co2_noCor'})
+        Impact = ImpactOfReduction(trained_values_joined, Sarima_temp)
         
-   
-    
 
         return {"barchart": fig, "monat_value":monat_value, "prediction_figure_plot": prediction_figure_slider, "delta_CO2_in_MioTons":Impact["delta_CO2_in_MioTons"], "delta_C_in_ppm":Impact["delta_C_in_ppm"] ,"delta_T_in_GradK":Impact["delta_T_in_GradK"],"savedEmission_in_Days":Impact["savedEmission_in_Days"]}
 

@@ -28,7 +28,7 @@ plt.rcParams.update({'font.size':16})
 
 #return: lr_cor_co2: Linear regression model that maps monthyl corona cases on the Emission reduction to the year before. 
 # This model is the input for EstimateCO2withCorona
-def TrainLRCoronaOnCO2(df_cor, df_co2, verbose=True):
+def TrainLRCoronaOnCO2(df_cor, df_co2, verbose=False):
     
     #convert datetime index to string index if needed
     #for corona case numbers dataframe
