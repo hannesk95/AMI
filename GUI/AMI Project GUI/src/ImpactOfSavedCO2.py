@@ -44,7 +44,7 @@ def ImpactOfReduction(df_co2_Cor, df_co2_noCor):
     emissions_Cor = df_co2_Cor.co2_Cor.to_numpy() #in MtC
     
     #saved CO2 emissions in Mio tons and days of emissions
-    delta_CO2 = (np.sum(emissions_noCor) - np.sum(emissions_Cor))
+    delta_CO2 = (np.sum(emissions_Cor) - np.sum(emissions_noCor))
     dailyEmissions2019 = emissions_noCor[-2]/365
     savedEmissionInDays = delta_CO2/dailyEmissions2019
     
