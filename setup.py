@@ -4,12 +4,14 @@ from setuptools import setup
 
 README_PATH = 'README.md'
 LONG_DESC = ''
+try:
+    if os.path.exists(README_PATH):
+        with open(README_PATH) as readme:
+            LONG_DESC = readme.read()
+except:
+    pass
 
-if os.path.exists(README_PATH):
-    with open(README_PATH) as readme:
-        LONG_DESC = readme.read()
-
-INSTALL_REQUIRES = ['ipykernel', 'jupyter', 'numpy', 'pandas', 'seaborn', 'sklearn', 'tensorflow']
+INSTALL_REQUIRES = ['numpy', 'pandas', 'datetime', 'pathlib', 'dash', 'dash_core_components', 'dash_html_components', 'dash_bootstrap_components', 'dash_daq', 'plotly', 'time', 'json', 'io', 'webbrowser', 'threading', 'warnings', 'matplotlib', 'seaborn', 'scipy', 'sklearn', 'math', 'random', 'statsmodels', 'pmdarima', 'fair']
 PACKAGE_NAME = 'group10'
 PACKAGE_DIR = ''
 
