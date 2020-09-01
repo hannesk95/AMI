@@ -77,8 +77,8 @@ def ImpactOfReduction(df_co2_Cor, df_co2_noCor):
     
 
     
-    delta_T = np.sum(T_noCor) - np.sum(T_Cor) #impact on global temperature
-    delta_C = np.sum(C_noCor) - np.sum(C_Cor) #impact on global CO2 concentration
+    delta_T = np.sum(T_Cor) - np.sum(T_noCor) #impact on global temperature
+    delta_C = np.sum(C_Cor) - np.sum(C_noCor) #impact on global CO2 concentration
     
     
     dic_ret = {'delta_CO2_in_MioTons': delta_CO2,
