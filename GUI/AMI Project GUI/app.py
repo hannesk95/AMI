@@ -454,12 +454,12 @@ def generate_control_card():
                         dbc.Row(
                                      [
                                          dbc.Col(),    
-                                         dbc.Col(daq.Slider(id="Month7", min=0,max=90000,  value=4000,handleLabel={"showCurrentValue": True,"label": "July"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month8", min=0,max=90000,  value=2000,handleLabel={"showCurrentValue": True,"label": "August"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month9", min=0,max=90000,  value=1000,handleLabel={"showCurrentValue": True,"label": "September"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month10", min=0,max=90000,  value=200,handleLabel={"showCurrentValue": True,"label": "October"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month11", min=0,max=90000,  value=50,handleLabel={"showCurrentValue": True,"label": "November"},step=1000,vertical=True)),
-                                         dbc.Col(daq.Slider(id="Month12", min=0,max=90000,  value=50,handleLabel={"showCurrentValue": True,"label": "December"},step=1000,vertical=True)), 
+                                         dbc.Col(daq.Slider(id="Month7", min=0,max=90000,  value=14099,handleLabel={"showCurrentValue": True,"label": "July"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month8", min=0,max=90000,  value=33797,handleLabel={"showCurrentValue": True,"label": "August"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month9", min=0,max=90000,  value=0,handleLabel={"showCurrentValue": True,"label": "September"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month10", min=0,max=90000,  value=0,handleLabel={"showCurrentValue": True,"label": "October"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month11", min=0,max=90000,  value=0,handleLabel={"showCurrentValue": True,"label": "November"},step=1000,vertical=True)),
+                                         dbc.Col(daq.Slider(id="Month12", min=0,max=90000,  value=0,handleLabel={"showCurrentValue": True,"label": "December"},step=1000,vertical=True)), 
                                      ]
                                  ),
                         html.Br(),
