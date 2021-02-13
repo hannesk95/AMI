@@ -4,7 +4,7 @@
 
 ### Preface
 
-In the context of a university lecture called "Applied Machine Intelligence" at Technical University Munich (TUM), chair of data processing, we have been investigating the impact of COVID-19 on the climate change in the summer term 2020. In order to make inference on collected data, various machine learning approaches were used. 
+In the context of a university lecture called "Applied Machine Intelligence" at Technical University Munich (TUM), chair of data processing, we have been investigating the impact of COVID-19 on the climate change in the summer term 2020. In order to draw inference on collected data, various machine learning approaches were used. 
 
 ---
 
